@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Debe especificar un SQL para el reporte.';
 	$plugin_lang['strreportcreated'] = 'Reporte guardado.';
 	$plugin_lang['strreportcreatedbad'] = 'Falló al guardar el reporte.';
-?>
+

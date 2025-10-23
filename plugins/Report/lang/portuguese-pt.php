@@ -20,4 +20,4 @@
     $plugin_lang['strreportneedsdef'] = 'Adicione a instrução SQL ao seu relatório.';	
     $plugin_lang['strreportcreated'] = 'Relatório salvo.';					
     $plugin_lang['strreportcreatedbad'] = 'Falha ao salvar o relatório.';		
-?>
+

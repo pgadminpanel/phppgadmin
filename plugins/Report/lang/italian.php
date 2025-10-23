@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'È necessario inserire il codice SQL per il rapporto.';
 	$plugin_lang['strreportcreated'] = 'Rapporto salvato';
 	$plugin_lang['strreportcreatedbad'] = 'Salvataggio del rapporto fallito.';
-?>
+

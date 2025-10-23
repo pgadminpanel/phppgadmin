@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Ha de donar un SQL al report.';
 	$plugin_lang['strreportcreated'] = 'Report desat.';
 	$plugin_lang['strreportcreatedbad'] = 'No s\'ha pogut desar el report.';
-?>
+

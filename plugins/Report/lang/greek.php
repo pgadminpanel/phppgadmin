@@ -21,4 +21,4 @@
 	$plugin_lang['strreportcreated'] = 'Η αναφορά αποθηκεύτηκε.';
 	$plugin_lang['strreportcreatedbad'] = 'Η αποθήκευση της αναφοράς απέτυχε.';
 
-?>
+

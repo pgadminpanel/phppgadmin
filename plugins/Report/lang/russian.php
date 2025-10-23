@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Вам необходимо указать SQL-запрос для Вашего отчета.';
 	$plugin_lang['strreportcreated'] = 'Отчет сохранен.';
 	$plugin_lang['strreportcreatedbad'] = 'Сохранение отчета прервано.';
-?>
+

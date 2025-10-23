@@ -24,8 +24,8 @@ h2 {
 	color: #fff;
 	font-size: 1em;
 	font-weight: bold;
-	border: 2px solid #363330;
-	background-color: #363330;
+	border: 1px solid #887f5c;
+	background-color: #c8c0a2;
 	padding: 2px 1em;
 	margin-top: 2em;
 	margin-bottom: 2em;
@@ -62,23 +62,23 @@ table.error {
 	border: 2px solid #de7c9c;
 	margin: auto;
 }
-th.data {
-	color: #fff;
-	background-color: #363330;
+th.data,
+th.empty {
+	color: #333;
+	background: #ded9c9 linear-gradient(180deg, #f0ece3 0%, #c8c2b0 100%);
 	border: 1px dotted #887f5c;
 	font-size: 0.9em;
 	padding: 3px 7px;
 }
 th.required {text-decoration: underline}
 .topbar, .trail {
-	color: #fff;
-	background-color: #363330;
+	background-color: #ded9c9;
 	margin: 0;
 	padding: 0;
 	text-align: left;
 }
 .topbar a, .trail a, body.browser a, th.data a {
-	color: #a8aac2;
+	color: #5112ff;
 }
 .topbar .platform, .topbar .host, .topbar .username {
 	font-weight: bold;
@@ -91,7 +91,6 @@ th.required {text-decoration: underline}
 table.tabs {
 	width: 100%;
 	border-collapse: collapse;
-	margin: 20px 0 40px 0;
 }
 .tab {
 	text-align: center;

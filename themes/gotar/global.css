@@ -22,6 +22,9 @@ p.comment, td.comment_cell {
 table {
 	border:1px gray solid;
 }
+table.data {
+	min-width: 100%;
+}
 body.browser {
 	background-color: #447;
 	color:#4bf;
@@ -52,9 +55,10 @@ h3 {
 }
 table.error {background-color: #f00}
 table.error td {background-color: #f84}
-th.data {
+th.data,
+th.empty {
 	color: #ada;
-	background-color: #241;
+	background-color: #336;
 	font-size: smaller; /* 0.9em */
 }
 th.data a:active, th.data a:link, th.data a:visited, th.data a:hover {
@@ -86,10 +90,10 @@ tr.data1, tr.data2, tr.data3 {
 	font-size: smaller; /*0.8em;*/
 }
 tr.data1:hover, tr.data2:hover, tr.data3:hover {
-	background-color: #39663e;
+	background-color: #336;
 }
 .row1, .data1 {
-	background-color: #2b482e;
+	background-color: #336;
 	text-align: left;
 }
 input, textarea, select {
@@ -119,7 +123,7 @@ p input:focus, .data input:focus, .data1 input:focus, .data2 input:focus, textar
 	color:#000;
 }
 .row2, .data2 {
-	background-color: #1a3f1e;
+	background-color: #336;
 	text-align: left;
 }
 td.opbutton1 {
@@ -146,8 +150,7 @@ td.opbutton1 a, td.opbutton2 a {
 }
 .topbar, .trail, .tab {
 	padding: 2px 1ex;
-	font-size: smaller;
-	color: #ddf;
+	font-size: 13px;
 }
 .crumb, .tab {
 	vertical-align: top;
@@ -165,11 +168,11 @@ table.tabs {
 .tabs .active {background-color: #449}
 .tab .icon {display: block}
 tr,td { height:100% }
-td:not(.constraint_cell) a:not(.help), th a { display:inline-block; height:100% }	/* vertical-align:middle doesn't work for block elements, CSS sux */
-td.crumb a, td.tab a { width:90% }
-tr.data1 a, tr.data2 a { width:100% }
+td:not(.constraint_cell) a:not(.help), th a { display:inline-block; }	/* vertical-align:middle doesn't work for block elements, CSS sux */
+td.crumb a, td.tab a { width: auto }
+tr.data1 a, tr.data2 a { width:auto }
 td.opbutton1 a, td.opbutton2 a { width:inherit }
-td a.help { display:inline; position:absolute; min-width:10px; }
+td a.help { display:inline; min-width:10px; }
 a.pagenav { display:inline-block; min-width:15px; }
 a.toplink { display:inline }
 a:active {
@@ -254,7 +257,15 @@ div.fk {
 	border-left: 1px solid #000;
 	padding: 5px 0 5px 0;
 }
-div.logo { display:none }
+div.logo {
+	margin:	0px;
+	padding: 0px;
+	border: none;
+	margin-bottom: 15px;
+	background-image: url('../../images/themes/gotar/title.png');
+	background-repeat: no-repeat;
+	height: 50px;
+}
 div.logo a {
 	display: block;
 	height: 100%;

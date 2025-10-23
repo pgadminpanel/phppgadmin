@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'SQL kifejezést kell hozzáadni a jelentéshez.';
 	$plugin_lang['strreportcreated'] = 'A jelentés megteremtve.';
 	$plugin_lang['strreportcreatedbad'] = 'Nem sikerült megteremteni a jelentést.';
-?>
+

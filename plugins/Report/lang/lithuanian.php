@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Turite pateikti ataskaitos SQL apibrėžtį.';
 	$plugin_lang['strreportcreated'] = 'Ataskaita įrašyta.';
 	$plugin_lang['strreportcreatedbad'] = 'Nepavyko įrašyti ataskaitos.';
-?>
+

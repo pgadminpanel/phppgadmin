@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Specificaţi o instrucţiune SQL pentru raport.';
 	$plugin_lang['strreportcreated'] = 'Raport salvat.';
 	$plugin_lang['strreportcreatedbad'] = 'Salvare raport eşuată.';
-?>
+

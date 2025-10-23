@@ -19,4 +19,4 @@
 	$plugin_lang['strreportneedsdef'] = 'їСЭ ЮХЯТШЯФЩЭЯ еЫСкСди SQL-кСавЯг ФЬб їСлХЧЯ ЯдоХдС.';
 	$plugin_lang['strreportcreated'] = 'ядоХд гЯШвСЮХЮ.';
 	$plugin_lang['strreportcreatedbad'] = 'ѓЯШвСЮХЮЩХ ЯдоХдС авХвзСЮЯ.';
-?>
+

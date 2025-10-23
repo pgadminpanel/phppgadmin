@@ -1,5 +1,6 @@
 <?php
-require_once('classes/Plugin.php');
+
+use PhpPgAdmin\Plugin;
 
 class GuiControl extends Plugin {
 
@@ -34,14 +35,14 @@ class GuiControl extends Plugin {
 	 * @return $hooks
 	 */
 	function get_hooks() {
-		$hooks = array(
-			'toplinks' => array('filer_toplinks'),
-			'tabs' => array('filter_tabs'),
-			'trail' => array('filter_trail'),
-			'navlinks' => array('filter_navlinks'),
-			'actionbuttons' => array('filter_actionbuttons'),
-			'tree' => array('filter_tree')
-		);
+		$hooks = [
+			'toplinks' => ['filer_toplinks'],
+			'tabs' => ['filter_tabs'],
+			'trail' => ['filter_trail'],
+			'navlinks' => ['filter_navlinks'],
+			'actionbuttons' => ['filter_actionbuttons'],
+			'tree' => ['filter_tree']
+		];
 		return $hooks;
 	}
 
@@ -57,14 +58,14 @@ class GuiControl extends Plugin {
 	 * @return $actions
 	 */
 	function get_actions() {
-		$actions = array(
+		$actions = [
 			'filer_toplinks',
 			'filter_tabs',
 			'filter_trail',
 			'filter_navlinks',
 			'filter_actionbuttons',
 			'filter_tree',
-		);
+		];
 		return $actions;
 	}
 
@@ -103,7 +104,7 @@ class GuiControl extends Plugin {
             return;
 
         if ($this->conf['trail_links'] === false)
-            $f_params['trail'] = array();
+            $f_params['trail'] = [];
 
         return;
     }
@@ -142,4 +143,3 @@ class GuiControl extends Plugin {
         return;
     }
 }
-?>

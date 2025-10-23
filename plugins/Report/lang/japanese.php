@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'レポート用のSQLを指定する必要があります。';
 	$plugin_lang['strreportcreated'] = 'レポートの保存をしました。';
 	$plugin_lang['strreportcreatedbad'] = 'レポートの保存に失敗しました。';
-?>
+

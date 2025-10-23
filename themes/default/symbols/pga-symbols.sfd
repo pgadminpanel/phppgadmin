@@ -1,0 +1,5980 @@
+SplineFontDB: 3.2
+FontName: pga-symbols
+FullName: pga-symbols
+FamilyName: pga-symbols
+Weight: Book
+Copyright: 
+Version: 1.0
+ItalicAngle: 0
+UnderlinePosition: -237
+UnderlineWidth: 119
+Ascent: 1638
+Descent: 410
+InvalidEm: 0
+sfntRevision: 0x00010000
+LayerCount: 2
+Layer: 0 1 "Hinten" 1
+Layer: 1 1 "Vorne" 0
+XUID: [1021 227 1230541460 10601]
+StyleMap: 0x0040
+FSType: 8
+OS2Version: 3
+OS2_WeightWidthSlopeOnly: 0
+OS2_UseTypoMetrics: 0
+CreationTime: 1138233600
+ModificationTime: 1768938671
+PfmFamily: 17
+TTFWeight: 400
+TTFWidth: 5
+LineGap: 0
+VLineGap: 0
+Panose: 2 11 5 2 4 2 4 2 2 3
+OS2TypoAscent: 1491
+OS2TypoAOffset: 0
+OS2TypoDescent: -431
+OS2TypoDOffset: 0
+OS2TypoLinegap: 269
+OS2WinAscent: 2210
+OS2WinAOffset: 0
+OS2WinDescent: 514
+OS2WinDOffset: 0
+HheadAscent: 2210
+HheadAOffset: 0
+HheadDescent: -514
+HheadDOffset: 0
+OS2SubXSize: 1434
+OS2SubYSize: 1331
+OS2SubXOff: 0
+OS2SubYOff: 283
+OS2SupXSize: 1434
+OS2SupYSize: 1331
+OS2SupXOff: 0
+OS2SupYOff: 977
+OS2StrikeYSize: 102
+OS2StrikeYPos: 530
+OS2CapHeight: 1434
+OS2XHeight: 1024
+OS2FamilyClass: 2053
+OS2Vendor: 'pg  '
+OS2CodePages: 00000001.40000000
+OS2UnicodeRanges: 800001e3.1200ffef.00040000.04000000
+Lookup: 1 0 0 "'ss01' Stilgruppe 1 in Lateinisch Nachschlagetabelle 0" { "'ss01' Stilgruppe 1 in Lateinisch Nachschlagetabelle 0 Subtabelle"  } ['ss01' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'ss02' Stilgruppe 2 in Lateinisch Nachschlagetabelle 1" { "'ss02' Stilgruppe 2 in Lateinisch Nachschlagetabelle 1 Subtabelle"  } ['ss02' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'ss03' Stilgruppe 3 in Lateinisch Nachschlagetabelle 2" { "'ss03' Stilgruppe 3 in Lateinisch Nachschlagetabelle 2 Subtabelle"  } ['ss03' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 3" { "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 3 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'ss04' Stilgruppe 4 in Lateinisch Nachschlagetabelle 4" { "'ss04' Stilgruppe 4 in Lateinisch Nachschlagetabelle 4 Subtabelle"  } ['ss04' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'ss05' Stilgruppe 5 in Lateinisch Nachschlagetabelle 5" { "'ss05' Stilgruppe 5 in Lateinisch Nachschlagetabelle 5 Subtabelle"  } ['ss05' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'ss07' Stilgruppe 7 in Lateinisch Nachschlagetabelle 6" { "'ss07' Stilgruppe 7 in Lateinisch Nachschlagetabelle 6 Subtabelle"  } ['ss07' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 7" { "'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 7 Subtabelle"  } ['ss20' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "'vert' Vertikale Alternativen in Lateinisch Nachschlagetabelle 8" { "'vert' Vertikale Alternativen in Lateinisch Nachschlagetabelle 8 Subtabelle"  } ['vert' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 9" { "'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 9 Subtabelle"  } ['ss20' ('latn' <'dflt' > ) ]
+Lookup: 3 0 0 "'ss18' Stilgruppe 18 in Lateinisch Nachschlagetabelle 10" { "'ss18' Stilgruppe 18 in Lateinisch Nachschlagetabelle 10 Subtabelle"  } ['ss18' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 11" { "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 11 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 12" { "'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 12 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss01' Stilgruppe 1 in Lateinisch Nachschlagetabelle 0" { "SegoeUISymbol-'ss01' Stilgruppe 1 in Lateinisch Nachschlagetabelle 0 Subtabelle"  } ['ss01' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss02' Stilgruppe 2 in Lateinisch Nachschlagetabelle 1" { "SegoeUISymbol-'ss02' Stilgruppe 2 in Lateinisch Nachschlagetabelle 1 Subtabelle"  } ['ss02' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss03' Stilgruppe 3 in Lateinisch Nachschlagetabelle 2" { "SegoeUISymbol-'ss03' Stilgruppe 3 in Lateinisch Nachschlagetabelle 2 Subtabelle"  } ['ss03' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 3" { "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 3 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss04' Stilgruppe 4 in Lateinisch Nachschlagetabelle 4" { "SegoeUISymbol-'ss04' Stilgruppe 4 in Lateinisch Nachschlagetabelle 4 Subtabelle"  } ['ss04' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss05' Stilgruppe 5 in Lateinisch Nachschlagetabelle 5" { "SegoeUISymbol-'ss05' Stilgruppe 5 in Lateinisch Nachschlagetabelle 5 Subtabelle"  } ['ss05' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'ss07' Stilgruppe 7 in Lateinisch Nachschlagetabelle 6" { "SegoeUISymbol-'ss07' Stilgruppe 7 in Lateinisch Nachschlagetabelle 6 Subtabelle"  } ['ss07' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "SegoeUISymbol-'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 7" { "SegoeUISymbol-'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 7 Subtabelle"  } ['ss20' ('latn' <'dflt' > ) ]
+Lookup: 1 0 0 "SegoeUISymbol-'vert' Vertikale Alternativen in Lateinisch Nachschlagetabelle 8" { "SegoeUISymbol-'vert' Vertikale Alternativen in Lateinisch Nachschlagetabelle 8 Subtabelle"  } ['vert' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "SegoeUISymbol-'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 9" { "SegoeUISymbol-'ss20' Stilgruppe 20 in Lateinisch Nachschlagetabelle 9 Subtabelle"  } ['ss20' ('latn' <'dflt' > ) ]
+Lookup: 3 0 0 "SegoeUISymbol-'ss18' Stilgruppe 18 in Lateinisch Nachschlagetabelle 10" { "SegoeUISymbol-'ss18' Stilgruppe 18 in Lateinisch Nachschlagetabelle 10 Subtabelle"  } ['ss18' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 11" { "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 11 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 4 0 0 "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 12" { "SegoeUISymbol-'ccmp' Glyphen-Zusammensetzung/Zerlegung in Lateinisch Nachschlagetabelle 12 Subtabelle"  } ['ccmp' ('latn' <'dflt' > ) ]
+Lookup: 260 0 0 "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 0" { "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 0 Subtabelle"  } ['mark' ('latn' <'dflt' > ) ]
+Lookup: 260 0 0 "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 1" { "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 1 Subtabelle"  } ['mark' ('latn' <'dflt' > ) ]
+Lookup: 258 0 0 "'kern' Horizontale Unterschneidung in Lateinisch Nachschlagetabelle 2" { "'kern' Horizontale Unterschneidung in Lateinisch Nachschlagetabelle 2 Subtabelle"  } ['kern' ('DFLT' <'dflt' > 'latn' <'dflt' > ) ]
+Lookup: 258 0 0 "SegoeUISymbol-'kern' Horizontale Unterschneidung in Lateinisch Nachschlagetabelle 2" { "SegoeUISymbol-'kern' Horizontale Unterschneidung in Lateinisch Nachschlagetabelle 2 Subtabelle"  } ['kern' ('DFLT' <'dflt' > 'latn' <'dflt' > ) ]
+MarkAttachClasses: 1
+DEI: 91125
+TtTable: prep
+PUSHW_2
+ 32
+ 318
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 316
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 308
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 306
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 303
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 302
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 300
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 268
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 260
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 259
+PUSHB_5
+ 9
+ 24
+ 1
+ 74
+ 32
+PUSHW_1
+ 257
+NPUSHB
+ 239
+ 9
+ 24
+ 1
+ 74
+ 32
+ 255
+ 9
+ 24
+ 1
+ 74
+ 32
+ 254
+ 9
+ 24
+ 1
+ 74
+ 32
+ 252
+ 9
+ 24
+ 1
+ 74
+ 32
+ 243
+ 9
+ 24
+ 1
+ 74
+ 32
+ 241
+ 9
+ 24
+ 1
+ 74
+ 32
+ 240
+ 9
+ 24
+ 1
+ 74
+ 32
+ 239
+ 9
+ 24
+ 1
+ 74
+ 32
+ 237
+ 9
+ 24
+ 1
+ 74
+ 32
+ 234
+ 9
+ 24
+ 1
+ 74
+ 32
+ 220
+ 9
+ 24
+ 1
+ 74
+ 32
+ 218
+ 9
+ 24
+ 1
+ 74
+ 32
+ 216
+ 9
+ 24
+ 1
+ 74
+ 32
+ 211
+ 9
+ 24
+ 1
+ 74
+ 32
+ 205
+ 9
+ 24
+ 1
+ 74
+ 32
+ 204
+ 9
+ 24
+ 1
+ 74
+ 32
+ 202
+ 9
+ 24
+ 1
+ 74
+ 32
+ 201
+ 9
+ 24
+ 1
+ 74
+ 32
+ 200
+ 9
+ 24
+ 1
+ 74
+ 32
+ 198
+ 9
+ 24
+ 1
+ 74
+ 32
+ 196
+ 9
+ 24
+ 1
+ 74
+ 32
+ 194
+ 9
+ 24
+ 1
+ 74
+ 32
+ 192
+ 9
+ 24
+ 1
+ 74
+ 32
+ 189
+ 9
+ 24
+ 1
+ 74
+ 32
+ 180
+ 9
+ 24
+ 1
+ 74
+ 32
+ 177
+ 9
+ 24
+ 1
+ 74
+ 32
+ 175
+ 9
+ 24
+ 1
+ 74
+ 32
+ 140
+ 9
+ 24
+ 1
+ 74
+ 32
+ 139
+ 9
+ 24
+ 1
+ 74
+ 32
+ 138
+ 9
+ 24
+ 1
+ 74
+ 32
+ 137
+ 9
+ 24
+ 1
+ 74
+ 32
+ 132
+ 9
+ 24
+ 1
+ 74
+ 32
+ 131
+ 9
+ 24
+ 1
+ 74
+ 32
+ 127
+ 9
+ 24
+ 1
+ 74
+ 32
+ 126
+ 9
+ 24
+ 1
+ 74
+ 32
+ 125
+ 9
+ 24
+ 1
+ 74
+ 32
+ 98
+ 9
+ 24
+ 1
+ 74
+ 32
+ 80
+ 9
+ 24
+ 1
+ 74
+ 32
+ 72
+ 9
+ 24
+ 1
+ 74
+ 32
+ 14
+ 9
+ 24
+ 1
+ 74
+ 47
+PUSHW_7
+ 1261
+ 1
+ 79
+ 1260
+ 1
+ 64
+ 1259
+NPUSHB
+ 84
+ 9
+ 13
+ 57
+ 223
+ 224
+ 22
+ 23
+ 28
+ 212
+ 213
+ 22
+ 23
+ 28
+ 123
+ 124
+ 22
+ 27
+ 123
+ 124
+ 25
+ 209
+ 210
+ 22
+ 23
+ 28
+ 118
+ 119
+ 22
+ 23
+ 28
+ 109
+ 112
+ 22
+ 23
+ 28
+ 108
+ 111
+ 22
+ 23
+ 28
+ 107
+ 110
+ 22
+ 27
+ 107
+ 110
+ 127
+ 114
+ 26
+ 116
+ 117
+ 20
+ 21
+ 28
+ 103
+ 106
+ 20
+ 21
+ 28
+ 102
+ 105
+ 20
+ 21
+ 28
+ 101
+ 104
+ 20
+ 27
+ 101
+ 104
+ 133
+ 113
+ 26
+ 25
+ 115
+ 22
+ 122
+ 67
+ 25
+ 33
+ 121
+ 67
+ 25
+ 33
+NPUSHW
+ 10
+ 380
+ 376
+ 40
+ 31
+ 377
+ 376
+ 50
+ 31
+ -64
+ 376
+PUSHB_3
+ 65
+ 65
+ 57
+PUSHW_2
+ -64
+ 376
+PUSHB_4
+ 62
+ 62
+ 57
+ 64
+PUSHW_1
+ 375
+PUSHB_3
+ 57
+ 58
+ 57
+PUSHW_2
+ -64
+ 374
+PUSHB_3
+ 74
+ 74
+ 57
+PUSHW_2
+ -64
+ 374
+PUSHB_3
+ 72
+ 72
+ 57
+PUSHW_2
+ -64
+ 374
+PUSHB_3
+ 56
+ 56
+ 57
+PUSHW_2
+ -64
+ 374
+PUSHB_3
+ 40
+ 41
+ 57
+PUSHW_2
+ -64
+ 374
+PUSHB_4
+ 24
+ 24
+ 57
+ 64
+PUSHW_1
+ 373
+PUSHB_3
+ 17
+ 18
+ 57
+PUSHW_2
+ -64
+ 372
+PUSHB_4
+ 40
+ 40
+ 57
+ 64
+PUSHW_1
+ 372
+PUSHB_3
+ 23
+ 23
+ 57
+PUSHW_2
+ -64
+ 372
+PUSHB_3
+ 11
+ 11
+ 57
+PUSHW_2
+ -64
+ 371
+PUSHB_4
+ 10
+ 10
+ 57
+ 64
+PUSHW_1
+ 370
+PUSHB_4
+ 18
+ 18
+ 57
+ 64
+PUSHW_1
+ 370
+PUSHB_4
+ 14
+ 14
+ 57
+ 224
+PUSHW_7
+ 1271
+ 1
+ 224
+ 1271
+ 1
+ 32
+ 1264
+PUSHB_4
+ 13
+ 17
+ 57
+ 64
+PUSHW_1
+ 1258
+PUSHB_3
+ 11
+ 20
+ 57
+PUSHW_2
+ -64
+ 1263
+PUSHB_4
+ 27
+ 34
+ 57
+ 63
+NPUSHW
+ 13
+ 1268
+ 1
+ 143
+ 1267
+ 1
+ 48
+ 1267
+ 1
+ 48
+ 1263
+ 1
+ 64
+ 1256
+PUSHB_4
+ 11
+ 16
+ 57
+ 63
+PUSHW_8
+ 322
+ 1
+ 15
+ 321
+ 160
+ 321
+ 2
+ -32
+PUSHB_5
+ 241
+ 41
+ 43
+ 57
+ 64
+PUSHW_1
+ 320
+PUSHB_4
+ 61
+ 67
+ 57
+ 64
+PUSHW_1
+ 320
+PUSHB_4
+ 36
+ 40
+ 57
+ 64
+PUSHW_1
+ 319
+PUSHB_4
+ 44
+ 47
+ 57
+ 64
+PUSHW_1
+ 319
+PUSHB_4
+ 23
+ 28
+ 57
+ 64
+PUSHW_1
+ 317
+NPUSHB
+ 22
+ 38
+ 43
+ 57
+ 230
+ 231
+ 3
+ 43
+ 64
+ 231
+ 44
+ 46
+ 57
+ 64
+ 231
+ 27
+ 28
+ 57
+ 64
+ 84
+ 31
+ 31
+ 57
+PUSHW_1
+ -64
+NPUSHB
+ 22
+ 203
+ 35
+ 35
+ 57
+ 64
+ 217
+ 41
+ 42
+ 57
+ 83
+ 82
+ 2
+ 43
+ 82
+ 226
+ 2
+ 43
+ 32
+ 176
+ 11
+ 13
+ 57
+PUSHW_2
+ 258
+ 257
+NPUSHB
+ 27
+ 2
+ 43
+ 253
+ 252
+ 10
+ 43
+ 251
+ 175
+ 5
+ 43
+ 242
+ 226
+ 2
+ 43
+ 195
+ 197
+ 2
+ 43
+ 64
+ 218
+ 23
+ 25
+ 57
+ 219
+ 226
+ 2
+ 43
+PUSHW_1
+ -64
+PUSHB_4
+ 226
+ 48
+ 49
+ 57
+PUSHW_1
+ -64
+NPUSHB
+ 25
+ 226
+ 29
+ 30
+ 57
+ 64
+ 214
+ 23
+ 23
+ 57
+ 235
+ 190
+ 2
+ 43
+ 190
+ 154
+ 2
+ 43
+ 153
+ 154
+ 2
+ 43
+ 154
+ 149
+ 5
+ 43
+PUSHW_1
+ -32
+PUSHB_8
+ 238
+ 20
+ 22
+ 57
+ 146
+ 145
+ 3
+ 43
+PUSHW_1
+ -32
+NPUSHB
+ 12
+ 244
+ 19
+ 22
+ 57
+ 236
+ 149
+ 4
+ 43
+ 145
+ 149
+ 36
+ 31
+PUSHW_1
+ -32
+NPUSHB
+ 11
+ 99
+ 24
+ 25
+ 57
+ 102
+ 99
+ 1
+ 150
+ 149
+ 2
+ 43
+PUSHW_1
+ -32
+PUSHB_4
+ 149
+ 37
+ 40
+ 57
+PUSHW_1
+ 257
+PUSHB_7
+ 125
+ 2
+ 43
+ 252
+ 219
+ 10
+ 43
+PUSHW_2
+ 318
+ 316
+PUSHB_3
+ 2
+ 43
+ 64
+PUSHW_1
+ 316
+PUSHB_3
+ 31
+ 36
+ 57
+PUSHW_1
+ 303
+PUSHB_3
+ 125
+ 3
+ 43
+PUSHW_1
+ 302
+PUSHB_4
+ 132
+ 3
+ 43
+ 208
+PUSHW_1
+ 300
+PUSHB_6
+ 1
+ 64
+ 216
+ 23
+ 25
+ 57
+PUSHW_1
+ -64
+NPUSHB
+ 9
+ 196
+ 34
+ 37
+ 57
+ 64
+ 194
+ 23
+ 23
+ 57
+PUSHW_1
+ -64
+PUSHB_4
+ 192
+ 26
+ 27
+ 57
+PUSHW_1
+ -64
+PUSHB_8
+ 192
+ 16
+ 18
+ 57
+ 205
+ 204
+ 3
+ 43
+PUSHW_1
+ -64
+PUSHB_8
+ 201
+ 35
+ 35
+ 57
+ 202
+ 200
+ 3
+ 43
+PUSHW_1
+ -64
+NPUSHB
+ 22
+ 240
+ 11
+ 13
+ 57
+ 234
+ 126
+ 2
+ 43
+ 48
+ 98
+ 12
+ 12
+ 6
+ 67
+ 177
+ 175
+ 2
+ 43
+ 175
+ 126
+ 2
+ 43
+PUSHW_1
+ -64
+PUSHB_4
+ 211
+ 15
+ 18
+ 57
+PUSHW_1
+ -64
+PUSHB_4
+ 189
+ 39
+ 40
+ 57
+PUSHW_1
+ -64
+NPUSHB
+ 28
+ 140
+ 30
+ 30
+ 57
+ 137
+ 138
+ 4
+ 43
+ 138
+ 132
+ 10
+ 43
+ 139
+ 132
+ 3
+ 43
+ 129
+ 127
+ 1
+ 43
+ 125
+ 126
+ 4
+ 43
+ 126
+ 132
+ 3
+ 43
+PUSHW_1
+ -32
+NPUSHB
+ 65
+ 98
+ 24
+ 25
+ 57
+ 98
+ 132
+ 1
+ 43
+ 136
+ 132
+ 1
+ 43
+ 135
+ 132
+ 1
+ 43
+ 133
+ 132
+ 1
+ 43
+ 131
+ 132
+ 4
+ 43
+ 233
+ 132
+ 249
+ 132
+ 2
+ 105
+ 132
+ 1
+ 39
+ 132
+ 1
+ 27
+ 55
+ 21
+ 24
+ 54
+ 21
+ 21
+ 53
+ 21
+ 18
+ 52
+ 21
+ 15
+ 51
+ 21
+ 12
+ 50
+ 21
+ 9
+ 49
+ 21
+ 6
+ 48
+ 21
+ 3
+ 47
+ 21
+ 0
+ 46
+ 21
+NPUSHW
+ 29
+ 314
+ 315
+ 15
+ 312
+ 313
+ 14
+ 310
+ 311
+ 14
+ 11
+ 312
+ 59
+ 312
+ 75
+ 312
+ 203
+ 312
+ 4
+ 11
+ 310
+ 59
+ 310
+ 91
+ 310
+ 3
+ 16
+ 314
+ 1
+ 262
+PUSHB_3
+ 3
+ 255
+ 31
+NPUSHW
+ 33
+ 266
+ 267
+ 15
+ 264
+ 265
+ 14
+ 262
+ 263
+ 14
+ 107
+ 264
+ 1
+ 11
+ 264
+ 59
+ 264
+ 75
+ 264
+ 187
+ 264
+ 235
+ 264
+ 251
+ 264
+ 6
+ 11
+ 266
+ 91
+ 266
+ 139
+ 266
+ 3
+ 262
+NPUSHB
+ 28
+ 3
+ 255
+ 31
+ 38
+ 39
+ 14
+ 40
+ 39
+ 15
+ 42
+ 43
+ 14
+ 44
+ 43
+ 15
+ 34
+ 35
+ 14
+ 36
+ 35
+ 15
+ 30
+ 31
+ 14
+ 32
+ 31
+ 15
+ 0
+PUSHW_8
+ 305
+ 16
+ 305
+ 32
+ 305
+ 3
+ 0
+ 304
+NPUSHB
+ 128
+ 1
+ 112
+ 42
+ 224
+ 42
+ 2
+ 0
+ 60
+ 1
+ 16
+ 36
+ 64
+ 36
+ 112
+ 36
+ 160
+ 36
+ 4
+ 15
+ 16
+ 17
+ 12
+ 9
+ 10
+ 11
+ 12
+ 6
+ 7
+ 8
+ 12
+ 3
+ 4
+ 5
+ 12
+ 0
+ 1
+ 2
+ 12
+ 38
+ 6
+ 28
+ 31
+ 6
+ 3
+ 24
+ 31
+ 15
+ 3
+ 63
+ 3
+ 223
+ 3
+ 3
+ 159
+ 0
+ 223
+ 0
+ 2
+ 15
+ 23
+ 31
+ 23
+ 47
+ 23
+ 3
+ 15
+ 20
+ 31
+ 20
+ 47
+ 20
+ 3
+ 27
+ 1
+ 29
+ 13
+ 24
+ 7
+ 26
+ 13
+ 21
+ 16
+ 23
+ 13
+ 18
+ 4
+ 20
+ 13
+ 47
+ 27
+ 1
+ 44
+ 60
+ 42
+ 60
+ 40
+ 60
+ 38
+ 60
+ 36
+ 60
+ 34
+ 60
+ 32
+ 60
+ 30
+ 60
+ 27
+ 60
+ 24
+ 60
+ 21
+ 60
+ 18
+ 60
+ 15
+ 60
+ 9
+ 60
+ 6
+ 60
+ 3
+ 60
+ 0
+ 60
+ 80
+ 51
+ 84
+SVTCA[x-axis]
+PUSHB_1
+ 18
+MPPEM
+SVTCA[y-axis]
+MPPEM
+EQ
+WS
+PUSHB_1
+ 19
+SVTCA[x-axis]
+MPPEM
+SVTCA[y-axis]
+MPPEM
+GTEQ
+WS
+PUSHB_1
+ 51
+CALL
+MPPEM
+PUSHW_1
+ 800
+GT
+PUSHB_1
+ 50
+CALL
+MPPEM
+PUSHB_1
+ 9
+LT
+OR
+IF
+PUSHB_2
+ 1
+ 1
+INSTCTRL
+EIF
+PUSHB_1
+ 51
+CALL
+PUSHB_1
+ 2
+GETINFO
+PUSHW_1
+ 256
+EQ
+PUSHB_1
+ 4
+GETINFO
+PUSHW_1
+ 512
+EQ
+PUSHB_1
+ 18
+RS
+AND
+OR
+IF
+PUSHW_1
+ 281
+PUSHB_2
+ 1
+ 1
+INSTCTRL
+SCANCTRL
+ELSE
+PUSHW_2
+ 1
+ 256
+PUSHB_1
+ 75
+ADD
+SCANCTRL
+SCANTYPE
+EIF
+CALL
+CALL
+SCVTCI
+PUSHB_1
+ 100
+MPPEM
+GTEQ
+IF
+PUSHB_1
+ 128
+SCVTCI
+EIF
+PUSHB_1
+ 50
+MPPEM
+GTEQ
+IF
+PUSHB_1
+ 144
+SCVTCI
+EIF
+SVTCA[y-axis]
+MPPEM
+PUSHB_1
+ 50
+LTEQ
+PUSHB_1
+ 27
+SWAP
+WS
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+DELTAC1
+DELTAC1
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+DELTAC1
+DELTAC1
+DELTAC1
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+PUSHB_2
+ 40
+ 38
+RCVT
+PUSHB_1
+ 42
+RCVT
+SUB
+PUSHB_1
+ 44
+RCVT
+ADD
+WCVTP
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+DELTAC2
+PUSHW_1
+ 262
+RCVT
+ROUND[Black]
+PUSHW_1
+ 266
+RCVT
+ROUND[Black]
+SUB
+PUSHW_1
+ 266
+SWAP
+WCVTP
+PUSHW_1
+ 264
+RCVT
+ROUND[Black]
+PUSHW_1
+ 266
+RCVT
+ADD
+PUSHW_1
+ 264
+SWAP
+WCVTP
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+DELTAC1
+PUSHW_1
+ 314
+RCVT
+ROUND[Black]
+PUSHW_1
+ 312
+RCVT
+ROUND[Black]
+ADD
+PUSHW_1
+ 312
+SWAP
+WCVTP
+PUSHW_1
+ 314
+RCVT
+ROUND[Black]
+PUSHW_1
+ 310
+RCVT
+ROUND[Black]
+ADD
+PUSHW_1
+ 310
+SWAP
+WCVTP
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+SVTCA[x-axis]
+DELTAC1
+DELTAC2
+DELTAC3
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+SVTCA[y-axis]
+CALL
+CALL
+DELTAC1
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+CALL
+DELTAC1
+DELTAC1
+DELTAC1
+DELTAC1
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC2
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+PUSHB_1
+ 24
+PUSHB_1
+ 63
+MPPEM
+GTEQ
+WS
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+DELTAC1
+DELTAC1
+PUSHB_2
+ 9
+ 50
+CALL
+MPPEM
+PUSHB_1
+ 80
+GT
+WS
+MPPEM
+PUSHB_1
+ 8
+GT
+MPPEM
+PUSHB_1
+ 8
+LT
+OR
+PUSHB_1
+ 26
+SWAP
+WS
+MPPEM
+PUSHB_1
+ 200
+GT
+MPPEM
+PUSHB_1
+ 54
+LT
+OR
+PUSHB_1
+ 12
+SWAP
+WS
+PUSHB_2
+ 0
+ 2
+RS
+EQ
+PUSHB_2
+ 2
+ 2
+RS
+EQ
+PUSHB_2
+ 6
+ 2
+RS
+EQ
+OR
+OR
+IF
+NPUSHW
+ 21
+ 318
+ 100
+ 316
+ 100
+ 308
+ 100
+ 306
+ 100
+ 303
+ 100
+ 302
+ 100
+ 300
+ 100
+ 268
+ 100
+ 260
+ 100
+ 259
+ 100
+ 257
+NPUSHB
+ 79
+ 100
+ 255
+ 100
+ 254
+ 100
+ 252
+ 100
+ 243
+ 100
+ 241
+ 100
+ 240
+ 100
+ 239
+ 100
+ 237
+ 100
+ 234
+ 100
+ 220
+ 100
+ 218
+ 100
+ 216
+ 100
+ 211
+ 100
+ 205
+ 100
+ 204
+ 100
+ 202
+ 100
+ 201
+ 100
+ 200
+ 100
+ 198
+ 100
+ 196
+ 100
+ 194
+ 100
+ 192
+ 100
+ 189
+ 100
+ 180
+ 100
+ 177
+ 100
+ 175
+ 100
+ 140
+ 100
+ 139
+ 100
+ 138
+ 100
+ 137
+ 100
+ 132
+ 100
+ 131
+ 100
+ 127
+ 100
+ 126
+ 100
+ 125
+ 100
+ 98
+ 100
+ 80
+ 100
+ 72
+ 100
+ 14
+ 100
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+EIF
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+EndTTInstrs
+TtTable: fpgm
+NPUSHB
+ 81
+ 100
+ 84
+ 82
+ 79
+ 78
+ 77
+ 76
+ 75
+ 74
+ 73
+ 72
+ 71
+ 70
+ 67
+ 66
+ 65
+ 64
+ 63
+ 62
+ 61
+ 60
+ 59
+ 58
+ 57
+ 56
+ 55
+ 54
+ 53
+ 52
+ 51
+ 50
+ 49
+ 48
+ 47
+ 46
+ 45
+ 44
+ 43
+ 42
+ 41
+ 40
+ 39
+ 38
+ 37
+ 36
+ 35
+ 34
+ 33
+ 32
+ 31
+ 30
+ 29
+ 28
+ 27
+ 26
+ 25
+ 24
+ 23
+ 22
+ 21
+ 20
+ 19
+ 18
+ 17
+ 16
+ 15
+ 14
+ 13
+ 12
+ 11
+ 10
+ 9
+ 8
+ 7
+ 6
+ 5
+ 4
+ 3
+ 2
+ 1
+ 0
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+RCVT
+ROUND[White]
+PUSHB_1
+ 25
+RS
+ADD
+PUSHB_1
+ 12
+SWAP
+WCVTP
+SWAP
+SRP0
+DUP
+PUSHB_1
+ 12
+FLIPOFF
+MIRP[rp0,grey]
+FLIPON
+MDAP[rnd]
+PUSHB_1
+ 0
+SRP2
+ELSE
+POP
+SWAP
+SRP1
+DUP
+SHP[rp1]
+MDAP[rnd]
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 5
+CALL
+PUSHB_1
+ 0
+SZP0
+MPPEM
+PUSHB_1
+ 20
+LT
+IF
+PUSHB_2
+ 0
+ 64
+SHPIX
+EIF
+PUSHB_1
+ 6
+CALL
+ELSE
+POP
+SWAP
+SRP1
+DUP
+SHP[rp1]
+MDAP[rnd]
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+FLIPOFF
+PUSHB_1
+ 3
+CINDEX
+SRP0
+MIRP[rp0,white]
+POP
+PUSHB_1
+ 0
+SRP2
+FLIPON
+ELSE
+DUP
+RCVT
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+SWAP
+MD[orig]
+SUB
+ABS
+PUSHB_1
+ 40
+GT
+IF
+POP
+SWAP
+SRP0
+MDRP[rp0,rnd,white]
+ELSE
+PUSHB_1
+ 3
+CINDEX
+SRP0
+MIRP[rp0,white]
+POP
+PUSHB_1
+ 0
+SRP2
+EIF
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 26
+RS
+IF
+POP
+POP
+ELSE
+PUSHB_1
+ 2
+CINDEX
+PUSHB_1
+ 2
+CINDEX
+MD[grid]
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MD[orig]
+SUB
+DUP
+ABS
+PUSHB_1
+ 16
+LT
+IF
+POP
+POP
+POP
+ELSE
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MD[grid]
+PUSHB_1
+ 0
+LT
+IF
+PUSHB_1
+ 0
+LT
+IF
+PUSHW_1
+ -30
+SHPIX
+POP
+ELSE
+PUSHB_1
+ 0
+SHPIX
+POP
+EIF
+ELSE
+PUSHB_1
+ 0
+GT
+IF
+PUSHB_1
+ 30
+SHPIX
+POP
+ELSE
+PUSHB_1
+ 0
+SHPIX
+POP
+EIF
+EIF
+EIF
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 5
+CALL
+PUSHB_1
+ 0
+SZP0
+MPPEM
+PUSHB_1
+ 20
+LT
+IF
+PUSHW_2
+ 0
+ -64
+SHPIX
+EIF
+PUSHB_1
+ 6
+CALL
+ELSE
+POP
+SWAP
+SRP1
+DUP
+SHP[rp1]
+MDAP[rnd]
+EIF
+ENDF
+FDEF
+FLIPOFF
+SVTCA[x-axis]
+ROLL
+SRP0
+PUSHB_2
+ 12
+ 25
+RS
+WCVTP
+PUSHB_1
+ 0
+SZP1
+PUSHB_2
+ 0
+ 12
+MIRP[white]
+PUSHB_1
+ 0
+SZP2
+PUSHW_2
+ 0
+ -16
+SHPIX
+SVTCA[y-axis]
+PUSHB_1
+ 0
+ALIGNRP
+PUSHB_1
+ 40
+CALL
+PUSHB_1
+ 2
+CINDEX
+SRP0
+PUSHB_1
+ 0
+ALIGNRP
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 0
+MDAP[rnd]
+PUSHB_1
+ 1
+SZP1
+MIRP[rp0,white]
+PUSHB_1
+ 1
+SZP0
+PUSHB_1
+ 1
+SZP2
+FLIPON
+PUSHB_1
+ 0
+SRP2
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 5
+CALL
+PUSHB_1
+ 0
+SZP0
+PUSHW_2
+ 0
+ -32
+SHPIX
+PUSHB_1
+ 6
+CALL
+ELSE
+POP
+SWAP
+SRP1
+DUP
+SHP[rp1]
+MDAP[rnd]
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+RCVT
+ABS
+ROUND[White]
+SWAP
+RCVT
+ABS
+ROUND[Black]
+PUSHB_1
+ 25
+RS
+ABS
+ADD
+ADD
+PUSHB_1
+ 12
+SWAP
+WCVTP
+SWAP
+SRP0
+DUP
+PUSHB_1
+ 12
+MIRP[rp0,grey]
+MDAP[rnd]
+PUSHB_1
+ 0
+SRP2
+ELSE
+POP
+POP
+DUP
+ROLL
+DUP
+ROLL
+GT
+IF
+SRP1
+SHP[rp1]
+ELSE
+POP
+POP
+EIF
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+MPPEM
+PUSHB_1
+ 200
+LTEQ
+IF
+PUSHB_2
+ 11
+ 10
+RS
+SWAP
+RS
+NEG
+SPVFS
+EIF
+ENDF
+FDEF
+SVTCA[y-axis]
+MPPEM
+PUSHB_1
+ 200
+LTEQ
+IF
+SVTCA[y-axis]
+PUSHB_2
+ 10
+ 11
+RS
+SWAP
+RS
+SFVFS
+EIF
+ENDF
+FDEF
+SVTCA[y-axis]
+PUSHB_1
+ 12
+SWAP
+WCVTF
+PUSHB_2
+ 1
+ 12
+MIAP[no-rnd]
+SVTCA[x-axis]
+PUSHB_1
+ 12
+SWAP
+WCVTF
+PUSHB_2
+ 2
+ 12
+RCVT
+MSIRP[no-rp0]
+PUSHB_2
+ 2
+ 0
+SFVTL[parallel]
+GFV
+ENDF
+FDEF
+PUSHB_1
+ 18
+CALL
+PUSHB_1
+ 2
+CINDEX
+RCVT
+PUSHB_1
+ 2
+CINDEX
+RCVT
+ROUND[White]
+PUSHB_1
+ 64
+MAX
+ADD
+PUSHB_1
+ 2
+CINDEX
+SWAP
+WCVTP
+POP
+POP
+POP
+ENDF
+FDEF
+PUSHB_1
+ 19
+CALL
+PUSHB_1
+ 2
+CINDEX
+RCVT
+PUSHB_1
+ 2
+CINDEX
+RCVT
+ROUND[White]
+PUSHW_1
+ -64
+MIN
+ADD
+PUSHB_1
+ 2
+CINDEX
+SWAP
+WCVTP
+POP
+POP
+POP
+ENDF
+FDEF
+PUSHB_1
+ 0
+PUSHB_1
+ 18
+CALL
+POP
+POP
+POP
+ENDF
+FDEF
+PUSHB_1
+ 0
+PUSHB_1
+ 19
+CALL
+POP
+POP
+POP
+ENDF
+FDEF
+SVTCA[x-axis]
+MPPEM
+PUSHB_1
+ 200
+LTEQ
+IF
+PUSHB_1
+ 6
+RS
+PUSHB_1
+ 7
+RS
+NEG
+SPVFS
+EIF
+ENDF
+FDEF
+DUP
+ROUND[Black]
+PUSHB_1
+ 64
+SUB
+PUSHB_1
+ 0
+MAX
+DUP
+PUSHB_2
+ 44
+ 192
+ROLL
+MIN
+PUSHW_1
+ 4096
+DIV
+ADD
+CALL
+GPV
+ABS
+SWAP
+ABS
+SUB
+NOT
+IF
+PUSHB_1
+ 3
+SUB
+EIF
+ENDF
+FDEF
+PUSHB_2
+ 0
+ 3
+CINDEX
+RCVT
+ROUND[Grey]
+EQ
+PUSHB_1
+ 28
+MPPEM
+LT
+AND
+IF
+PUSHB_1
+ 3
+CINDEX
+RCVT
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ADD
+ROUND[Grey]
+DUP
+PUSHB_1
+ 4
+CINDEX
+SWAP
+WCVTP
+PUSHB_1
+ 4
+CINDEX
+SWAP
+WCVTP
+ELSE
+PUSHB_1
+ 3
+CINDEX
+DUP
+RCVT
+ROUND[Grey]
+DUP
+ROLL
+SWAP
+WCVTP
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ROUND[Grey]
+ADD
+PUSHB_1
+ 3
+CINDEX
+SWAP
+WCVTP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 3
+CINDEX
+DUP
+RCVT
+ROUND[Grey]
+DUP
+ROLL
+SWAP
+WCVTP
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ABS
+ROUND[Grey]
+NEG
+ADD
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 1
+ADD
+SWAP
+WCVTP
+ENDF
+FDEF
+PUSHB_1
+ 9
+RS
+IF
+SDPVTL[orthog]
+POP
+MDRP[grey]
+ELSE
+PUSHB_1
+ 18
+RS
+IF
+SDPVTL[orthog]
+RCVT
+PUSHB_1
+ 17
+CALL
+PUSHB_1
+ 13
+SWAP
+WCVTP
+PUSHB_1
+ 13
+ROFF
+MIRP[rnd,grey]
+ELSE
+SPVTCA[x-axis]
+ROLL
+RCVT
+RTG
+ROUND[Black]
+DUP
+PUSHB_1
+ 13
+SWAP
+WCVTP
+ROLL
+ROLL
+SDPVTL[orthog]
+DUP
+PUSHB_1
+ 160
+LTEQ
+IF
+PUSHB_1
+ 17
+CALL
+PUSHB_1
+ 13
+SWAP
+WCVTP
+PUSHB_1
+ 13
+ROFF
+MIRP[rnd,grey]
+ELSE
+POP
+PUSHB_1
+ 13
+ROFF
+MIRP[rnd,grey]
+EIF
+EIF
+EIF
+RTG
+ENDF
+FDEF
+DUP
+ROLL
+RCVT
+SWAP
+RCVT
+ROUND[Grey]
+ADD
+WCVTP
+ENDF
+FDEF
+RCVT
+ROUND[White]
+WS
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+MDAP[rnd]
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+MD[grid]
+ABS
+SWAP
+RCVT
+ABS
+ROUND[Black]
+PUSHB_1
+ 64
+MAX
+SUB
+DUP
+PUSHB_1
+ 128
+DIV
+ROUND[White]
+PUSHB_1
+ 2
+CINDEX
+PUSHB_1
+ 2
+CINDEX
+SUB
+MIN
+PUSHB_1
+ 25
+RS
+ADD
+PUSHB_1
+ 12
+SWAP
+WCVTP
+POP
+ROLL
+SRP0
+PUSHB_1
+ 12
+MIRP[rp0,rnd,white]
+POP
+ELSE
+POP
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 2
+CINDEX
+RCVT
+PUSHB_1
+ 2
+CINDEX
+RCVT
+ABS
+ADD
+ROUND[White]
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ROUND[White]
+SUB
+DUP
+PUSHB_1
+ 4
+CINDEX
+RCVT
+ROUND[White]
+DUP
+ROLL
+MAX
+NEG
+PUSHB_1
+ 4
+CINDEX
+SWAP
+WCVTP
+MIN
+PUSHB_1
+ 3
+CINDEX
+SWAP
+WCVTP
+POP
+POP
+ELSE
+DUP
+RCVT
+ROUND[White]
+WCVTP
+DUP
+RCVT
+ROUND[White]
+WCVTP
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+DUP
+RCVT
+PUSHB_1
+ 0
+NEQ
+PUSHB_1
+ 24
+RS
+AND
+IF
+RCVT
+ROUND[Grey]
+SWAP
+RCVT
+ROUND[Black]
+PUSHB_1
+ 64
+MAX
+SUB
+DUP
+PUSHB_1
+ 128
+DIV
+ROUND[White]
+DUP
+ROLL
+SWAP
+SUB
+DUP
+PUSHB_1
+ 3
+CINDEX
+MAX
+NEG
+PUSHB_1
+ 4
+CINDEX
+SWAP
+WCVTP
+MIN
+PUSHB_1
+ 3
+CINDEX
+SWAP
+WCVTP
+POP
+POP
+ELSE
+POP
+POP
+PUSHB_1
+ 25
+CALL
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+ROLL
+ROLL
+RCVT
+ABS
+SWAP
+RCVT
+ABS
+SUB
+ABS
+WS
+ENDF
+FDEF
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 25
+CALL
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 27
+CALL
+SVTCA[x-axis]
+PUSHB_1
+ 2
+CINDEX
+RS
+PUSHB_1
+ 64
+EQ
+PUSHB_1
+ 2
+CINDEX
+RS
+PUSHB_1
+ 0
+EQ
+AND
+IF
+PUSHB_1
+ 3
+CINDEX
+DUP
+RCVT
+PUSHB_1
+ 64
+SUB
+WCVTP
+EIF
+PUSHB_1
+ 2
+CINDEX
+RS
+PUSHB_1
+ 0
+EQ
+PUSHB_1
+ 2
+CINDEX
+RS
+PUSHB_1
+ 64
+EQ
+AND
+IF
+PUSHB_1
+ 4
+CINDEX
+DUP
+RCVT
+PUSHB_1
+ 64
+ADD
+WCVTP
+EIF
+EIF
+POP
+POP
+POP
+POP
+ENDF
+FDEF
+PUSHB_1
+ 3
+CINDEX
+DUP
+PUSHB_1
+ 7
+CINDEX
+SDPVTL[orthog]
+SFVTCA[x-axis]
+MDAP[no-rnd]
+SWAP
+DUP
+ROLL
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 7
+CINDEX
+PUSHB_1
+ 20
+CALL
+SRP0
+POP
+MDRP[rnd,grey]
+POP
+ENDF
+FDEF
+MDRP[grey]
+ENDF
+FDEF
+MPPEM
+GT
+IF
+RCVT
+WCVTP
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+IF
+RTDG
+MIRP[min,rnd,black]
+RTG
+ELSE
+MIRP[min,rnd,black]
+EIF
+ENDF
+FDEF
+MPPEM
+LT
+IF
+RCVT
+WCVTP
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+MPPEM
+GT
+IF
+ROLL
+MDAP[rnd]
+MIRP[min,rnd,black]
+ELSE
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ROUND[Grey]
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ROUND[Grey]
+PUSHB_1
+ 3
+CINDEX
+ADD
+EQ
+IF
+POP
+POP
+POP
+ELSE
+PUSHB_1
+ 2
+CINDEX
+RCVT
+ROUND[Grey]
+ADD
+PUSHB_1
+ 3
+CINDEX
+SWAP
+WCVTP
+POP
+POP
+EIF
+ELSE
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+IF
+RTDG
+MDRP[min,rnd,black]
+RTG
+ELSE
+MDRP[min,rnd,black]
+EIF
+ENDF
+FDEF
+GC[cur]
+SWAP
+GC[cur]
+ADD
+ROLL
+ROLL
+GC[cur]
+SWAP
+DUP
+GC[cur]
+ROLL
+ADD
+ROLL
+SUB
+PUSHW_1
+ -128
+DIV
+SWAP
+DUP
+SRP0
+SWAP
+ROLL
+PUSHB_2
+ 12
+ 12
+ROLL
+WCVTF
+RCVT
+ADD
+DUP
+PUSHB_1
+ 0
+LT
+IF
+PUSHB_1
+ 1
+SUB
+PUSHW_1
+ -70
+MAX
+ELSE
+PUSHB_1
+ 70
+MIN
+EIF
+PUSHB_1
+ 16
+ADD
+ROUND[Grey]
+SVTCA[x-axis]
+MSIRP[no-rp0]
+ENDF
+FDEF
+DUP
+RCVT
+PUSHB_1
+ 3
+CINDEX
+GC[cur]
+GT
+MPPEM
+PUSHB_1
+ 19
+LTEQ
+OR
+IF
+PUSHB_1
+ 2
+CINDEX
+GC[cur]
+DUP
+ROUND[Grey]
+SUB
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MIAP[rnd]
+SWAP
+POP
+SHPIX
+ELSE
+POP
+SRP1
+EIF
+ENDF
+FDEF
+DUP
+RCVT
+PUSHB_1
+ 3
+CINDEX
+GC[cur]
+LT
+IF
+PUSHB_1
+ 2
+CINDEX
+GC[cur]
+DUP
+ROUND[Grey]
+SUB
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MIAP[rnd]
+SWAP
+POP
+SHPIX
+ELSE
+POP
+SRP1
+EIF
+ENDF
+FDEF
+SVTCA[y-axis]
+MPPEM
+PUSHB_1
+ 200
+LTEQ
+IF
+SVTCA[y-axis]
+PUSHB_1
+ 7
+RS
+PUSHB_1
+ 6
+RS
+SFVFS
+EIF
+ENDF
+FDEF
+ROLL
+SRP0
+MIRP[min,rnd,grey]
+ENDF
+FDEF
+PUSHB_1
+ 12
+RS
+IF
+POP
+ELSE
+DUP
+GC[cur]
+PUSHB_1
+ 0
+GT
+IF
+PUSHW_1
+ -16
+SHPIX
+ELSE
+PUSHB_1
+ 16
+SHPIX
+EIF
+EIF
+ENDF
+FDEF
+DUP
+PUSHB_1
+ 0
+NEQ
+IF
+PUSHW_1
+ 4096
+MUL
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ABS
+PUSHB_1
+ 3
+CINDEX
+RCVT
+ABS
+SUB
+PUSHB_1
+ 0
+GTEQ
+IF
+PUSHB_1
+ 2
+ELSE
+PUSHB_1
+ 64
+SUB
+PUSHB_1
+ 3
+EIF
+CINDEX
+RCVT
+ROUND[Black]
+GTEQ
+IF
+RCVT
+WCVTP
+ELSE
+POP
+POP
+EIF
+ELSE
+POP
+PUSHB_1
+ 2
+CINDEX
+RCVT
+PUSHB_1
+ 2
+CINDEX
+RCVT
+SUB
+ABS
+PUSHB_1
+ 40
+LTEQ
+IF
+RCVT
+WCVTP
+ELSE
+POP
+POP
+EIF
+EIF
+ENDF
+FDEF
+POP
+POP
+GPV
+ABS
+SWAP
+ABS
+MAX
+PUSHW_1
+ 16384
+DIV
+ENDF
+FDEF
+POP
+PUSHB_1
+ 128
+LTEQ
+IF
+GPV
+ABS
+SWAP
+ABS
+MAX
+PUSHW_1
+ 8192
+DIV
+ELSE
+PUSHB_3
+ 0
+ 64
+ 47
+CALL
+EIF
+PUSHB_1
+ 2
+ADD
+ENDF
+FDEF
+POP
+PUSHB_1
+ 192
+LTEQ
+IF
+GPV
+ABS
+SWAP
+ABS
+MAX
+PUSHW_1
+ 5461
+DIV
+ELSE
+PUSHB_3
+ 0
+ 128
+ 47
+CALL
+EIF
+PUSHB_1
+ 2
+ADD
+ENDF
+FDEF
+GPV
+ABS
+SWAP
+ABS
+MAX
+PUSHW_1
+ 16384
+DIV
+ADD
+SWAP
+POP
+ENDF
+FDEF
+RTG
+MPPEM
+GTEQ
+IF
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+MD[grid]
+ABS
+SWAP
+RCVT
+ABS
+ROUND[Black]
+PUSHB_1
+ 64
+MAX
+SUB
+DUP
+PUSHB_1
+ 128
+DIV
+ROUND[White]
+PUSHB_1
+ 2
+CINDEX
+PUSHB_1
+ 2
+CINDEX
+SUB
+MIN
+PUSHB_1
+ 12
+SWAP
+WCVTP
+POP
+ROLL
+SRP0
+PUSHB_1
+ 12
+MIRP[rp0,rnd,white]
+POP
+ELSE
+POP
+ROLL
+SRP1
+SWAP
+SRP2
+DUP
+IP
+MDAP[rnd]
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+CINDEX
+PUSHB_1
+ 2
+CINDEX
+MD[grid]
+ABS
+PUSHB_1
+ 192
+EQ
+IF
+PUSHW_1
+ -8
+SHPIX
+PUSHB_1
+ 8
+SHPIX
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 19
+RS
+IF
+SPVTCA[x-axis]
+ELSE
+SPVTCA[y-axis]
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 19
+RS
+IF
+SPVTCA[y-axis]
+ELSE
+SPVTCA[x-axis]
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 10
+CALL
+SWAP
+SRP0
+DUP
+ALIGNRP
+PUSHB_1
+ 23
+CALL
+ENDF
+FDEF
+PUSHB_1
+ 2
+CINDEX
+PUSHW_1
+ -16
+SHPIX
+PUSHB_1
+ 40
+CALL
+ROLL
+SRP0
+SWAP
+DUP
+MDRP[rp0,grey]
+SWAP
+PUSHB_1
+ 16
+CALL
+PUSHB_1
+ 5
+RS
+IF
+MDRP[grey]
+ELSE
+ALIGNRP
+EIF
+DUP
+SRP0
+SRP1
+PUSHB_1
+ 0
+SRP2
+SVTCA[x-axis]
+ENDF
+FDEF
+PUSHB_1
+ 72
+CALL
+ENDF
+FDEF
+SVTCA[x-axis]
+PUSHB_1
+ 2
+CINDEX
+SRP0
+MDRP[rp0,grey]
+SWAP
+MDRP[min,black]
+SVTCA[x-axis]
+PUSHB_1
+ 1
+SZP0
+PUSHB_1
+ 0
+SZP1
+SRP0
+PUSHB_1
+ 1
+ALIGNRP
+PUSHB_1
+ 1
+SZPS
+ENDF
+FDEF
+SVTCA[x-axis]
+PUSHB_1
+ 0
+SZP0
+PUSHB_1
+ 1
+PUSHB_1
+ 3
+CINDEX
+MD[grid]
+PUSHB_1
+ 3
+SLOOP
+SHPIX
+PUSHB_1
+ 1
+SZP0
+ENDF
+FDEF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+DUP
+RCVT
+ROLL
+ADD
+WCVTP
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+RTG
+MPPEM
+GTEQ
+IF
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+MD[grid]
+ABS
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MD[grid]
+ABS
+ROUND[Grey]
+PUSHB_1
+ 64
+MAX
+SUB
+DUP
+PUSHB_1
+ 128
+DIV
+ROUND[White]
+PUSHB_1
+ 2
+CINDEX
+PUSHB_1
+ 2
+CINDEX
+SUB
+MIN
+PUSHB_1
+ 12
+SWAP
+WCVTP
+POP
+PUSHB_1
+ 4
+CINDEX
+SRP0
+SWAP
+PUSHB_1
+ 12
+MIRP[rp0,rnd,white]
+ELSE
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+SRP1
+SRP2
+SWAP
+DUP
+IP
+MDAP[rnd]
+EIF
+MDRP[min,rnd,grey]
+POP
+POP
+ENDF
+FDEF
+SVTCA[x-axis]
+RTG
+PUSHB_1
+ 24
+RS
+IF
+PUSHB_1
+ 5
+CINDEX
+GC[cur]
+SWAP
+RCVT
+ABS
+SUB
+ELSE
+POP
+PUSHB_1
+ 4
+CINDEX
+PUSHB_1
+ 4
+CINDEX
+MD[orig]
+EIF
+PUSHB_1
+ 14
+SWAP
+WCVTP
+SWAP
+SRP0
+PUSHB_1
+ 14
+MIRP[min,rnd,grey]
+SWAP
+SRP0
+PUSHB_1
+ 14
+MIRP[min,rnd,grey]
+ENDF
+FDEF
+PUSHB_1
+ 27
+RS
+IF
+DUP
+PUSHB_1
+ 1
+ADD
+RCVT
+PUSHB_1
+ 0
+LTEQ
+IF
+DUP
+PUSHB_1
+ 1
+ADD
+DUP
+RCVT
+DUP
+ROUND[Grey]
+PUSHB_1
+ 0
+NEQ
+IF
+PUSHB_1
+ 32
+ADD
+WCVTP
+POP
+ELSE
+POP
+POP
+POP
+EIF
+ELSE
+DUP
+PUSHB_1
+ 1
+ADD
+DUP
+RCVT
+DUP
+ROUND[Grey]
+PUSHB_1
+ 0
+NEQ
+IF
+PUSHW_1
+ -32
+ADD
+WCVTP
+PUSHB_1
+ 28
+MPPEM
+LT
+IF
+DUP
+RCVT
+PUSHB_1
+ 32
+ADD
+WCVTP
+ELSE
+POP
+EIF
+ELSE
+POP
+POP
+POP
+EIF
+EIF
+ELSE
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+CINDEX
+GC[cur]
+DUP
+ROUND[Grey]
+SUB
+PUSHB_1
+ 3
+CINDEX
+PUSHB_1
+ 3
+CINDEX
+MIAP[rnd]
+SWAP
+POP
+SHPIX
+ENDF
+FDEF
+GC[cur]
+SWAP
+GC[cur]
+ADD
+ROLL
+ROLL
+GC[cur]
+SWAP
+DUP
+GC[cur]
+ROLL
+ADD
+ROLL
+SUB
+PUSHW_1
+ -128
+DIV
+SWAP
+DUP
+SRP0
+SWAP
+ROLL
+PUSHB_2
+ 12
+ 12
+ROLL
+WCVTF
+RCVT
+ADD
+DUP
+PUSHB_1
+ 0
+LT
+IF
+PUSHB_1
+ 1
+SUB
+PUSHW_1
+ -128
+MAX
+ELSE
+PUSHB_1
+ 129
+MIN
+EIF
+ROUND[Grey]
+MSIRP[no-rp0]
+ENDF
+FDEF
+PUSHB_1
+ 64
+LOOPCALL
+POP
+ENDF
+FDEF
+DUP
+SHC[rp1]
+PUSHB_1
+ 1
+ADD
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+SHPIX
+ELSE
+POP
+POP
+EIF
+ELSE
+POP
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+MD[grid]
+PUSHB_1
+ 14
+SWAP
+WCVTP
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+DUP
+RCVT
+ROLL
+ADD
+WCVTP
+ELSE
+POP
+POP
+EIF
+ELSE
+POP
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+DUP
+RCVT
+ROLL
+ADD
+WCVTP
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+MPPEM
+EQ
+IF
+DUP
+RCVT
+ROLL
+ADD
+WCVTP
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+MPPEM
+GTEQ
+SWAP
+MPPEM
+LTEQ
+AND
+IF
+SHPIX
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 0
+POP
+MPPEM
+EQ
+IF
+SHPIX
+ELSE
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+PUSHB_1
+ 70
+CALL
+ELSE
+POP
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+PUSHB_1
+ 71
+CALL
+ELSE
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+PUSHB_1
+ 72
+CALL
+ELSE
+POP
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+PUSHB_1
+ 2
+RS
+EQ
+IF
+PUSHB_1
+ 73
+CALL
+ELSE
+POP
+POP
+POP
+EIF
+ENDF
+FDEF
+SVTCA[y-axis]
+PUSHB_1
+ 2
+CINDEX
+DUP
+SRP1
+MD[grid]
+PUSHB_1
+ 0
+LTEQ
+IF
+PUSHW_1
+ -64
+SHPIX
+ELSE
+POP
+EIF
+ENDF
+FDEF
+SVTCA[y-axis]
+PUSHB_1
+ 2
+CINDEX
+DUP
+SRP1
+MD[grid]
+PUSHB_1
+ 0
+GTEQ
+IF
+PUSHB_1
+ 64
+SHPIX
+ELSE
+POP
+EIF
+ENDF
+FDEF
+MPPEM
+GT
+IF
+RDTG
+ELSE
+ROFF
+EIF
+ENDF
+FDEF
+PUSHB_2
+ 2
+ 0
+WS
+PUSHB_2
+ 35
+ 1
+GETINFO
+LTEQ
+PUSHB_2
+ 64
+ 1
+GETINFO
+GTEQ
+AND
+IF
+PUSHW_2
+ 4096
+ 32
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 1
+ 2
+RS
+ADD
+WS
+EIF
+PUSHB_2
+ 36
+ 1
+GETINFO
+LTEQ
+IF
+PUSHW_2
+ 8192
+ 64
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 2
+ 2
+RS
+ADD
+WS
+PUSHB_2
+ 36
+ 1
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 32
+ 2
+RS
+ADD
+WS
+SVTCA[y-axis]
+MPPEM
+SVTCA[x-axis]
+MPPEM
+GT
+IF
+PUSHB_3
+ 2
+ 8
+ 2
+RS
+ADD
+WS
+EIF
+ELSE
+PUSHW_2
+ 16384
+ 128
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 4
+ 2
+RS
+ADD
+WS
+EIF
+PUSHW_2
+ 16384
+ 128
+MUL
+PUSHW_1
+ 256
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 8
+ 2
+RS
+ADD
+WS
+EIF
+PUSHW_2
+ 16384
+ 256
+MUL
+PUSHW_1
+ 512
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 16
+ 2
+RS
+ADD
+WS
+EIF
+PUSHW_2
+ 16384
+ 512
+MUL
+PUSHW_1
+ 1024
+GETINFO
+EQ
+IF
+PUSHB_3
+ 2
+ 64
+ 2
+RS
+ADD
+WS
+EIF
+EIF
+EIF
+EIF
+EIF
+ENDF
+FDEF
+DUP
+RCVT
+ROUND[Black]
+WCVTP
+ENDF
+EndTTInstrs
+ShortTable: cvt  1275
+  1516
+  22
+  0
+  1434
+  24
+  0
+  1434
+  24
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  1024
+  24
+  0
+  0
+  -24
+  -119
+  0
+  -24
+  -119
+  0
+  -24
+  0
+  -471
+  -11
+  0
+  1434
+  0
+  -326
+  0
+  0
+  0
+  717
+  -19
+  1441
+  13
+  584
+  -21
+  857
+  13
+  0
+  -21
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  -338
+  0
+  0
+  0
+  0
+  2048
+  0
+  2048
+  0
+  1024
+  0
+  258
+  138
+  0
+  0
+  0
+  115
+  0
+  0
+  0
+  107
+  0
+  113
+  128
+  98
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  214
+  214
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  176
+  168
+  145
+  0
+  0
+  0
+  168
+  164
+  0
+  0
+  0
+  0
+  168
+  164
+  155
+  104
+  0
+  0
+  0
+  0
+  151
+  140
+  328
+  328
+  138
+  131
+  0
+  0
+  148
+  138
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  224
+  224
+  160
+  228
+  446
+  258
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  134
+  134
+  0
+  197
+  195
+  129
+  74
+  90
+  81
+  1499
+  1499
+  134
+  88
+  144
+  88
+  138
+  128
+  0
+  0
+  0
+  0
+  0
+  207
+  0
+  0
+  214
+  0
+  120
+  119
+  122
+  97
+  122
+  129
+  0
+  0
+  0
+  129
+  107
+  0
+  0
+  0
+  120
+  109
+  0
+  0
+  146
+  129
+  146
+  139
+  160
+  151
+  467
+  76
+  116
+  100
+  168
+  -481
+  0
+  0
+  0
+  0
+  1571
+  201
+  106
+  109
+  76
+  97
+  105
+  200
+  162
+  128
+  126
+  107
+  1434
+  17
+  548
+  17
+  768
+  -17
+  129
+  103
+  113
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  143
+  99
+  150
+  192
+  -324
+  -270
+  100
+  100
+  118
+  124
+  758
+  13
+  512
+  13
+  1174
+  -13
+  84
+  70
+  106
+  107
+  76
+  1897
+  -463
+  228
+  188
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  1039
+  946
+  487
+  394
+  129
+  123
+  116
+  110
+  95
+  85
+  78
+  80
+  240
+  160
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  0
+  131
+  188
+  148
+  148
+  -123
+  -82
+  82
+  41
+  1556
+  174
+  70
+  70
+  -424
+  1376
+  143
+  133
+  133
+  92
+  84
+  70
+EndShort
+ShortTable: maxp 16
+  1
+  0
+  9410
+  1372
+  181
+  108
+  5
+  2
+  16
+  47
+  101
+  0
+  1135
+  2435
+  3
+  1
+EndShort
+LangName: 1038 "" "" "Norm+AOEA-l"
+LangName: 1029 "" "" "oby+AQ0A-ejn+AOkA"
+LangName: 1055 "" "" "Normal"
+LangName: 2058 "" "" "Normal"
+LangName: 1034 "" "" "Normal"
+LangName: 3082 "" "" "Normal"
+LangName: 1060 "" "" "Navadno"
+LangName: 1051 "" "" "Norm+AOEA-lne"
+LangName: 1053 "" "" "Normal"
+LangName: 1049 "" "" "+BB4EMQRLBEcEPQRLBDkA"
+LangName: 2070 "" "" "Normal"
+LangName: 1046 "" "" "Normal"
+LangName: 1045 "" "" "Normalny"
+LangName: 1044 "" "" "Normal"
+LangName: 1043 "" "" "Standaard"
+LangName: 1027 "" "" "Normal"
+LangName: 1040 "" "" "Normale"
+LangName: 1032 "" "" "+A5oDsQO9A78DvQO5A7oDrAAA"
+LangName: 3084 "" "" "Normal"
+LangName: 1036 "" "" "Normal"
+LangName: 1035 "" "" "Normaali"
+LangName: 1030 "" "" "normal"
+LangName: 1069 "" "" "Arrunta"
+LangName: 1033 "" "" "Regular" "pga-symbols" "" "Version 1.0"
+LangName: 1031 "" "" "Standard"
+GaspTable: 2 8 10 65535 15 1
+Encoding: UnicodeFull
+UnicodeInterp: none
+NameList: AGL For New Fonts
+DisplaySize: -48
+AntiAlias: 1
+FitToEm: 0
+WinInfo: 9940 35 16
+BeginPrivate: 0
+EndPrivate
+TeXData: 1 0 0 -1048576 -524288 -349525 0 -1048576 -349525 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
+AnchorClass2: "Anker-0" "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 0 Subtabelle" "Anker-1" "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 0 Subtabelle" "Anker-2" "'mark' Akzent-Positionierung in Lateinisch Nachschlagetabelle 1 Subtabelle"
+BeginChars: 1116000 11
+
+StartChar: uni2B9C
+Encoding: 11164 11164 0
+Width: 1627
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+1455 0 m 1,0,-1
+ 173 740 l 1,1,-1
+ 1455 1480 l 1,2,-1
+ 1027 740 l 1,3,-1
+ 1455 0 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni2B9E
+Encoding: 11166 11166 1
+Width: 1627
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+Refer: 0 11164 N -0.999878 0 0 1 1628 0 2
+EndChar
+
+StartChar: uni2B9D
+Encoding: 11165 11165 2
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+173 198 m 1,0,-1
+ 913 1480 l 1,1,-1
+ 1653 198 l 1,2,-1
+ 913 626 l 1,3,-1
+ 173 198 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni2B9F
+Encoding: 11167 11167 3
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+1653 1282 m 1,0,-1
+ 913 0 l 1,1,-1
+ 173 1282 l 1,2,-1
+ 913 854 l 1,3,-1
+ 1653 1282 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni2BA8
+Encoding: 11176 11176 4
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+172 740 m 1,0,-1
+ 576 1144 l 1,1,-1
+ 576 937 l 1,2,-1
+ 1220 937 l 2,3,4
+ 1437 937 1437 937 1520 1006.5 c 128,-1,5
+ 1603 1076 1603 1076 1603 1256 c 2,6,-1
+ 1603 1283 l 1,7,-1
+ 1652 1283 l 1,8,-1
+ 1652 1084 l 2,9,10
+ 1652 884 1652 884 1621.5 792.5 c 128,-1,11
+ 1591 701 1591 701 1502 633 c 0,12,13
+ 1385 543 1385 543 1102 543 c 2,14,-1
+ 576 543 l 1,15,-1
+ 576 336 l 1,16,-1
+ 172 740 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni2BA9
+Encoding: 11177 11177 5
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+1652 740 m 1,0,-1
+ 1249 336 l 1,1,-1
+ 1249 543 l 1,2,-1
+ 723 543 l 2,3,4
+ 440 543 440 543 323 633 c 0,5,6
+ 233 701 233 701 202.5 792.5 c 128,-1,7
+ 172 884 172 884 172 1084 c 2,8,-1
+ 172 1283 l 1,9,-1
+ 221 1283 l 1,10,-1
+ 221 1256 l 2,11,12
+ 221 1076 221 1076 304.5 1006.5 c 128,-1,13
+ 388 937 388 937 604 937 c 2,14,-1
+ 1249 937 l 1,15,-1
+ 1249 1144 l 1,16,-1
+ 1652 740 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni2BAA
+Encoding: 11178 11178 6
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+Refer: 5 11177 N -0.999878 0 0 -0.999878 1824 1480 2
+EndChar
+
+StartChar: uni2BAB
+Encoding: 11179 11179 7
+Width: 1825
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+Refer: 4 11176 N -0.999878 0 0 -0.999878 1824 1480 2
+EndChar
+
+StartChar: uni21A9
+Encoding: 8617 8617 8
+Width: 2048
+LayerCount: 2
+Fore
+SplineSet
+1224 697 m 2,0,1
+ 1288 697 1288 697 1344 722 c 128,-1,2
+ 1400 747 1400 747 1441.5 789.5 c 128,-1,3
+ 1483 832 1483 832 1507 888.5 c 128,-1,4
+ 1531 945 1531 945 1531 1009 c 128,-1,5
+ 1531 1073 1531 1073 1507 1129 c 128,-1,6
+ 1483 1185 1483 1185 1441.5 1227 c 128,-1,7
+ 1400 1269 1400 1269 1344 1293 c 128,-1,8
+ 1288 1317 1288 1317 1224 1317 c 1,9,-1
+ 1192 1314 l 1,10,-1
+ 1192 1521 l 1,11,-1
+ 1224 1521 l 2,12,13
+ 1330 1521 1330 1521 1423.5 1481 c 128,-1,14
+ 1517 1441 1517 1441 1587 1371.5 c 128,-1,15
+ 1657 1302 1657 1302 1697.5 1208.5 c 128,-1,16
+ 1738 1115 1738 1115 1738 1009 c 128,-1,17
+ 1738 903 1738 903 1697.5 809.5 c 128,-1,18
+ 1657 716 1657 716 1587 646 c 128,-1,19
+ 1517 576 1517 576 1423.5 535.5 c 128,-1,20
+ 1330 495 1330 495 1224 495 c 2,21,-1
+ 432 495 l 1,22,-1
+ 781 151 l 1,23,-1
+ 506 151 l 1,24,-1
+ 28 601 l 1,25,-1
+ 506 1041 l 1,26,-1
+ 781 1041 l 1,27,-1
+ 432 697 l 1,28,-1
+ 1224 697 l 2,0,1
+EndSplineSet
+EndChar
+
+StartChar: uni21AA
+Encoding: 8618 8618 9
+Width: 2048
+LayerCount: 2
+Fore
+SplineSet
+1334 697 m 1,0,-1
+ 985 1041 l 1,1,-1
+ 1260 1041 l 1,2,-1
+ 1738 601 l 1,3,-1
+ 1260 151 l 1,4,-1
+ 985 151 l 1,5,-1
+ 1334 495 l 1,6,-1
+ 542 495 l 2,7,8
+ 436 495 436 495 342.5 535.5 c 128,-1,9
+ 249 576 249 576 179 646 c 128,-1,10
+ 109 716 109 716 68.5 809.5 c 128,-1,11
+ 28 903 28 903 28 1009 c 128,-1,12
+ 28 1115 28 1115 68.5 1208.5 c 128,-1,13
+ 109 1302 109 1302 179 1371.5 c 128,-1,14
+ 249 1441 249 1441 342.5 1481 c 128,-1,15
+ 436 1521 436 1521 542 1521 c 2,16,-1
+ 574 1521 l 1,17,-1
+ 574 1314 l 1,18,-1
+ 542 1317 l 1,19,20
+ 478 1317 478 1317 422 1293 c 128,-1,21
+ 366 1269 366 1269 324.5 1227 c 128,-1,22
+ 283 1185 283 1185 259 1129 c 128,-1,23
+ 235 1073 235 1073 235 1009 c 128,-1,24
+ 235 945 235 945 259 888.5 c 128,-1,25
+ 283 832 283 832 324.5 789.5 c 128,-1,26
+ 366 747 366 747 422 722 c 128,-1,27
+ 478 697 478 697 542 697 c 2,28,-1
+ 1334 697 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni270E
+Encoding: 9998 9998 10
+Width: 2048
+LayerCount: 2
+Fore
+SplineSet
+526 909 m 6,0,1
+ 511 924 511 924 511 945 c 4,2,3
+ 511 967 511 967 528 984 c 6,4,-1
+ 797 1252 l 6,5,6
+ 816 1271 816 1271 839 1271 c 4,7,8
+ 860 1271 860 1271 875 1256 c 6,9,-1
+ 1645 486 l 6,10,11
+ 1660 471 1660 471 1660 451 c 4,12,13
+ 1660 427 1660 427 1641 408 c 6,14,-1
+ 1370 137 l 6,15,16
+ 1353 122 1353 122 1331 122 c 4,17,18
+ 1311 122 1311 122 1297 136 c 6,19,-1
+ 526 909 l 6,0,1
+716 1333 m 6,20,-1
+ 449 1066 l 6,21,22
+ 429 1046 429 1046 405 1046 c 4,23,24
+ 385 1046 385 1046 371 1060 c 4,25,26
+ 367 1064 367 1064 359 1073.5 c 132,-1,27
+ 351 1083 351 1083 341.5 1094 c 132,-1,28
+ 332 1105 332 1105 322 1117 c 132,-1,29
+ 312 1129 312 1129 305 1137 c 4,30,31
+ 290 1154 290 1154 282.5 1180 c 132,-1,32
+ 275 1206 275 1206 275 1236 c 4,33,34
+ 275 1284 275 1284 294.5 1336 c 132,-1,35
+ 314 1388 314 1388 355 1429 c 4,36,37
+ 397 1471 397 1471 446 1489 c 132,-1,38
+ 495 1507 495 1507 540 1507 c 4,39,40
+ 572 1507 572 1507 599.5 1499.5 c 132,-1,41
+ 627 1492 627 1492 646 1478 c 6,42,-1
+ 723 1411 l 6,43,44
+ 735 1396 735 1396 735 1377 c 4,45,46
+ 735 1352 735 1352 716 1333 c 6,20,-1
+1731 13 m 6,47,-1
+ 1562 45 l 6,48,49
+ 1557 47 1557 47 1552 48.5 c 132,-1,50
+ 1547 50 1547 50 1543 53 c 4,51,52
+ 1536 60 1536 60 1536 69 c 4,53,54
+ 1536 83 1536 83 1551 98 c 6,55,-1
+ 1688 235 l 6,56,57
+ 1695 241 1695 241 1702 245 c 132,-1,58
+ 1709 249 1709 249 1716 249 c 4,59,60
+ 1722 249 1722 249 1730 243 c 4,61,62
+ 1737 234 1737 234 1740 223 c 6,63,-1
+ 1772 54 l 5,64,-1
+ 1773 45 l 6,65,66
+ 1773 31 1773 31 1765 21 c 4,67,68
+ 1754 12 1754 12 1739 12 c 4,69,70
+ 1734 12 1734 12 1731 13 c 6,47,-1
+EndSplineSet
+EndChar
+EndChars
+EndSplineFont

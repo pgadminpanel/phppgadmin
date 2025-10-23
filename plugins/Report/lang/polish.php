@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Musisz podać zapytanie SQL definiujące raport.';
 	$plugin_lang['strreportcreated'] = 'Raport został utworzony.';
 	$plugin_lang['strreportcreatedbad'] = 'Próba utworzenia raportu się nie powiodła.';
-?>
+

@@ -97,7 +97,7 @@ odd characters in user input.  Examine existing functions that do similar
 things to yours to get yours right.
 
 When writing data to the display, you should always urlencode() variables in
-HREFs and htmlspecialchars() variables in forms.  Rather than use action=""
+HREFs and html_esc() variables in forms.  Rather than use action=""
 attributes in HTML form elements use action="thisformname.php".  This
 ensures that browsers remove query strings when expanding the given
 relative URL into a full URL.
@@ -122,7 +122,7 @@ $data - A data connection to the current or default database.
 $misc - Contains miscellaneous functions.  eg. printing headers & footers, etc.
 $lang - Global array containing translated strings.  The strings in this array 
         have already been converted to HTML, so you should not 
-        htmlspecialchars() them.
+        html_esc() them.
 $conf - Global array of configuration options.
 
 WORKING WITH RECORDSETS

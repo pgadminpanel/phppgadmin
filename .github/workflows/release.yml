@@ -1,0 +1,151 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '发布版本号 (例如: v8.0.4)'
+        required: true
+        default: 'v8.0.*'
+  push:
+    branches:
+      - master
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.MY_RELEASE_TOKEN }}
+          persist-credentials: true
+
+      - name: Get version
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=$(sed -n "s/.*setAppVersion(\$appVersion = '\([^']*\)'.*/\1/p" libraries/bootstrap.php)
+            VERSION="v${VERSION}"
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Version: ${VERSION}"
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache composer packages
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+
+      - name: Create release artifacts
+        run: |
+          set -e
+          mkdir -p artifacts
+
+          STAGE=$(mktemp -d)
+          NAME=phppgadmin-${{ steps.version.outputs.VERSION }}
+          mkdir -p "$STAGE/$NAME"
+
+          # 复制
+          cp -r bin conf images js lang libraries plugins themes "$STAGE/$NAME/"
+          cp LICENSE *.php robots.txt composer.json "$STAGE/$NAME/"
+          mkdir -p "$STAGE/$NAME/vendor"
+          cp -r vendor/autoload.php vendor/composer "$STAGE/$NAME/vendor/"
+          mkdir -p "$STAGE/$NAME/vendor/greenlion"
+          cp -r vendor/greenlion/php-sql-parser "$STAGE/$NAME/vendor/greenlion/"
+
+          # conf
+          cd "$STAGE/$NAME"
+          cp conf/config-dist.inc.php conf/config.inc.php
+          rm -f conf/config-dist.inc.php
+
+          # 清理 chart.js/dist
+          if [ -d js/lib/chart.js/dist ]; then
+            find js/lib/chart.js/dist -mindepth 1 -maxdepth 1 \
+              ! -name 'chart.umd.min.js' \
+              ! -name 'chart.umd.min.js.map' \
+              -exec rm -rf {} +
+          fi
+
+          # 清理 ace/src-min-noconflict
+          if [ -d js/lib/ace/src-min-noconflict ]; then
+            KEEP="ace.js worker-base.js ext-language_tools.js ext-searchbox.js ext-textarea.js mode-xml.js ext-modelist.js mode-csv.js mode-javascript.js mode-json.js mode-perl.js mode-pgsql.js mode-plpgsql.js mode-python.js mode-sql.js mode-text.js theme-sqlserver.js theme-textmate.js"
+            cd js/lib/ace/src-min-noconflict
+            find . -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+            for f in *; do
+              keep=0
+              for k in $KEEP; do
+                [ "$f" = "$k" ] && keep=1 && break
+              done
+              [ "$keep" = "0" ] && rm -f "$f"
+            done
+            cd - > /dev/null
+          fi
+
+          # 打包
+          cd "$STAGE"
+          tar -czf "$GITHUB_WORKSPACE/artifacts/$NAME.tar.gz" "$NAME"
+          rm -rf "$STAGE"
+          
+      - name: Extract commit message (Generate Release Note)
+        id: msg
+        run: |
+          {
+            echo "BODY<<RELEASE_BODY_EOF"
+            echo "## Release Logs"
+            echo ""
+            git log -1 --format=%B
+            echo ""
+            echo "## Package Recommendations"
+            echo ""
+            echo "- **Production**: use **phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz** below (slim build, redundant files removed)."
+            echo "- **Developers or Testing**: download the **Source code** package (full source, includes tests)."
+            echo ""
+            echo "**Full commit:** \`$(git rev-parse HEAD)\`"
+            echo "RELEASE_BODY_EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Force update tag
+        run: |
+          git tag -f ${{ steps.version.outputs.VERSION }} ${{ github.sha }}
+          git push origin ${{ steps.version.outputs.VERSION }} --force
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          target_commitish: master
+          files: artifacts/phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz
+          body: ${{ steps.msg.outputs.BODY }}
+          draft: false
+          prerelease: false
+
+      - name: Delete old runs
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run list --repo ${{ github.repository }} \
+            --workflow "${{ github.workflow }}" \
+            --limit 100 \
+            --json databaseId,createdAt \
+            | jq -r '.[] | select((now - (.createdAt | fromdateiso8601)) > 2*86400) | .databaseId' \
+            | while read id; do
+                echo "[INFO] 删除 run: $id"
+                gh run delete "$id" --repo ${{ github.repository }} || true
+              done

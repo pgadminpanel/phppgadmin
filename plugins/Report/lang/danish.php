@@ -22,4 +22,4 @@
 	$plugin_lang['strreportdroppedbad'] = 'Det lykkedes ikke at fjerne rapport.';
 	$plugin_lang['strconfdropreport'] = 'Er du sikker på, at du vil fjerne rapporten "%s"?';
 	$plugin_lang['strreportneedsdef'] = 'Du skal angive en SQL-forespørgsel.';
-?>
+
