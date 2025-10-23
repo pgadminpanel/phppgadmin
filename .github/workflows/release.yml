@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '发布版本号 (例如: v8.0.4)'
+        required: true
+        default: 'v8.0.*'
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.MY_RELEASE_TOKEN }}
+
+      - name: Get version
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=$(sed -n "s/.*setAppVersion(\$appVersion = '\([^']*\)'.*/\1/p" libraries/bootstrap.php)
+            VERSION="v${VERSION}"
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Version: ${VERSION}"
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache composer packages
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+
+      - name: Create release artifacts
+        run: |
+          mkdir -p artifacts
+          cp conf/config-dist.inc.php conf/config.inc.php
+          tar -czf artifacts/phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz \
+            --exclude='conf/config-dist.inc.php' \
+            bin conf images js lang libraries plugins themes \
+            LICENSE *.php robots.txt composer.json \
+            vendor/autoload.php vendor/composer \
+            vendor/greenlion/php-sql-parser/src \
+            vendor/greenlion/php-sql-parser/composer.json \
+            vendor/greenlion/php-sql-parser/LICENSE
+          rm -f conf/config.inc.php
+
+      - name: Extract commit message (Generate Release Note)
+        id: msg
+        run: |
+          {
+            echo "BODY<<RELEASE_BODY_EOF"
+            echo "## Release Logs"
+            echo ""
+            git log -1 --format=%B
+            echo ""
+            echo "**Full commit:** \`$(git rev-parse HEAD)\`"
+            echo "RELEASE_BODY_EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Create Release and Auto Tag
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          target_commitish: master
+          files: artifacts/phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz
+          body: ${{ steps.msg.outputs.BODY }}
+          draft: false
+          prerelease: false

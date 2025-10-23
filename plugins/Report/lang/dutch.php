@@ -18,4 +18,4 @@
 	$plugin_lang['strreportneedsdef'] = 'U dient SQL op te geven voor het rapport.';
 	$plugin_lang['strreportcreated'] = 'Rapport bewaard.';
 	$plugin_lang['strreportcreatedbad'] = 'Bewaren van het rapport mislukt.';
-?>
+

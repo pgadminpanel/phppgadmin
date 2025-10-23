@@ -21,4 +21,4 @@
 	$plugin_lang['strreportneedsdef'] = 'You must give SQL for your report.';
 	$plugin_lang['strreportcreated'] = 'Report saved.';
 	$plugin_lang['strreportcreatedbad'] = 'Failed to save report.';
-?>
+

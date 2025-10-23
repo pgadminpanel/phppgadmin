@@ -9,4 +9,4 @@
 	 * other means.
 	 */
 	$plugin_conf['owned_reports_only'] = false;
-?>
+

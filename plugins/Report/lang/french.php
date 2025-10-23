@@ -21,4 +21,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Vous devez fournir une requête SQL pour votre rapport.';
 	$plugin_lang['strreportcreated'] = 'Rapport sauvegardé.';
 	$plugin_lang['strreportcreatedbad'] = 'Échec lors de la sauvegarde du rapport.';
-?>
+

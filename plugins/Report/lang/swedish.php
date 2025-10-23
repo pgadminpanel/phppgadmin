@@ -22,4 +22,4 @@
 	$plugin_lang['strreportdroppedbad'] = 'Misslyckades att skapa rapport.';
 	$plugin_lang['strconfdropreport'] = 'Är du säker på att du vill radera rapporten "%s"?';
 	$plugin_lang['strreportneedsdef'] = 'Du måste ange din SQL-fråga.';
-?>
+

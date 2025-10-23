@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Musíte zadat dotaz SQL pro výstupní sestavu.';
 	$plugin_lang['strreportcreated'] = 'Výstupní sestava byla uložena.';
 	$plugin_lang['strreportcreatedbad'] = 'Nezdařilo se uložit výstupní sestavu.';
-?>
+

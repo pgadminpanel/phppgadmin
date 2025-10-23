@@ -1,29 +1,25 @@
 <?php
-	$subject = isset($_REQUEST['subject']) ? $_REQUEST['subject'] : 'root'; 
-	
-	if ($subject == 'root')
-		$_no_db_connection = true;
-	
-	include_once('./libraries/lib.inc.php');
-	
-	$url = $misc->getLastTabURL($subject);
-	
-	// Load query vars into superglobal arrays
-	if (isset($url['urlvars'])) {
-		$urlvars = array();
+$subject = $_REQUEST['subject'] ?? 'root';
 
-		foreach($url['urlvars'] as $k => $urlvar) {
-			$urlvars[$k] = value($urlvar, $_REQUEST);
-		}
+if ($subject == 'root')
+	$_ENV["SKIP_DB_CONNECTION"] = '1';
 
-		/* parse_str function is affected by magic_quotes_gpc */
-		if (ini_get('magic_quotes_gpc')) {
-			$misc->stripVar($urlvars);
-		}
+include_once('./libraries/bootstrap.php');
 
-		$_REQUEST = array_merge($_REQUEST, $urlvars);
-		$_GET = array_merge($_GET, $urlvars);
+$url = $misc->getLastTabURL($subject);
+
+// Load query vars into superglobal arrays
+if (isset($url['urlvars'])) {
+	$urlvars = [];
+
+	foreach ($url['urlvars'] as $k => $urlvar) {
+		$urlvars[$k] = value($urlvar, $_REQUEST);
 	}
-	
-	require $url['url'];
-?>
+
+	$_REQUEST = array_merge($_REQUEST, $urlvars);
+	$_GET = array_merge($_GET, $urlvars);
+}
+
+//var_dump($url);
+//exit;
+require $url['url'];

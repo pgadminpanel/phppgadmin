@@ -1,423 +1,539 @@
 <?php
 
-	/**
-	 * List indexes on a table
-	 *
-	 * $Id: indexes.php,v 1.46 2008/01/08 22:50:29 xzilla Exp $
-	 */
+use PhpPgAdmin\Database\Actions\SchemaActions;
+use PhpPgAdmin\Html\XHtmlButton;
+use PhpPgAdmin\Html\XHtmlOption;
+use PhpPgAdmin\Html\XHtmlSelect;
+use PhpPgAdmin\Core\AppContainer;
+use PhpPgAdmin\Database\Actions\AdminActions;
+use PhpPgAdmin\Database\Actions\IndexActions;
+use PhpPgAdmin\Database\Actions\TableActions;
+use PhpPgAdmin\Database\Actions\TablespaceActions;
 
-	// Include application functions
-	include_once('./libraries/lib.inc.php');
-	include_once('./classes/class.select.php');
-		
-	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
+/**
+ * List indexes on a table
+ *
+ * $Id: indexes.php,v 1.46 2008/01/08 22:50:29 xzilla Exp $
+ */
 
-	/**
-	 * Show confirmation of cluster index and perform actual cluster
-	 */
-	function doClusterIndex($confirm) {
-		global $data, $misc, $action;
-		global $lang;
+// Include application functions
+include_once('./libraries/bootstrap.php');
 
-		if ($confirm) {
-			// Default analyze to on
-			$_REQUEST['analyze'] = true;
-			
-			$misc->printTrail('index');
-			$misc->printTitle($lang['strclusterindex'],'pg.index.cluster');
+/**
+ * Show confirmation of cluster index and perform actual cluster
+ */
+function doClusterIndex($confirm)
+{
+	$pg = AppContainer::getPostgres();
+	$misc = AppContainer::getMisc();
+	$lang = AppContainer::getLang();
+	$indexActions = new IndexActions($pg);
+	$adminActions = new AdminActions($pg);
 
-			echo "<p>", sprintf($lang['strconfcluster'], $misc->printVal($_REQUEST['index'])), "</p>\n";
+	$subject = $_REQUEST['subject'] ?? 'table';
+	$table = $_REQUEST[$subject];
 
-			echo "<form action=\"indexes.php\" method=\"post\">\n";
-			echo "<p><input type=\"checkbox\" id=\"analyze\" name=\"analyze\"", (isset($_REQUEST['analyze']) ? ' checked="checked"' : ''), " /><label for=\"analyze\">{$lang['stranalyze']}</label></p>\n";
-			echo "<input type=\"hidden\" name=\"action\" value=\"cluster_index\" />\n";
-			echo "<input type=\"hidden\" name=\"table\" value=\"", htmlspecialchars($_REQUEST['table']), "\" />\n";
-			echo "<input type=\"hidden\" name=\"index\" value=\"", htmlspecialchars($_REQUEST['index']), "\" />\n";
-			echo $misc->form;
-			echo "<input type=\"submit\" name=\"cluster\" value=\"{$lang['strclusterindex']}\" />\n";
-			echo "<input type=\"submit\" name=\"cancel\" value=\"{$lang['strcancel']}\" />\n";
-			echo "</form>\n";
-		}
-		else {
-			$status = $data->clusterIndex($_POST['table'], $_POST['index']);
-			if ($status == 0)
-				if (isset($_POST['analyze'])){
-					$status = $data->analyzeDB($_POST['table']);
-					if ($status == 0)
-						doDefault($lang['strclusteredgood'] . ' ' . $lang['stranalyzegood']);
-					else
-						doDefault($lang['stranalyzebad']);
-				} else
-					doDefault($lang['strclusteredgood']);
-			else
-				doDefault($lang['strclusteredbad']);
-		}
+	if ($confirm) {
+		// Default analyze to on
+		$_REQUEST['analyze'] = true;
 
-	}
+		$misc->printTrail('index');
+		$misc->printTitle($lang['strclusterindex'], 'pg.index.cluster');
+		?>
+		<p><?= sprintf($lang['strconfcluster'], $misc->formatVal($_REQUEST['index'])) ?></p>
 
-	function doReindex() {
-		global $data, $lang;
-
-		$status = $data->reindex('INDEX', $_REQUEST['index']);
+		<form action="indexes.php" method="post">
+			<p>
+				<input type="checkbox" id="analyze" name="analyze" <?= isset($_REQUEST['analyze']) ? 'checked="checked"' : '' ?> />
+				<label for="analyze"><?= $lang['stranalyze'] ?></label>
+			</p>
+			<input type="hidden" name="action" value="cluster_index" />
+			<input type="hidden" name="subject" value="<?= htmlspecialchars($subject) ?>" />
+			<input type="hidden" name="<?= htmlspecialchars($subject) ?>" value="<?= htmlspecialchars($table) ?>" />
+			<input type="hidden" name="index" value="<?= html_esc($_REQUEST['index']) ?>" />
+			<?= $misc->form ?>
+			<input type="submit" name="cluster" value="<?= $lang['strclusterindex'] ?>" />
+			<input type="submit" name="cancel" value="<?= $lang['strcancel'] ?>" />
+		</form>
+		<?php
+	} else {
+		$status = $indexActions->clusterIndex($table, $_POST['index']);
 		if ($status == 0)
-			doDefault($lang['strreindexgood']);
+			if (isset($_POST['analyze'])) {
+				$status = $adminActions->analyzeDB($table);
+				if ($status == 0)
+					doDefault($lang['strclusteredgood'] . ' ' . $lang['stranalyzegood']);
+				else
+					doDefault($lang['stranalyzebad']);
+			} else
+				doDefault($lang['strclusteredgood']);
 		else
-			doDefault($lang['strreindexbad']);
+			doDefault($lang['strclusteredbad']);
 	}
 
-	/**
-	 * Displays a screen where they can enter a new index
-	 */
-	function doCreateIndex($msg = '') {
-		global $data, $misc;
-		global $lang;
+}
 
-		if (!isset($_POST['formIndexName'])) $_POST['formIndexName'] = '';
-		if (!isset($_POST['formIndexType'])) $_POST['formIndexType'] = null;
-		if (!isset($_POST['formCols'])) $_POST['formCols'] = '';
-		if (!isset($_POST['formWhere'])) $_POST['formWhere'] = '';
-		if (!isset($_POST['formSpc'])) $_POST['formSpc'] = '';
+function doReindex()
+{
+	$pg = AppContainer::getPostgres();
+	$lang = AppContainer::getLang();
+	$indexActions = new IndexActions($pg);
 
-		$attrs = $data->getTableAttributes($_REQUEST['table']);
-		// Fetch all tablespaces from the database
-		if ($data->hasTablespaces()) $tablespaces = $data->getTablespaces();
-		
-		$misc->printTrail('table');
-		$misc->printTitle($lang['strcreateindex'],'pg.index.create');
-		$misc->printMsg($msg);
+	$status = $indexActions->reindex('INDEX', $_REQUEST['index']);
+	if ($status == 0)
+		doDefault($lang['strreindexgood']);
+	else
+		doDefault($lang['strreindexbad']);
+}
 
-		$selColumns = new XHTML_select("TableColumnList",true,10);
-		$selColumns->set_style("width: 10em;");
+/**
+ * Displays a screen where they can enter a new index
+ */
+function doCreateIndex($msg = '')
+{
+	$pg = AppContainer::getPostgres();
+	$misc = AppContainer::getMisc();
+	$lang = AppContainer::getLang();
+	$tableActions = new TableActions($pg);
+	$tableSpaceActions = new TablespaceActions($pg);
 
-		if ($attrs->recordCount() > 0) {
-			while (!$attrs->EOF) {
-                $XHTML_Option = new XHTML_Option($attrs->fields['attname']);
-                $selColumns->add($XHTML_Option);
-				$attrs->moveNext();
-			}
-		}
+	$subject = $_REQUEST['subject'] ?? 'table';
+	$table = $_REQUEST[$subject];
 
-		$selIndex = new XHTML_select("IndexColumnList[]", true, 10);
-		$selIndex->set_style("width: 10em;");
-		$selIndex->set_attribute("id", "IndexColumnList");
-		$buttonAdd    = new XHTML_Button("add", ">>");
-		$buttonAdd->set_attribute("onclick", "buttonPressed(this);");
-		$buttonAdd->set_attribute("type", "button");
+	if (!isset($_POST['formIndexName']))
+		$_POST['formIndexName'] = '';
+	if (!isset($_POST['formIndexType']))
+		$_POST['formIndexType'] = null;
+	if (!isset($_POST['formCols']))
+		$_POST['formCols'] = '';
+	if (!isset($_POST['formWhere']))
+		$_POST['formWhere'] = '';
+	if (!isset($_POST['formSpc']))
+		$_POST['formSpc'] = '';
 
-		$buttonRemove = new XHTML_Button("remove", "<<");
-		$buttonRemove->set_attribute("onclick", "buttonPressed(this);");		
-		$buttonRemove->set_attribute("type", "button");
+	$attrs = $tableActions->getTableAttributes($table);
+	// Fetch all tablespaces from the database
+	if ($pg->hasTablespaces())
+		$tablespaces = $tableSpaceActions->getTablespaces();
 
-		echo "<form onsubmit=\"doSelectAll();\" name=\"formIndex\" action=\"indexes.php\" method=\"post\">\n";
+	$misc->printTrail($subject);
+	$misc->printTitle($lang['strcreateindex'], 'pg.index.create');
+	$misc->printMsg($msg);
 
+	$selColumns = new XHtmlSelect("TableColumnList", true, 10);
+	$selColumns->set_style("width: 10em;");
 
-		echo "<table>\n";
-		echo "<tr><th class=\"data required\" colspan=\"3\">{$lang['strindexname']}</th></tr>";
-		echo "<tr>";
-		echo "<td class=\"data1\" colspan=\"3\"><input type=\"text\" name=\"formIndexName\" size=\"32\" maxlength=\"{$data->_maxNameLen}\" value=\"", 
-			htmlspecialchars($_POST['formIndexName']), "\" /></td></tr>";
-		echo "<tr><th class=\"data\">{$lang['strtablecolumnlist']}</th><th class=\"data\">&nbsp;</th>";
-		echo "<th class=\"data required\">{$lang['strindexcolumnlist']}</th></tr>\n";
-		echo "<tr><td class=\"data1\">" . $selColumns->fetch() . "</td>\n";
-		echo "<td class=\"data1\">" . $buttonRemove->fetch() . $buttonAdd->fetch() . "</td>";
-		echo "<td class=\"data1\">" . $selIndex->fetch() . "</td></tr>\n";
-		echo "</table>\n";
-
-		echo "<table> \n";
-		echo "<tr>";
-		echo "<th class=\"data left required\" scope=\"row\">{$lang['strindextype']}</th>";
-		echo "<td class=\"data1\"><select name=\"formIndexType\">";
-		foreach ($data->typIndexes as $v) {
-			echo "<option value=\"", htmlspecialchars($v), "\"",
-				($v == $_POST['formIndexType']) ? ' selected="selected"' : '', ">", htmlspecialchars($v), "</option>\n";
-		}
-		echo "</select></td></tr>\n";				
-		echo "<tr>";
-		echo "<th class=\"data left\" scope=\"row\"><label for=\"formUnique\">{$lang['strunique']}</label></th>";
-		echo "<td class=\"data1\"><input type=\"checkbox\" id=\"formUnique\" name=\"formUnique\"", (isset($_POST['formUnique']) ? 'checked="checked"' : ''), " /></td>";
-		echo "</tr>";
-		echo "<tr>";
-		echo "<th class=\"data left\" scope=\"row\">{$lang['strwhere']}</th>";
-		echo "<td class=\"data1\">(<input name=\"formWhere\" size=\"32\" maxlength=\"{$data->_maxNameLen}\" value=\"", 
-			htmlspecialchars($_POST['formWhere']), "\" />)</td>";
-		echo "</tr>";
-		
-		// Tablespace (if there are any)
-		if ($data->hasTablespaces() && $tablespaces->recordCount() > 0) {
-			echo "\t<tr>\n\t\t<th class=\"data left\">{$lang['strtablespace']}</th>\n";
-			echo "\t\t<td class=\"data1\">\n\t\t\t<select name=\"formSpc\">\n";
-			// Always offer the default (empty) option
-			echo "\t\t\t\t<option value=\"\"",
-				($_POST['formSpc'] == '') ? ' selected="selected"' : '', "></option>\n";
-			// Display all other tablespaces
-			while (!$tablespaces->EOF) {
-				$spcname = htmlspecialchars($tablespaces->fields['spcname']);
-				echo "\t\t\t\t<option value=\"{$spcname}\"",
-					($spcname == $_POST['formSpc']) ? ' selected="selected"' : '', ">{$spcname}</option>\n";
-				$tablespaces->moveNext();
-			}
-			echo "\t\t\t</select>\n\t\t</td>\n\t</tr>\n";
-		}
-
-		if ($data->hasConcurrentIndexBuild()) {
-			echo "<tr>";
-			echo "<th class=\"data left\" scope=\"row\"><label for=\"formConcur\">{$lang['strconcurrently']}</label></th>";
-			echo "<td class=\"data1\"><input type=\"checkbox\" id=\"formConcur\" name=\"formConcur\"", (isset($_POST['formConcur']) ? 'checked="checked"' : ''), " /></td>";
-			echo "</tr>";
-		}	
-
-		echo "</table>";
-
-		echo "<p><input type=\"hidden\" name=\"action\" value=\"save_create_index\" />\n";
-		echo $misc->form;
-		echo "<input type=\"hidden\" name=\"table\" value=\"", htmlspecialchars($_REQUEST['table']), "\" />\n";
-		echo "<input type=\"submit\" value=\"{$lang['strcreate']}\" />\n";
-		echo "<input type=\"submit\" name=\"cancel\" value=\"{$lang['strcancel']}\" /></p>\n";
-		echo "</form>\n";
-	}
-
-	/**
-	 * Actually creates the new index in the database
-	 * @@ Note: this function can't handle columns with commas in them
-	 */
-	function doSaveCreateIndex() {
-		global $data;
-		global $lang;
-		
-		// Handle databases that don't have partial indexes
-		if (!isset($_POST['formWhere'])) $_POST['formWhere'] = '';
-		// Default tablespace to null if it isn't set
-		if (!isset($_POST['formSpc'])) $_POST['formSpc'] = null;
-		
-		// Check that they've given a name and at least one column
-		if ($_POST['formIndexName'] == '') doCreateIndex($lang['strindexneedsname']);
-		elseif (!isset($_POST['IndexColumnList']) || $_POST['IndexColumnList'] == '') doCreateIndex($lang['strindexneedscols']);
-		else {
-			$status = $data->createIndex($_POST['formIndexName'], $_POST['table'], $_POST['IndexColumnList'], 
-				$_POST['formIndexType'], isset($_POST['formUnique']), $_POST['formWhere'], $_POST['formSpc'], 
-				isset($_POST['formConcur']));
-			if ($status == 0)
-				doDefault($lang['strindexcreated']);
-			else
-				doCreateIndex($lang['strindexcreatedbad']);
+	if ($attrs->recordCount() > 0) {
+		while (!$attrs->EOF) {
+			$XHTML_Option = new XHtmlOption($attrs->fields['attname']);
+			$selColumns->add($XHTML_Option);
+			$attrs->moveNext();
 		}
 	}
 
-	/**
-	 * Show confirmation of drop index and perform actual drop
-	 */
-	function doDropIndex($confirm) {
-		global $data, $misc;
-		global $lang;
+	$selIndex = new XHtmlSelect("IndexColumnList[]", true, 10);
+	$selIndex->set_style("width: 10em;");
+	$selIndex->set_attribute("id", "IndexColumnList");
+	$buttonAdd = new XHtmlButton("add", ">>");
+	$buttonAdd->set_attribute("onclick", "buttonPressed(this);");
+	$buttonAdd->set_attribute("type", "button");
+	$buttonRemove = new XHtmlButton("remove", "<<");
+	$buttonRemove->set_attribute("onclick", "buttonPressed(this);");
+	$buttonRemove->set_attribute("type", "button");
 
-		if ($confirm) {
-			$misc->printTrail('index');
-			$misc->printTitle($lang['strdrop'],'pg.index.drop');
+	?>
+	<form onsubmit="doSelectAll();" name="formIndex" action="indexes.php" method="post">
+		<table>
+			<tr>
+				<th class="data required" colspan="3"><?= $lang['strindexname'] ?></th>
+			</tr>
+			<tr>
+				<td class="data1" colspan="3">
+					<input type="text" name="formIndexName" id="formIndexName" size="32" maxlength="<?= $pg->_maxNameLen ?>"
+						data-suffix="idx" value="<?= html_esc($_POST['formIndexName']) ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th class="data"><?= $lang['strtablecolumnlist'] ?></th>
+				<th class="data">&nbsp;</th>
+				<th class="data required"><?= $lang['strindexcolumnlist'] ?></th>
+			</tr>
+			<tr>
+				<td class="data1"><?= $selColumns->fetch() ?></td>
+				<td class="data1"><?= $buttonRemove->fetch() . $buttonAdd->fetch() ?></td>
+				<td class="data1"><?= $selIndex->fetch() ?></td>
+			</tr>
+		</table>
 
-			echo "<p>", sprintf($lang['strconfdropindex'], $misc->printVal($_REQUEST['index'])), "</p>\n";
+		<table>
+			<tr>
+				<th class="data left required" scope="row"><?= $lang['strindextype'] ?></th>
+				<td class="data1">
+					<select name="formIndexType">
+						<?php foreach (IndexActions::INDEX_TYPES as $v): ?>
+							<option value="<?= html_esc($v) ?>" <?= ($v == $_POST['formIndexType']) ? 'selected="selected"' : '' ?>><?= html_esc($v) ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="data left" scope="row"><label for="formUnique"><?= $lang['strunique'] ?></label></th>
+				<td class="data1"><input type="checkbox" id="formUnique" name="formUnique" <?= isset($_POST['formUnique']) ? 'checked="checked"' : '' ?> /></td>
+			</tr>
+			<tr>
+				<th class="data left" scope="row"><?= $lang['strwhere'] ?></th>
+				<td class="data1">(<input name="formWhere" size="32" maxlength="<?= $pg->_maxNameLen ?>"
+						value="<?= html_esc($_POST['formWhere']) ?>" />)</td>
+			</tr>
 
-			echo "<form action=\"indexes.php\" method=\"post\">\n";
-			echo "<input type=\"hidden\" name=\"action\" value=\"drop_index\" />\n";
-			echo "<input type=\"hidden\" name=\"table\" value=\"", htmlspecialchars($_REQUEST['table']), "\" />\n";
-			echo "<input type=\"hidden\" name=\"index\" value=\"", htmlspecialchars($_REQUEST['index']), "\" />\n";
-			echo $misc->form;
-			echo "<p><input type=\"checkbox\" id=\"cascade\" name=\"cascade\" /> <label for=\"cascade\">{$lang['strcascade']}</label></p>\n";
-			echo "<input type=\"submit\" name=\"drop\" value=\"{$lang['strdrop']}\" />\n";
-			echo "<input type=\"submit\" name=\"cancel\" value=\"{$lang['strcancel']}\" />\n";
-			echo "</form>\n";
-		}
-		else {
-			$status = $data->dropIndex($_POST['index'], isset($_POST['cascade']));
-			if ($status == 0)
-				doDefault($lang['strindexdropped']);
-			else
-				doDefault($lang['strindexdroppedbad']);
-		}
+			<?php if ($pg->hasTablespaces() && $tablespaces->recordCount() > 0): ?>
+				<tr>
+					<th class="data left"><?= $lang['strtablespace'] ?></th>
+					<td class="data1">
+						<select name="formSpc">
+							<option value="" <?= ($_POST['formSpc'] == '') ? 'selected="selected"' : '' ?>></option>
+							<?php while (!$tablespaces->EOF):
+								$spcname = html_esc($tablespaces->fields['spcname']);
+								?>
+								<option value="<?= $spcname ?>" <?= ($spcname == $_POST['formSpc']) ? 'selected="selected"' : '' ?>>
+									<?= $spcname ?>
+								</option>
+								<?php $tablespaces->moveNext(); endwhile; ?>
+						</select>
+					</td>
+				</tr>
+			<?php endif; ?>
 
-	}
+			<?php if ($pg->hasConcurrentIndexBuild()): ?>
+				<tr>
+					<th class="data left" scope="row"><label for="formConcur"><?= $lang['strconcurrently'] ?></label></th>
+					<td class="data1"><input type="checkbox" id="formConcur" name="formConcur" <?= isset($_POST['formConcur']) ? 'checked="checked"' : '' ?> /></td>
+				</tr>
+			<?php endif; ?>
+		</table>
 
-	function doDefault($msg = '') {
-		global $data, $misc;
-		global $lang;
-		
-		function indPre(&$rowdata, $actions) {
-			global $data, $lang;
-			
-			if ($data->phpBool($rowdata->fields['indisprimary'])) {
-				$rowdata->fields['+constraints'] = $lang['strprimarykey'];
-				$actions['drop']['disable'] = true;
-			}
-			elseif ($data->phpBool($rowdata->fields['indisunique'])) {
-				$rowdata->fields['+constraints'] = $lang['struniquekey'];
-				$actions['drop']['disable'] = true;
-			}
-			else
-				$rowdata->fields['+constraints'] = '';
-			
-			return $actions;
-		}
-		
-		$misc->printTrail('table');
-		$misc->printTabs('table','indexes');
-		$misc->printMsg($msg);
+		<p>
+			<input type="hidden" name="action" value="save_create_index" />
+			<?= $misc->form ?>
+			<input type="hidden" name="subject" value="<?= htmlspecialchars($subject) ?>" />
+			<input type="hidden" name="<?= htmlspecialchars($subject) ?>" value="<?= htmlspecialchars($table) ?>" />
+			<input type="submit" value="<?= $lang['strcreate'] ?>" />
+			<input type="submit" name="cancel" value="<?= $lang['strcancel'] ?>" />
+		</p>
+	</form>
+	<?php
+}
 
-		$indexes = $data->getIndexes($_REQUEST['table']);
-		
-		$columns = array(
-			'index' => array(
-				'title' => $lang['strname'],
-				'field' => field('indname'),
-			),
-			'definition' => array(
-				'title' => $lang['strdefinition'],
-				'field' => field('inddef'),
-			),
-			'constraints' => array(
-				'title' => $lang['strconstraints'],
-				'field' => field('+constraints'),
-				'type'  => 'verbatim',
-				'params'=> array('align' => 'center'),
-			),
-			'clustered' => array(
-				'title' => $lang['strclustered'],
-				'field' => field('indisclustered'),
-				'type'  => 'yesno',
-			),
-			'actions' => array(
-				'title' => $lang['stractions'],
-			),
-			'comment' => array(
-				'title' => $lang['strcomment'],
-				'field' => field('idxcomment'),
-			),
+/**
+ * Actually creates the new index in the database
+ * @@ Note: this function can't handle columns with commas in them
+ */
+function doSaveCreateIndex()
+{
+	$pg = AppContainer::getPostgres();
+	$lang = AppContainer::getLang();
+	$indexActions = new IndexActions($pg);
+
+	$subject = $_REQUEST['subject'] ?? 'table';
+	$table = $_REQUEST[$subject];
+
+	// Handle databases that don't have partial indexes
+	if (!isset($_POST['formWhere']))
+		$_POST['formWhere'] = '';
+	// Default tablespace to null if it isn't set
+	if (!isset($_POST['formSpc']))
+		$_POST['formSpc'] = null;
+
+	// Check that they've given a name and at least one column
+	if ($_POST['formIndexName'] == '')
+		doCreateIndex($lang['strindexneedsname']);
+	elseif (!isset($_POST['IndexColumnList']) || $_POST['IndexColumnList'] == '')
+		doCreateIndex($lang['strindexneedscols']);
+	else {
+		$status = $indexActions->createIndex(
+			$_POST['formIndexName'],
+			$table,
+			$_POST['IndexColumnList'],
+			$_POST['formIndexType'],
+			isset($_POST['formUnique']),
+			$_POST['formWhere'],
+			$_POST['formSpc'],
+			isset($_POST['formConcur'])
 		);
+		if ($status == 0)
+			doDefault($lang['strindexcreated']);
+		else
+			doCreateIndex($lang['strindexcreatedbad']);
+	}
+}
 
-		$actions = array(
-			'cluster' => array(
-				'content' => $lang['strclusterindex'],
-				'attr'=> array (
-					'href' => array (
+/**
+ * Perform actual drop of index
+ */
+function doExecDropIndex()
+{
+	$pg = AppContainer::getPostgres();
+	$lang = AppContainer::getLang();
+	$indexActions = new IndexActions($pg);
+
+	$status = $indexActions->dropIndex($_POST['index'], isset($_POST['cascade']));
+	if ($status == 0)
+		doDefault($lang['strindexdropped']);
+	else
+		doDefault($lang['strindexdroppedbad']);
+	return;
+}
+
+/**
+ * Show confirmation of drop index
+ */
+function doConfirmDropIndex()
+{
+	$pg = AppContainer::getPostgres();
+	$misc = AppContainer::getMisc();
+	$lang = AppContainer::getLang();
+
+	$subject = $_REQUEST['subject'] ?? 'table';
+	$table = $_REQUEST[$subject];
+
+	$misc->printTrail('index');
+	$misc->printTitle($lang['strdrop'], 'pg.index.drop');
+	?>
+	<p><?= sprintf($lang['strconfdropindex'], $misc->formatVal($_REQUEST['index'])) ?></p>
+
+	<form action="indexes.php" method="post">
+		<input type="hidden" name="action" value="drop_index" />
+		<input type="hidden" name="subject" value="<?= htmlspecialchars($subject) ?>" />
+		<input type="hidden" name="<?= htmlspecialchars($subject) ?>" value="<?= htmlspecialchars($table) ?>" />
+		<input type="hidden" name="index" value="<?= html_esc($_REQUEST['index']) ?>" />
+		<?= $misc->form ?>
+		<p><input type="checkbox" id="cascade" name="cascade" /> <label for="cascade"><?= $lang['strcascade'] ?></label></p>
+		<input type="submit" name="drop" value="<?= $lang['strdrop'] ?>" />
+		<input type="submit" name="cancel" value="<?= $lang['strcancel'] ?>" />
+	</form>
+	<?php
+}
+
+function doDefault($msg = '')
+{
+	$pg = AppContainer::getPostgres();
+	$misc = AppContainer::getMisc();
+	$lang = AppContainer::getLang();
+	$indexActions = new IndexActions($pg);
+
+	$indPre = function ($rowdata, $actions) use ($pg, $lang) {
+		if ($pg->phpBool($rowdata->fields['indisprimary'])) {
+			$rowdata->fields['+constraints'] = $lang['strprimarykey'];
+			$actions['drop']['disable'] = true;
+		} elseif ($pg->phpBool($rowdata->fields['indisunique'])) {
+			$rowdata->fields['+constraints'] = $lang['struniquekey'];
+			$actions['drop']['disable'] = true;
+		} else
+			$rowdata->fields['+constraints'] = '';
+
+		return $actions;
+	};
+
+	$subject = $_REQUEST['subject'] ?? 'table';
+	$table = $_REQUEST[$subject];
+
+	$misc->printTrail($subject);
+	$misc->printTabs($subject, 'indexes');
+	$misc->printMsg($msg);
+
+	$indexes = $indexActions->getIndexes($table);
+	$columns = [
+		'index' => [
+			'title' => $lang['strname'],
+			'field' => field('indname'),
+			'class' => 'nowrap',
+			'icon' => $misc->icon('Index'),
+		],
+		'definition' => [
+			'title' => $lang['strdefinition'],
+			'field' => field('inddef'),
+			'type' => 'sql',
+		],
+		'constraints' => [
+			'title' => $lang['strconstraints'],
+			'field' => field('+constraints'),
+			'type' => 'verbatim',
+			//'params' => ['align' => 'center'],
+		],
+		'clustered' => [
+			'title' => $lang['strclustered'],
+			'field' => field('indisclustered'),
+			'type' => 'yesno',
+		],
+		'actions' => [
+			'title' => $lang['stractions'],
+		],
+		'comment' => [
+			'title' => $lang['strcomment'],
+			'field' => field('idxcomment'),
+		],
+	];
+
+	$actions = [
+		'cluster' => [
+			'icon' => $misc->icon('Cluster'),
+			'content' => $lang['strclusterindex'],
+			'attr' => [
+				'href' => [
+					'url' => 'indexes.php',
+					'urlvars' => [
+						'action' => 'confirm_cluster_index',
+						'subject' => $subject,
+						$subject => $table,
+						'index' => field('indname')
+					]
+				]
+			]
+		],
+		'reindex' => [
+			'icon' => $misc->icon('Refresh'),
+			'content' => $lang['strreindex'],
+			'attr' => [
+				'href' => [
+					'url' => 'indexes.php',
+					'urlvars' => [
+						'action' => 'reindex',
+						'subject' => $subject,
+						$subject => $table,
+						'index' => field('indname')
+					]
+				]
+			]
+		],
+		'drop' => [
+			'icon' => $misc->icon('Delete'),
+			'content' => $lang['strdrop'],
+			'attr' => [
+				'href' => [
+					'url' => 'indexes.php',
+					'urlvars' => [
+						'action' => 'confirm_drop_index',
+						'subject' => $subject,
+						$subject => $table,
+						'index' => field('indname')
+					]
+				]
+			]
+		]
+	];
+
+	$schemaActions = new SchemaActions($pg);
+	$isSystemSchema = $schemaActions->isSystemSchema($_REQUEST['schema']);
+	if ($isSystemSchema) {
+		$actions = [];
+		unset($columns['actions']);
+	}
+
+	$misc->printTable($indexes, $columns, $actions, 'indexes-indexes', $lang['strnoindexes'], $indPre);
+
+	if (!$isSystemSchema) {
+		$misc->printNavLinks([
+			'create' => [
+				'attr' => [
+					'href' => [
 						'url' => 'indexes.php',
-						'urlvars' => array (
-							'action' => 'confirm_cluster_index',
-							'table' => $_REQUEST['table'],
-							'index' => field('indname')
-						)
-					)
-				)
-			),
-			'reindex' => array(
-				'content' => $lang['strreindex'],
-				'attr'=> array (
-					'href' => array (
-						'url' => 'indexes.php',
-						'urlvars' => array (
-							'action' => 'reindex',
-							'table' => $_REQUEST['table'],
-							'index' => field('indname')
-						)
-					)
-				)
-			),
-			'drop' => array(
-				'content' => $lang['strdrop'],
-				'attr'=> array (
-					'href' => array (
-						'url' => 'indexes.php',
-						'urlvars' => array (
-							'action' => 'confirm_drop_index',
-							'table' => $_REQUEST['table'],
-							'index' => field('indname')
-						)
-					)
-				)
-			)
-		);
-		
-		$misc->printTable($indexes, $columns, $actions, 'indexes-indexes', $lang['strnoindexes'], 'indPre');
-		
-		$misc->printNavLinks(array (
-			'create' => array (
-				'attr'=> array (
-					'href' => array (
-						'url' => 'indexes.php',
-						'urlvars' => array (
+						'urlvars' => [
 							'action' => 'create_index',
 							'server' => $_REQUEST['server'],
 							'database' => $_REQUEST['database'],
 							'schema' => $_REQUEST['schema'],
-							'table' => $_REQUEST['table']
-						)
-					)
-				),
+							'subject' => $subject,
+							$subject => $table,
+						]
+					]
+				],
+				'icon' => $misc->icon('CreateIndex'),
 				'content' => $lang['strcreateindex']
-			)
-		), 'indexes-indexes', get_defined_vars());
+			]
+		], 'indexes-indexes', get_defined_vars());
 	}
+}
 
-	function doTree() {
-		global $misc, $data;
+function doTree()
+{
+	$misc = AppContainer::getMisc();
+	$pg = AppContainer::getPostgres();
+	$indexActions = new IndexActions($pg);
 
-		$indexes = $data->getIndexes($_REQUEST['table']);
+	$table = $_REQUEST['table'] ?? $_REQUEST['view'] ?? '';
 
-		$reqvars = $misc->getRequestVars('table');
+	$indexes = $indexActions->getIndexes($table);
 
-		function getIcon($f) {
-			if ($f['indisprimary'] == 't')
-				return 'PrimaryKey';
-			if ($f['indisunique'] == 't')
-				return 'UniqueConstraint';
-			return 'Index';
-		}
+	//$reqvars = $misc->getRequestVars('table');
 
-		$attrs = array(
-			'text'   => field('indname'),
-			'icon'   => callback('getIcon'),
-		);
+	$getIcon = function ($f) {
+		if ($f['indisprimary'] == 't')
+			return 'PrimaryKey';
+		if ($f['indisunique'] == 't')
+			return 'UniqueConstraint';
+		return 'Index';
+	};
 
-		$misc->printTree($indexes, $attrs, 'indexes');
-		exit;
-	}
+	$attrs = [
+		'text' => field('indname'),
+		'icon' => callback($getIcon),
+	];
 
-	if ($action == 'tree') doTree();
+	$misc->printTree($indexes, $attrs, 'indexes');
+	exit;
+}
 
-	$misc->printHeader($lang['strindexes'], "<script src=\"indexes.js\" type=\"text/javascript\"></script>");
+// Main program
 
-	if ($action == 'create_index' || $action == 'save_create_index')
-		echo "<body onload=\"init();\">";
-	else
-		$misc->printBody();
+$misc = AppContainer::getMisc();
+$lang = AppContainer::getLang();
 
-	switch ($action) {
-		case 'cluster_index':
-			if (isset($_POST['cluster'])) doClusterIndex(false);
-			else doDefault();
-			break;
-		case 'confirm_cluster_index':
-			doClusterIndex(true);
-			break;
-		case 'reindex':
-			doReindex();
-			break;
-		case 'save_create_index':
-			if (isset($_POST['cancel'])) doDefault();
-			else doSaveCreateIndex();
-			break;
-		case 'create_index':
-			doCreateIndex();
-			break;
-		case 'drop_index':
-			if (isset($_POST['drop'])) doDropIndex(false);
-			else doDefault();
-			break;
-		case 'confirm_drop_index':
-			doDropIndex(true);
-			break;
-		default:
+$action = $_REQUEST['action'] ?? '';
+
+$table = $_REQUEST['table'] ?? $_REQUEST['view'] ?? '';
+
+if ($action == 'tree')
+	doTree();
+
+$scripts = "<script defer src=\"js/indexes.js\" type=\"text/javascript\"></script>";
+$misc->printHeader($table . ' - ' . $lang['strindexes'], $scripts);
+
+$misc->printBody();
+
+switch ($action) {
+	case 'cluster_index':
+		if (isset($_POST['cluster']))
+			doClusterIndex(false);
+		else
 			doDefault();
-			break;
-	}
+		break;
+	case 'confirm_cluster_index':
+		doClusterIndex(true);
+		break;
+	case 'reindex':
+		doReindex();
+		break;
+	case 'save_create_index':
+		if (isset($_POST['cancel']))
+			doDefault();
+		else
+			doSaveCreateIndex();
+		break;
+	case 'create_index':
+		doCreateIndex();
+		break;
+	case 'drop_index':
+		if (isset($_POST['drop']))
+			doExecDropIndex();
+		else
+			doDefault();
+		break;
+	case 'confirm_drop_index':
+		doConfirmDropIndex();
+		break;
+	default:
+		doDefault();
+		break;
+}
 
-	$misc->printFooter();
-
-?>
+$misc->printFooter();

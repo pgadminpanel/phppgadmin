@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = '您需給您的報表 SQL。';
 	$plugin_lang['strreportcreated'] = '成功儲存報表。';
 	$plugin_lang['strreportcreatedbad'] = '無法儲存報表。';
-?>
+

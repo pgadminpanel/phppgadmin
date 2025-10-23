@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] =  'Jy moet SQL-kode skryf vir die verslag.';
 	$plugin_lang['strreportcreated'] =  'Verslag is geskep.';
 	$plugin_lang['strreportcreatedbad'] =  'Die verslag kon nie geskep word nie.';
-?>
+

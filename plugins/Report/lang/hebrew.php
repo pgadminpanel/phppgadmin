@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'אתה חייב לתת SQL לדוח.';
 	$plugin_lang['strreportcreated'] = 'דוח נשמר.';
 	$plugin_lang['strreportcreatedbad'] = 'שמירת דוח נכשלה.';
-?>
+

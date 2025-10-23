@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Musíš zadať SQL dotaz pre tvoj report.';
 	$plugin_lang['strreportcreated'] = 'Report uložený.';
 	$plugin_lang['strreportcreatedbad'] = 'Report nebol uložený.';
-?>
+

@@ -1,298 +1,221 @@
 <?php
 
+use PhpPgAdmin\Core\AppContainer;
+use PhpPgAdmin\Database\Import\Data\DataImportExecutor;
+use PhpPgAdmin\Database\Import\LogCollector;
+
+// Streaming data import endpoint for table-scoped CSV/TSV/XML imports
+
+if (!isset($_REQUEST['server'])) {
+	header('Content-Type: application/json');
+	http_response_code(400);
+	echo json_encode(['error' => 'server parameter required']);
+	exit;
+}
+
+require_once __DIR__ . '/libraries/bootstrap.php';
+
+function handle_process_chunk(): void
+{
+	header('Content-Type: application/json');
+
+	ini_set('html_errors', '0');
+
 	/**
-	 * Does an import to a particular table from a text file
+	 * Detects whether input is JSON, XML, CSV or TSV.
+	 * Works on partial/chunked input.
 	 *
-	 * $Id: dataimport.php,v 1.11 2007/01/22 16:33:01 soranzo Exp $
+	 * @param string $chunk  First chunk or any chunk with structural hints
+	 * @return string|null   "json" | "xml" | "csv" | "tsv" | null
 	 */
+	$detectFormat = function (string $chunk): ?string {
+		$trim = ltrim($chunk);
 
-	// Prevent timeouts on large exports (non-safe mode only)
-	if (!ini_get('safe_mode')) set_time_limit(0);
-
-	// Include application functions
-	include_once('./libraries/lib.inc.php');
-
-	// Default state for XML parser
-	$state = 'XML';
-	$curr_col_name = null;
-	$curr_col_val = null;
-	$curr_col_null = false;
-	$curr_row = array();
-
-	/**
-	 * Open tag handler for XML import feature
-	 */
-	function _startElement($parser, $name, $attrs) {
-		global $data, $misc, $lang;
-		global $state, $curr_row, $curr_col_name, $curr_col_val, $curr_col_null;
-
-		switch ($name) {
-			case 'DATA':
-				if ($state != 'XML') {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				$state = 'DATA';
-				break;
-			case 'HEADER':
-				if ($state != 'DATA') {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				$state = 'HEADER';
-				break;
-			case 'RECORDS':
-				if ($state != 'READ_HEADER') {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				$state = 'RECORDS';
-				break;
-			case 'ROW':
-				if ($state != 'RECORDS') {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				$state = 'ROW';
-				$curr_row = array();
-				break;
-			case 'COLUMN':
-				// We handle columns in rows
-				if ($state == 'ROW') {
-					$state = 'COLUMN';
-					$curr_col_name = $attrs['NAME'];
-					$curr_col_null = isset($attrs['NULL']);
-				}
-				// And we ignore columns in headers and fail in any other context				
-				elseif ($state != 'HEADER') {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				break;
-			default:
-				// An unrecognised tag means failure
-				$data->rollbackTransaction();
-				$misc->printMsg($lang['strimporterror']);
-				exit;			
+		// --- JSON detection ---
+		// JSON always starts with { or [
+		if ($trim !== '' && ($trim[0] === '{' || $trim[0] === '[')) {
+			return 'json';
 		}
-	}
-	
-	/**
-	 * Close tag handler for XML import feature
-	 */
-	function _endElement($parser, $name) {
-		global $data, $misc, $lang;
-		global $state, $curr_row, $curr_col_name, $curr_col_val, $curr_col_null;
 
-		switch ($name) {
-			case 'DATA':
-				$state = 'READ_DATA';
-				break;
-			case 'HEADER':
-				$state = 'READ_HEADER';
-				break;
-			case 'RECORDS':
-				$state = 'READ_RECORDS';
-				break;
-			case 'ROW':
-				// Build value map in order to insert row into table
-				$fields = array();
-				$vars = array();
-				$nulls = array();
-				$format = array();		
-				$types = array();
-				$i = 0;			
-				foreach ($curr_row as $k => $v) {
-					$fields[$i] = $k;
-					// Check for nulls
-					if ($v === null) $nulls[$i] = 'on';
-					// Add to value array
-					$vars[$i] = $v;
-					// Format is always VALUE
-					$format[$i] = 'VALUE';
-					// Type is always text
-					$types[$i] = 'text';
-					$i++;
-				}
-				$status = $data->insertRow($_REQUEST['table'], $fields, $vars, $nulls, $format, $types);
-				if ($status != 0) {
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strimporterror']);
-					exit;
-				}
-				$curr_row = array();
-				$state = 'RECORDS';
-				break;
-			case 'COLUMN':
-				$curr_row[$curr_col_name] = ($curr_col_null ? null : $curr_col_val);
-				$curr_col_name = null;
-				$curr_col_val = null;
-				$curr_col_null = false;
-				$state = 'ROW';
-				break;
-			default:
-				// An unrecognised tag means failure
-				$data->rollbackTransaction();
-				$misc->printMsg($lang['strimporterror']);
-				exit;
+		// --- XML detection ---
+		// XML starts with <tag or <?xml
+		if (str_starts_with($trim, '<')) {
+			return 'xml';
 		}
-	}
 
-	/**
-	 * Character data handler for XML import feature
-	 */
-	function _charHandler($parser, $cdata) {
-		global $data, $misc, $lang;
-		global $state, $curr_col_val;
+		// --- CSV/TSV detection ---
+		// Heuristics: look at first non-empty line
+		$lines = preg_split('/\r\n|\n|\r/', $chunk);
+		foreach ($lines as $line) {
+			$line = trim($line);
+			if ($line === '')
+				continue;
 
-		if ($state == 'COLUMN') {
-			$curr_col_val .= $cdata;
-		} 
-	}
-
-	function loadNULLArray() {
-		$array = array();
-		if (isset($_POST['allowednulls'])) {
-			foreach ($_POST['allowednulls'] as $null_char)
-				$array[] = $null_char;
-		}
-		return $array;
-	}
-
-	function determineNull($field, $null_array) {
-		return in_array($field, $null_array);
-	}
-
-	$misc->printHeader($lang['strimport']);
-	$misc->printTrail('table');
-	$misc->printTabs('table','import');
-
-	// Check that file is specified and is an uploaded file
-	if (isset($_FILES['source']) && is_uploaded_file($_FILES['source']['tmp_name']) && is_readable($_FILES['source']['tmp_name'])) {
-		
-		$fd = fopen($_FILES['source']['tmp_name'], 'r');
-		// Check that file was opened successfully
-		if ($fd !== false) {		
-			$null_array = loadNULLArray();
-			$status = $data->beginTransaction();
-			if ($status != 0) {
-				$misc->printMsg($lang['strimporterror']);
-				exit;
+			// TSV: tab-separated
+			if (strpos($line, "\t") !== false) {
+				return 'tsv';
 			}
 
-			// If format is set to 'auto', then determine format automatically from file name
-			if ($_REQUEST['format'] == 'auto') {
-				$extension = substr(strrchr($_FILES['source']['name'], '.'), 1);
-				switch ($extension) {
-					case 'csv':
-						$_REQUEST['format'] = 'csv';
-						break;
-					case 'txt':
-						$_REQUEST['format'] = 'tab';
-						break;
-					case 'xml':
-						$_REQUEST['format'] = 'xml';
-						break;
-					default:
-						$data->rollbackTransaction();
-						$misc->printMsg($lang['strimporterror-fileformat']);
-						exit;			
+			// CSV: comma-separated (but avoid JSON arrays)
+			if (strpos($line, ',') !== false) {
+				return 'csv';
+			}
+
+			break;
+		}
+
+		return null;
+	};
+
+	try {
+		$misc = AppContainer::getMisc();
+		$pg = AppContainer::getPostgres();
+
+		$schema = $_REQUEST['schema'] ?? '';
+		$subject = $_REQUEST['subject'] ?? $_REQUEST['scope'] ?? '';
+		$table = $_REQUEST[$subject] ?? $_REQUEST['scope_ident'] ?? '';
+		if ($schema === '' || $table === '') {
+			http_response_code(400);
+			echo json_encode(['error' => 'schema and table parameters required']);
+			return;
+		}
+
+		$importSessionId = $_REQUEST['import_session_id'] ?? '';
+		if ($importSessionId === '') {
+			http_response_code(400);
+			echo json_encode(['error' => 'import_session_id parameter required']);
+			return;
+		}
+
+		$baseOffset = isset($_REQUEST['offset']) ? (int) $_REQUEST['offset'] : 0;
+		$remainderLen = isset($_REQUEST['remainder_len']) ? max(0, (int) $_REQUEST['remainder_len']) : 0;
+		$eof = !empty($_REQUEST['eof']);
+
+		if (!isset($_SESSION['table_import'])) {
+			$_SESSION['table_import'] = [];
+		}
+		if (!isset($_SESSION['table_import'][$importSessionId])) {
+			$_SESSION['table_import'][$importSessionId] = [];
+		}
+		$state = &$_SESSION['table_import'][$importSessionId];
+
+		// Validate session/auth
+		if (!$misc->getServerInfo()) {
+			http_response_code(401);
+			echo json_encode(['error' => 'Not authenticated']);
+			return;
+		}
+
+		$logCollector = new LogCollector(true);
+
+		// Collect options
+		$format = $_REQUEST['format'] ?? 'auto';
+		$useHeader = !empty($_REQUEST['use_header']);
+		$allowedNulls = array_values($_REQUEST['allowed_nulls'] ?? []);
+		$truncate = !empty($_REQUEST['opt_truncate']);
+		$byteaEncoding = $_REQUEST['bytea_encoding'] ?? 'hex';
+
+		// Read request body (binary)
+		$raw = file_get_contents('php://input');
+		if ($raw === false) {
+			http_response_code(400);
+			echo json_encode(['error' => 'No input']);
+			return;
+		}
+
+		// Optional checksum
+		$clientHash = $_REQUEST['chunk_hash'] ?? null;
+		if ($clientHash !== null) {
+			$serverHash = hash('fnv1a64', $raw);
+			if ($serverHash !== $clientHash) {
+				http_response_code(400);
+				echo json_encode([
+					'error' => 'Checksum mismatch: chunk corrupted during transmission',
+					'error_type' => 'checksum_mismatch',
+					'expected' => $clientHash,
+					'received' => $serverHash,
+				]);
+				return;
+			}
+		}
+
+		// Detect gzip magic bytes 0x1F 0x8B
+		$decoded = $raw;
+		if (strlen($raw) >= 2) {
+			$b0 = ord($raw[0]);
+			$b1 = ord($raw[1]);
+			if ($b0 === 0x1F && $b1 === 0x8B && function_exists('gzdecode')) {
+				$tmp = @gzdecode($raw);
+				if ($tmp !== false) {
+					$decoded = $tmp;
 				}
 			}
-
-			// Do different import technique depending on file format
-			switch ($_REQUEST['format']) {
-				case 'csv':
-				case 'tab':
-					// XXX: Length of CSV lines limited to 100k
-					$csv_max_line = 100000;
-					// Set delimiter to tabs or commas
-					if ($_REQUEST['format'] == 'csv') $csv_delimiter = ',';
-					else $csv_delimiter = "\t";
-					// Get first line of field names
-					$fields = fgetcsv($fd, $csv_max_line, $csv_delimiter);
-					$row = 2; //We start on the line AFTER the field names
-					while ($line = fgetcsv($fd, $csv_max_line, $csv_delimiter)) {
-						// Build value map
-						$t_fields = array();
-						$vars = array();
-						$nulls = array();
-						$format = array();
-						$types = array();
-						$i = 0;
-						foreach ($fields as $f) {
-							// Check that there is a column
-							if (!isset($line[$i])) {
-								$misc->printMsg(sprintf($lang['strimporterrorline-badcolumnnum'], $row));
-								exit;
-							}
-							$t_fields[$i] = $f;
-							
-							// Check for nulls
-							if (determineNull($line[$i], $null_array)) {
-								$nulls[$i] = 'on';
-							}
-							// Add to value array
-							$vars[$i] = $line[$i];
-							// Format is always VALUE
-							$format[$i] = 'VALUE';
-							// Type is always text
-							$types[$i] = 'text';
-							$i++;
-						}
-
-						$status = $data->insertRow($_REQUEST['table'], $t_fields, $vars, $nulls, $format, $types);
-						if ($status != 0) {
-							$data->rollbackTransaction();
-							$misc->printMsg(sprintf($lang['strimporterrorline'], $row));
-							exit;
-						}
-						$row++;
-					}
-					break;
-				case 'xml':
-					$parser = xml_parser_create();
-					xml_set_element_handler($parser, '_startElement', '_endElement');
-					xml_set_character_data_handler($parser, '_charHandler');
-					
-					while (!feof($fd)) {
-						$line = fgets($fd, 4096);
-						xml_parse($parser, $line);
-					}
-					
-					xml_parser_free($parser);
-					break;
-				default:
-					// Unknown type
-					$data->rollbackTransaction();
-					$misc->printMsg($lang['strinvalidparam']);
-					exit;
-			}
-	
-			$status = $data->endTransaction();
-			if ($status != 0) {
-				$misc->printMsg($lang['strimporterror']);
-				exit;
-			}
-			fclose($fd);
-
-			$misc->printMsg($lang['strfileimported']);
 		}
-		else {
-			// File could not be opened
-			$misc->printMsg($lang['strimporterror']);
-		}
-	}
-	else {
-		// Upload went wrong
-		$misc->printMsg($lang['strimporterror-uploadedfile']);
-	}
-	
-	$misc->printFooter();
 
-?>
+		// Reset per-import state on first chunk
+		if ($baseOffset === 0) {
+			$state['parser'] = [];
+			$state['header_validated'] = false;
+			$state['mapping'] = [];
+			$state['meta'] = [];
+			$state['serial_omitted'] = false;
+			$state['truncated_tables'] = [];
+			$state['format'] = $format;
+			if ($format === 'auto') {
+				$detected = $detectFormat($decoded);
+				if ($detected !== null) {
+					$state['format'] = $detected;
+				}
+			}
+		}
+
+		$executor = new DataImportExecutor($pg, $logCollector);
+		$result = $executor->process($decoded, [
+			'format' => $state['format'],
+			'use_header' => $useHeader,
+			'allowed_nulls' => $allowedNulls,
+			'bytea_encoding' => $byteaEncoding,
+			'truncate' => $truncate,
+			'schema' => $schema,
+			'table' => $table,
+		], $state);
+
+		$payloadLen = strlen($decoded);
+		$newBytesRead = $payloadLen - $remainderLen;
+		if ($newBytesRead < 0) {
+			$newBytesRead = 0;
+		}
+		$absoluteOffset = $baseOffset + $newBytesRead;
+
+		if ($eof) {
+			$remainder = trim($result['remainder']);
+			if ($remainder !== '') {
+				$result['errors']++;
+				$logCollector->addError('Unexpected end of file: trailing data not parsed. remainder_len=' . strlen($remainder) . ' bytes');
+			}
+		}
+
+		echo json_encode([
+			'offset' => $absoluteOffset,
+			'remainder_len' => strlen($result['remainder']),
+			'remainder' => $result['remainder'],
+			'errors' => $result['errors'],
+			'logEntries' => $logCollector->getLogs(),
+		]);
+	} catch (\Throwable $t) {
+		http_response_code(500);
+		echo json_encode(['error' => 'process_chunk failed', 'detail' => $t->getMessage()]);
+	}
+}
+
+$action = $_REQUEST['action'] ?? 'process_chunk';
+
+switch ($action) {
+	case 'process_chunk':
+		handle_process_chunk();
+		//sleep(1); // Simulate processing delay for testing
+		break;
+	default:
+		http_response_code(400);
+		echo 'Unknown action';
+}

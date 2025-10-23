@@ -1,26 +1,26 @@
 <?php
 
-$plugin_conf = array(
+$plugin_conf = [
 
     /**
      * Top Links
      **/
-    'top_links' => array (
+    'top_links' => [
         // 'sql' => true,
         // 'history' => true,
         // 'find' => true,
         // 'logout' => true,
-    ),
+	 ],
 
     /**
      * Tabs Links
      **/
-     'tab_links' => array (
-        'root' => array (
+     'tab_links' => [
+        'root' => [
             // 'intro' => true,
             // 'servers' => true,
-        ),
-        'server' => array (
+		  ],
+        'server' => [
             // 'databases' => true,
             // 'roles' => true, /* postgresql 8.1+ */
             // 'users' => true, /* postgresql <8.1 */
@@ -29,8 +29,8 @@ $plugin_conf = array(
             // 'tablespaces' => true,
             // 'export' => true,
             // 'reports' => true,
-        ),
-        'database' => array (
+		  ],
+        'database' => [
             // 'schemas' => true,
             // 'sql' => true,
             // 'find' => true,
@@ -42,8 +42,8 @@ $plugin_conf = array(
             // 'languages' => true,
             // 'casts' => true,
             // 'export' => true,
-        ),
-        'schema' => array(
+		  ],
+        'schema' => [
             // 'tables' => true,
             // 'views' => true,
             // 'sequences' => true,
@@ -57,8 +57,8 @@ $plugin_conf = array(
             // 'conversions' => true,
             // 'privileges' => true,
             // 'export' => true,
-        ),
-        'table' => array(
+		  ],
+        'table' => [
             // 'columns' => true,
             // 'indexes' => true,
             // 'constraints' => true,
@@ -69,38 +69,38 @@ $plugin_conf = array(
             // 'privileges' => true,
             // 'import' => true,
             // 'export' => true,
-        ),
-        'view' => array (
+		  ],
+        'view' => [
             // 'columns' => true,
             // 'definition' => true,
             // 'rules' => true,
             // 'privileges' => true,
             // 'export' => true,
-        ),
-        'function' => array(
+		  ],
+        'function' => [
             // 'definition' => true,
             // 'privileges' => true,
-        ),
-        'aggregate' => array(
+		  ],
+        'aggregate' => [
             // 'definition' => true,
-        ),
-        'role' => array(
+		  ],
+        'role' => [
             // 'definition' => true,
-        ),
-        'popup' => array(
+		  ],
+        'popup' => [
             // 'sql' => true,
             // 'find' => true,
-        ),
-        'column' => array(
+		  ],
+        'column' => [
             // 'properties' => true,
             // 'privileges' => true,
-        ),
-        'fulltext' => array(
+		  ],
+        'fulltext' => [
             // 'ftsconfigs' => true,
             // 'ftsdicts' => true,
             // 'ftsparsers' => true,
-        ),
-     ),
+		  ],
+	  ],
 
     /**
      * Trail Links
@@ -110,30 +110,30 @@ $plugin_conf = array(
     /**
      * Navigation Links
      **/
-     'navlinks' => array(
-        'aggregates-properties' => array(
+     'navlinks' => [
+        'aggregates-properties' => [
             // 'showall' => true,
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'aggregates-aggregates' => array(
+		  ],
+        'aggregates-aggregates' => [
             // 'create' => true,
-        ),
-        'all_db-databases' => array(
+		  ],
+        'all_db-databases' => [
             // 'create' => true,
-        ),
-        'colproperties-colproperties' => array(
+		  ],
+        'colproperties-colproperties' => [
             // 'browse' => true,
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'constraints-constraints' => array(
+		  ],
+        'constraints-constraints' => [
             // 'addcheck' => true,
             // 'adduniq' => true,
             // 'addpk' => true,
             // 'addfk' => true,
-        ),
-        'display-browse' => array(
+		  ],
+        'display-browse' => [
             // 'back' => true,
             // 'edit' => true,
             // 'collapse' => true,
@@ -142,52 +142,52 @@ $plugin_conf = array(
             // 'download' => true,
             // 'insert' => true,
             // 'refresh' => true,
-        ),
-        'domains-properties' => array(
+		  ],
+        'domains-properties' => [
             // 'drop' => true,
             // 'addcheck' => true,
             // 'alter' => true,
-        ),
-        'domains-domains' => array(
+		  ],
+        'domains-domains' => [
             // 'create' => true,
-        ),
-        'fulltext-fulltext' => array(
+		  ],
+        'fulltext-fulltext' => [
             // 'createconf' => true,
-        ),
-        'fulltext-viewdicts' => array(
+		  ],
+        'fulltext-viewdicts' => [
             // 'createdict' => true,
-        ),
-        'fulltext-viewconfig' => array(
+		  ],
+        'fulltext-viewconfig' => [
             // 'addmapping' => true,
-        ),
-        'functions-properties' => array(
+		  ],
+        'functions-properties' => [
             // 'showall' => true,
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'functions-functions' => array(
+		  ],
+        'functions-functions' => [
             // 'createpl' => true,
             // 'createinternal' => true,
             // 'createc' => true,
-        ),
-        'groups-groups' => array(
+		  ],
+        'groups-groups' => [
             // 'create' => true,
-        ),
-        'groups-properties' => array(
+		  ],
+        'groups-properties' => [
             // 'showall' => true,
-        ),
-        'history-history' => array(
+		  ],
+        'history-history' => [
             // 'refresh' => true,
             // 'download' => true,
             // 'clear' => true,
-        ),
-        'indexes-indexes' => array(
+		  ],
+        'indexes-indexes' => [
             // 'create' => true,
-        ),
-        'operators-properties' => array(
+		  ],
+        'operators-properties' => [
             // 'showall' => true,
-        ),
-        'privileges-privileges' => array(
+		  ],
+        'privileges-privileges' => [
             // 'grant' => true,
             // 'revoke' => true,
             // 'showalltables' => true,
@@ -198,60 +198,60 @@ $plugin_conf = array(
             // 'showallfunctions' => true,
             // 'showallsequences' => true,
             // 'showalltablespaces' => true,
-        ),
-        'reports-properties' => array(
+		  ],
+        'reports-properties' => [
             // 'showall' => true,
             // 'alter' => true,
             // 'exec' => true,
-        ),
-        'reports-reports' => array(
+		  ],
+        'reports-reports' => [
             // 'create' => true,
-        ),
-        'roles-account' => array(
+		  ],
+        'roles-account' => [
             // 'changepassword' => true,
-        ),
-        'roles-properties' => array(
+		  ],
+        'roles-properties' => [
             // 'showall' => true,
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'roles-roles' => array(
+		  ],
+        'roles-roles' => [
             // 'create' => true,
-        ),
-        'rules-rules' => array(
+		  ],
+        'rules-rules' => [
             // 'create' => true,
-        ),
-        'schemas-schemas' => array(
+		  ],
+        'schemas-schemas' => [
             // 'create' => true,
-        ),
-        'sequences-properties' => array(
+		  ],
+        'sequences-properties' => [
             // 'alter' => true,
             // 'nextval' => true,
             // 'restart' => true,
             // 'reset' => true,
-        ),
-        'sequences-sequences' => array(
+		  ],
+        'sequences-sequences' => [
             // 'create' => true,
-        ),
-        'servers-servers' => array(
+		  ],
+        'servers-servers' => [
             // 'showall' => true,
             /*we cannot filter the group names in navlinks presently*/
-        ),
-        'sql-form' => array(
+		  ],
+        'sql-form' => [
             // 'back' => true,
             // 'alter' => true,
             // 'createreport' => true,
             // 'createview' => true,
             // 'download' => true,
-        ),
-        'tables-tables' => array(
+		  ],
+        'tables-tables' => [
             // 'create' => true,
             // 'createlike' => true,
-        ),
-        'tablespaces-tablespaces' => array(
+		  ],
+        'tablespaces-tablespaces' => [
             // 'create' => true,
-        ),
-        'tblproperties-tblproperties' => array(
+		  ],
+        'tblproperties-tblproperties' => [
             // 'browse' => true,
             // 'select' => true,
             // 'insert' => true,
@@ -259,177 +259,177 @@ $plugin_conf = array(
             // 'drop' => true,
             // 'addcolumn' => true,
             // 'alter' => true,
-        ),
-        'triggers-triggers' => array(
+		  ],
+        'triggers-triggers' => [
             // 'create' => true,
-        ),
-        'types-properties' => array(
+		  ],
+        'types-properties' => [
             // 'showall' => true,
-        ),
-        'types-types' => array(
+		  ],
+        'types-types' => [
             // 'create' => true,
             // 'createcomp' => true,
             // 'createenum' => true,
-        ),
-        'users-account' => array(
+		  ],
+        'users-account' => [
             // 'changepassword' => true,
-        ),
-        'users-users' => array(
+		  ],
+        'users-users' => [
             // 'create' => true,
-        ),
-        'viewproperties-definition' => array(
+		  ],
+        'viewproperties-definition' => [
             // 'alter' => true,
-        ),
-        'viewproperties-viewproperties' => array(
+		  ],
+        'viewproperties-viewproperties' => [
             // 'browse' => true,
             // 'select' => true,
             // 'drop' => true,
             // 'alter' => true,
-        ),
-        'views-views' => array(
+		  ],
+        'views-views' => [
             // 'create' => true,
             // 'createwiz' => true,
-        ),
-     ),
+		  ],
+	  ],
 
      /**
       * action links
       **/
 
-    'actionbuttons' => array(
-        'admin-admin' => array(
+    'actionbuttons' => [
+        'admin-admin' => [
             // 'edit' => true,
             // 'delete' => true,
-        ),
-        'aggregates-aggregates' => array(
+		  ],
+        'aggregates-aggregates' => [
             // 'alter' => true,
 			// 'drop' => true,
-        ),
-        'all_db-databases' => array(
+		  ],
+        'all_db-databases' => [
             // 'drop' => true,
             // 'privileges' => true,
             // 'alter' => true,
-        ),
-        'casts-casts' => array(
+		  ],
+        'casts-casts' => [
             // none
-        ),
-        'colproperties-colproperties' => array(
+		  ],
+        'colproperties-colproperties' => [
             // none
-        ),
-        'constraints-constraints' => array(
+		  ],
+        'constraints-constraints' => [
             // 'drop' => true,
-        ),
-        'conversions-conversions' => array(
+		  ],
+        'conversions-conversions' => [
             // none
-        ),
-        'database-variables' => array(
+		  ],
+        'database-variables' => [
             // none
-        ),
-        'database-processes-preparedxacts' => array(
+		  ],
+        'database-processes-preparedxacts' => [
             // none
-        ),
-        'database-processes' => array(
+		  ],
+        'database-processes' => [
             // 'cancel' => true,
             // 'kill' => true,
-        ),
-        'database-locks' => array(
+		  ],
+        'database-locks' => [
             // none
-        ),
-        'display-browse' => array(
+		  ],
+        'display-browse' => [
             // TODO
             // 'edit' => true,
             // 'delete' => true,
-        ),
-        'domains-properties' => array(
+		  ],
+        'domains-properties' => [
             // 'drop' => true,
-        ),
-        'domains-domains' => array(
+		  ],
+        'domains-domains' => [
             // 'alter' => true,
 			// 'drop' => true,
-        ),
-        'fulltext-fulltext' => array(
+		  ],
+        'fulltext-fulltext' => [
             // 'drop' => true,
             // 'alter' => true,
-        ),
-        'fulltext-viewparsers' => array(
+		  ],
+        'fulltext-viewparsers' => [
             // none
-        ),
-        'fulltext-viewdicts' => array(
+		  ],
+        'fulltext-viewdicts' => [
             // 'drop' => true,
             // 'alter' => true,
-        ),
-        'fulltext-viewconfig' => array(
+		  ],
+        'fulltext-viewconfig' => [
             // 'multiactions' => true,
             // 'drop' => true,
             // 'alter' => true,
-        ),
-        'functions-functions' => array(
+		  ],
+        'functions-functions' => [
             // 'multiactions' => true,
             // 'alter' => true,
             // 'drop' => true,
             // 'privileges' => true,
-        ),
-        'groups-members' => array(
+		  ],
+        'groups-members' => [
             // 'drop' => true,
-        ),
-        'groups-properties' => array(
+		  ],
+        'groups-properties' => [
             // 'drop' => true,
-        ),
-        'history-history' => array(
+		  ],
+        'history-history' => [
             // 'run' => true,
             // 'remove' => true,
-        ),
-        'indexes-indexes' => array(
+		  ],
+        'indexes-indexes' => [
             // 'cluster' => true,
             // 'reindex' => true,
             // 'drop' => true,
-        ),
-        'info-referrers' => array(
+		  ],
+        'info-referrers' => [
             // 'properties' => true,
-        ),
-        'info-parents' => array(
+		  ],
+        'info-parents' => [
             // 'properties' => true,
-        ),
-        'info-children' => array(
+		  ],
+        'info-children' => [
             // 'properties' => true,
-        ),
-        'languages-languages' => array(
+		  ],
+        'languages-languages' => [
             // none
-        ),
-        'opclasses-opclasses' => array(
+		  ],
+        'opclasses-opclasses' => [
             // none
-        ),
-        'operators-operators' => array(
+		  ],
+        'operators-operators' => [
              // 'drop' => true,
-        ),
-        'reports-reports' => array(
+		  ],
+        'reports-reports' => [
             // 'run' => true,
             // 'edit' => true,
             // 'drop' => true,
-        ),
-        'roles-roles' => array(
+		  ],
+        'roles-roles' => [
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'rules-rules' => array(
+		  ],
+        'rules-rules' => [
             // 'drop' => true,
-        ),
-        'schemas-schemas' => array(
+		  ],
+        'schemas-schemas' => [
             // 'multiactions' => true,
             // 'drop' => true,
             // 'privileges' => true,
             // 'alter' => true,
-        ),
-        'sequences-sequences' => array(
+		  ],
+        'sequences-sequences' => [
             // 'multiactions' => true,
             // 'drop' => true,
             // 'privileges' => true,
             // 'alter' => true,
-        ),
-        'servers-servers' => array(
+		  ],
+        'servers-servers' => [
             // 'logout' => true,
-        ),
-        'tables-tables' => array(
+		  ],
+        'tables-tables' => [
             // 'multiactions' => true,
             // 'browse' => true,
             // 'select' => true,
@@ -440,45 +440,45 @@ $plugin_conf = array(
             // 'vacuum' => true,
             // 'analyze' => true,
             // 'reindex' => true,
-        ),
-        'tablespaces-tablespaces' => array(
+		  ],
+        'tablespaces-tablespaces' => [
             // 'drop' => true,
             // 'privileges' => true,
             // 'alter' => true,
-        ),
-        'tblproperties-tblproperties' => array(
+		  ],
+        'tblproperties-tblproperties' => [
             // 'browse' => true,
             // 'alter' => true,
             // 'privileges' => true,
             // 'drop' => true,
-        ),
-        'triggers-triggers' => array(
+		  ],
+        'triggers-triggers' => [
             // 'alter' => true,
             // 'drop' => true,
             // 'enable' => true,
             // 'disable' => true,
-        ),
-        'types-properties' => array(
+		  ],
+        'types-properties' => [
             // none
-        ),
-        'types-types' => array(
+		  ],
+        'types-types' => [
             // 'drop' => true,
-        ),
-        'users-users' => array(
+		  ],
+        'users-users' => [
             // 'alter' => true,
             // 'drop' => true,
-        ),
-        'viewproperties-viewproperties' => array(
+		  ],
+        'viewproperties-viewproperties' => [
             // 'alter' => true,
-        ),
-        'views-views' => array(
+		  ],
+        'views-views' => [
             //'multiactions' => true,
             // 'browse' => true,
             // 'select' => true,
             //'alter' => true,
             //'drop' => true,
-        ),
-    ),
-);
+		  ],
+	 ],
+];
 
-?>
+

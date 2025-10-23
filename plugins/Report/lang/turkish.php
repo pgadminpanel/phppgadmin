@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Raporunuz için SQL sorguları yazmalısınız.';
 	$plugin_lang['strreportcreated'] = 'Rapor kaydedildi.';
 	$plugin_lang['strreportcreatedbad'] = 'Rapor kaydetme başarısız oldu.';
-?>
+

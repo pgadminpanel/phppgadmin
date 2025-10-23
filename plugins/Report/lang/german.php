@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Sie müssen eine SQL-Abfrage für den Bericht eingeben.';
 	$plugin_lang['strreportcreated'] = 'Bericht gespeichert.';
 	$plugin_lang['strreportcreatedbad'] = 'Speichern des Berichtes fehlgeschlagen.';
-?>
+

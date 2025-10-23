@@ -20,4 +20,4 @@
 	$plugin_lang['strreportneedsdef'] = 'Debe fornecer un código SQL para o informe.';
 	$plugin_lang['strreportcreated'] = 'Gardouse o informe.';
 	$plugin_lang['strreportcreatedbad'] = 'Non se conseguiu gardar o informe.';
-?>
+

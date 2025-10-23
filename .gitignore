@@ -1,2 +1,7 @@
+.idea
+.vscode
 selenium/tests/config.inc.php
 tests/selenium/config.test.php
+imports/*
+temp/*
+sessions/*
