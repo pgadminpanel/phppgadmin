@@ -447,7 +447,7 @@ function doDefault($msg = '')
 	$footer = [
 		'aggrname' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['straggregates']}",
+			'format' => fn($v) => sprintf($lang['strcount_aggregates'], $v),
 			'colspan' => 3,
 		],
 		'owner' => [

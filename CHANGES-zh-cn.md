@@ -46,9 +46,9 @@
 - **统一术语**：如"所有者""名称""修改""启用/禁用"等，与界面实际含义保持一致。
 - **修正旧版误译**：如"崩溃"改为"折叠"、"集群"改为"按索引重排"、"固定（Tabbed）"改为"制表符分隔"。
 
-### 新增语言（27 种）
+### 新增语言（29 种）
 
-本次新增 27 个语言文件，并注册到 `$appLangFiles` 与 `$availableLanguages`：
+本次新增 29 个语言文件，并注册到 `$appLangFiles` 与 `$availableLanguages`：
 
 | 语言文件 | 语言代码 | 语言名称 |
 |---|---|---|
@@ -68,6 +68,7 @@
 | `indonesian` | `id` | Bahasa Indonesia |
 | `korean` | `ko` | 한국어 |
 | `kurdish` | `ku` | Kurdî |
+| `kurdish-sorani` | `ckb` | کوردیی سۆرانی |
 | `lao` | `lo` | ລາວ |
 | `malay` | `ms` | Bahasa Melayu |
 | `norwegian` | `no` | Norsk |
@@ -76,6 +77,7 @@
 | `serbian` | `sr` | Српски |
 | `swahili` | `sw` | Kiswahili |
 | `tamil` | `ta` | தமிழ் |
+| `telugu` | `te` | తెలుగు |
 | `thai` | `th` | ไทย |
 | `urdu` | `ur` | اردو |
 | `vietnamese` | `vi` | Tiếng Việt |
@@ -100,16 +102,16 @@
 
 ### 语言覆盖
 
-目前共支持 56 种语言，覆盖全球主要语言区域：
+目前共支持 58 种语言，覆盖全球主要语言区域：
 
 - **欧洲**：英语、德语、法语、西班牙语、意大利语、葡萄牙语、俄语、乌克兰语等
 - **亚洲**：中文、日语、韩语、印地语、孟加拉语、泰米尔语、泰语、越南语、印尼语等
-- **中东**：阿拉伯语、希伯来语、波斯语、土耳其语、库尔德语等
+- **中东**：阿拉伯语、希伯来语、波斯语、土耳其语、库尔德语（库尔曼吉语、索拉尼语）等
 - **非洲**：斯瓦希里语、豪萨语、阿姆哈拉语、南非荷兰语等
 
 ### 翻译完善与反馈
 
-本次更新新增 27 种语言，并补充、修正了已有语言的翻译。如果您在实际使用的过程中发现翻译错误，欢迎通过以下方式反馈：
+本次更新新增 29 种语言，并补充、修正了已有语言的翻译。如果您在实际使用的过程中发现翻译错误，欢迎通过以下方式反馈：
 
 - **讨论区**：[pgadminpanel discussions](https://github.com/orgs/pgadminpanel/discussions)
 - **提交更正请求**：[pgadminpanel issues](https://github.com/pgadminpanel/phppgadmin/issues)

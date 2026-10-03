@@ -411,7 +411,7 @@ function doDefault($msg = '')
 	$footer = [
 		'operator' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['stroperators']}",
+			'format' => fn($v) => sprintf($lang['strcount_operators'], $v),
 			'colspan' => 4,
 		],
 		'owner' => [

@@ -22,6 +22,7 @@ class ExportOutputRenderer
     {
         AppContainer::setSkipHtmlFrame(false);
         $misc = AppContainer::getMisc();
+        $lang = AppContainer::getLang();
         $subject = $_REQUEST['subject'] ?? 'server';
         $misc->printHeader("Export", null);
         $misc->printBody();
@@ -30,10 +31,9 @@ class ExportOutputRenderer
 
         ?>
         <div class="mb-2">
-            <input class="ui-btn" type="button" value="🔙 Back" onclick="history.back()">
-            <input class="ui-btn" type="button" value="🔄 Reload" onclick="location.reload()">
-            <input class="ui-btn" type="button" value="✨ Highlight"
-                onclick="createSqlEditor(document.getElementById('export-output'))">
+            <input class="ui-btn" type="button" value="🔙 <?= htmlspecialchars($lang['strback']) ?>" onclick="history.back()">
+            <input class="ui-btn" type="button" value="🔄 <?= htmlspecialchars($lang['strreload']) ?>" onclick="location.reload()">
+            <input class="ui-btn" type="button" value="✨ <?= htmlspecialchars($lang['strhighlight']) ?>" onclick="createSqlEditor(document.getElementById('export-output'))">
         </div>
         <?php
         $modeAttr = isset($options['mode']) ? " data-mode=\"{$options['mode']}\"" : '';
@@ -51,13 +51,13 @@ class ExportOutputRenderer
      */
     public static function endHtmlOutput()
     {
+        $lang = AppContainer::getLang();
         echo "</textarea>\n";
         ?>
         <div class="my-2">
-            <input class="ui-btn" type="button" value="🔙 Back" onclick="history.back()">
-            <input class="ui-btn" type="button" value="🔄 Reload" onclick="location.reload()">
-            <input class="ui-btn" type="button" value="✨ Highlight"
-                onclick="createSqlEditor(document.getElementById('export-output'))">
+            <input class="ui-btn" type="button" value="🔙 <?= htmlspecialchars($lang['strback']) ?>" onclick="history.back()">
+            <input class="ui-btn" type="button" value="🔄 <?= htmlspecialchars($lang['strreload']) ?>" onclick="location.reload()">
+            <input class="ui-btn" type="button" value="✨ <?= htmlspecialchars($lang['strhighlight']) ?>" onclick="createSqlEditor(document.getElementById('export-output'))">
         </div>
         <?php
         $misc = AppContainer::getMisc();

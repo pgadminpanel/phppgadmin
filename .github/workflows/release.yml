@@ -23,6 +23,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.MY_RELEASE_TOKEN }}
+          persist-credentials: true
 
       - name: Get version
         id: version
@@ -52,18 +53,54 @@ jobs:
 
       - name: Create release artifacts
         run: |
+          set -e
           mkdir -p artifacts
-          cp conf/config-dist.inc.php conf/config.inc.php
-          tar -czf artifacts/phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz \
-            --exclude='conf/config-dist.inc.php' \
-            bin conf images js lang libraries plugins themes \
-            LICENSE *.php robots.txt composer.json \
-            vendor/autoload.php vendor/composer \
-            vendor/greenlion/php-sql-parser/src \
-            vendor/greenlion/php-sql-parser/composer.json \
-            vendor/greenlion/php-sql-parser/LICENSE
-          rm -f conf/config.inc.php
 
+          STAGE=$(mktemp -d)
+          NAME=phppgadmin-${{ steps.version.outputs.VERSION }}
+          mkdir -p "$STAGE/$NAME"
+
+          # 复制
+          cp -r bin conf images js lang libraries plugins themes "$STAGE/$NAME/"
+          cp LICENSE *.php robots.txt composer.json "$STAGE/$NAME/"
+          mkdir -p "$STAGE/$NAME/vendor"
+          cp -r vendor/autoload.php vendor/composer "$STAGE/$NAME/vendor/"
+          mkdir -p "$STAGE/$NAME/vendor/greenlion"
+          cp -r vendor/greenlion/php-sql-parser "$STAGE/$NAME/vendor/greenlion/"
+
+          # conf
+          cd "$STAGE/$NAME"
+          cp conf/config-dist.inc.php conf/config.inc.php
+          rm -f conf/config-dist.inc.php
+
+          # 清理 chart.js/dist
+          if [ -d js/lib/chart.js/dist ]; then
+            find js/lib/chart.js/dist -mindepth 1 -maxdepth 1 \
+              ! -name 'chart.umd.min.js' \
+              ! -name 'chart.umd.min.js.map' \
+              -exec rm -rf {} +
+          fi
+
+          # 清理 ace/src-min-noconflict
+          if [ -d js/lib/ace/src-min-noconflict ]; then
+            KEEP="ace.js worker-base.js ext-language_tools.js ext-searchbox.js ext-textarea.js ext-modelist.js mode-csv.js mode-javascript.js mode-json.js mode-perl.js mode-pgsql.js mode-plpgsql.js mode-python.js mode-sql.js mode-text.js theme-sqlserver.js theme-textmate.js"
+            cd js/lib/ace/src-min-noconflict
+            find . -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+            for f in *; do
+              keep=0
+              for k in $KEEP; do
+                [ "$f" = "$k" ] && keep=1 && break
+              done
+              [ "$keep" = "0" ] && rm -f "$f"
+            done
+            cd - > /dev/null
+          fi
+
+          # 打包
+          cd "$STAGE"
+          tar -czf "$GITHUB_WORKSPACE/artifacts/$NAME.tar.gz" "$NAME"
+          rm -rf "$STAGE"
+          
       - name: Extract commit message (Generate Release Note)
         id: msg
         run: |
@@ -73,11 +110,21 @@ jobs:
             echo ""
             git log -1 --format=%B
             echo ""
+            echo "## Package Recommendations"
+            echo ""
+            echo "- **Production**: use **phppgadmin-${{ steps.version.outputs.VERSION }}.tar.gz** below (slim build, redundant files removed)."
+            echo "- **Developers or Testing**: download the **Source code** package (full source, includes tests)."
+            echo ""
             echo "**Full commit:** \`$(git rev-parse HEAD)\`"
             echo "RELEASE_BODY_EOF"
           } >> $GITHUB_OUTPUT
 
-      - name: Create Release and Auto Tag
+      - name: Force update tag
+        run: |
+          git tag -f ${{ steps.version.outputs.VERSION }} ${{ github.sha }}
+          git push origin ${{ steps.version.outputs.VERSION }} --force
+
+      - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.VERSION }}

@@ -31,7 +31,7 @@ function doCluster($type, $confirm = false)
 			?>
 			<form action="<?= htmlspecialchars($script, ENT_QUOTES, 'UTF-8') ?>" method="post">
 				<?php foreach ($_REQUEST['ma'] as $v) {
-					$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
+					$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
 					<p><?= sprintf($lang['strconfclustertable'], $misc->formatVal($a['table'])) ?></p>
 					<input type="hidden" name="table[]" value="<?= html_esc($a['table']) ?>" />
 				<?php } ?>
@@ -118,7 +118,7 @@ function doReindex($type, $confirm = false)
 			?>
 			<form action="<?= htmlspecialchars($script, ENT_QUOTES, 'UTF-8') ?>" method="post">
 				<?php foreach ($_REQUEST['ma'] as $v) {
-					$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
+					$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
 					<p><?= sprintf($lang['strconfreindextable'], $misc->formatVal($a['table'])) ?></p>
 					<input type="hidden" name="table[]" value="<?= html_esc($a['table']) ?>" />
 				<?php } ?>
@@ -205,7 +205,7 @@ function doAnalyze($type, $confirm = false)
 			?>
 			<form action="<?= htmlspecialchars($script, ENT_QUOTES, 'UTF-8') ?>" method="post">
 				<?php foreach ($_REQUEST['ma'] as $v) {
-					$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
+					$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
 					<p><?= sprintf($lang['strconfanalyzetable'], $misc->formatVal($a['table'])) ?></p>
 					<input type="hidden" name="table[]" value="<?= html_esc($a['table']) ?>" />
 				<?php } ?>
@@ -284,7 +284,7 @@ function doVacuum($type, $confirm = false)
 			?>
 			<form action="<?= htmlspecialchars($script, ENT_QUOTES, 'UTF-8') ?>" method="post">
 				<?php foreach ($_REQUEST['ma'] as $v) {
-					$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
+					$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES)); ?>
 					<p><?= sprintf($lang['strconfvacuumtable'], $misc->formatVal($a['table'])) ?></p>
 					<input type="hidden" name="table[]" value="<?= html_esc($a['table']) ?>" />
 				<?php } ?>

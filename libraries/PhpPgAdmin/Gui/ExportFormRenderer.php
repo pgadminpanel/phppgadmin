@@ -108,22 +108,22 @@ class ExportFormRenderer
                 <legend>
                     <!--
                     <?= sprintf(
-                        $this->lang['strselectobjectstoexport'] ?? 'Select %s to export',
+                        $this->lang['strselectobjectstoexport'],
                         ucfirst($params['name'] ?? 'objects')
                     ) ?>
                     -->
                     <input type="checkbox" id="export_all_objects" name="export_all_objects" value="true" checked="checked" />
-                    <label for="export_all_objects"><?= $this->lang['strexportallobjects'] ?? 'Export all objects'; ?></label>
+                    <label for="export_all_objects"><?= $this->lang['strexportallobjects']; ?></label>
                 </legend>
                 <?php
                 $objectGroups = $params['objects_by_type'] ?? [];
                 $iconGroups = $params['icons_by_type'] ?? [];
                 $groupLabels = [
-                    'databases' => $this->lang['strdatabases'] ?? 'Databases',
-                    'schemas' => $this->lang['strschemas'] ?? 'Schemas',
-                    'tables' => $this->lang['strtables'] ?? 'Tables',
-                    'views' => $this->lang['strviews'] ?? 'Views',
-                    'sequences' => $this->lang['strsequences'] ?? 'Sequences',
+                    'databases' => $this->lang['strdatabases'],
+                    'schemas' => $this->lang['strschemas'],
+                    'tables' => $this->lang['strtables'],
+                    'views' => $this->lang['strviews'],
+                    'sequences' => $this->lang['strsequences'],
                 ];
                 $groupIcons = [
                     'databases' => 'Database',
@@ -184,7 +184,7 @@ class ExportFormRenderer
                         <input type="checkbox" id="include_schema_objects" name="include_schema_objects" value="true"
                             checked="checked" />
                         <label for="include_schema_objects">
-                            <?= $this->lang['strincludeschemaobjects'] ?? 'Include schema objects (functions, types, etc.)'; ?>
+                            <?= $this->lang['strincludeschemaobjects']; ?>
                         </label>
                     </div>
                 <?php endif; ?>
@@ -204,23 +204,23 @@ class ExportFormRenderer
                 <div class="my-1 ms-1">
                     <input type="checkbox" id="no_owner" name="no_owner" value="true" />
                     <label
-                        for="no_owner"><?= $this->lang['strnoowner'] ?? 'Do not output commands to set ownership of objects'; ?></label>
+                        for="no_owner"><?= $this->lang['strnoowner']; ?></label>
                 </div>
                 <div class="my-1 ms-1">
                     <input type="checkbox" id="no_privileges" name="no_privileges" value="true" />
                     <label
-                        for="no_privileges"><?= $this->lang['strnoprivileges'] ?? 'Do not output privileges (GRANT/REVOKE)'; ?></label>
+                        for="no_privileges"><?= $this->lang['strnoprivileges_export']; ?></label>
                 </div>
                 <?php if ($subject === 'server' || $subject === 'database'): ?>
                     <div class="my-1 ms-1">
                         <input type="checkbox" id="add_create_database" name="add_create_database" value="true" />
-                        <label for="add_create_database"><?= $this->lang['stradddbcreation'] ?? 'Add database creation'; ?></label>
+                        <label for="add_create_database"><?= $this->lang['stradddbcreation']; ?></label>
                     </div>
                 <?php endif; ?>
                 <?php if ($subject === 'schema' || $subject === 'database'): ?>
                     <div class="my-1 ms-1">
                         <input type="checkbox" id="add_create_schema" name="add_create_schema" value="true" />
-                        <label for="add_create_schema"><?= $this->lang['straddschemacreation'] ?? 'Add schema creation'; ?></label>
+                        <label for="add_create_schema"><?= $this->lang['straddschemacreation']; ?></label>
                     </div>
                 <?php endif; ?>
             </fieldset>

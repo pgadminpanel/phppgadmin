@@ -1031,7 +1031,7 @@ function doDefault($msg = '')
     $footer = [
         'partition' => [
             'agg' => 'count',
-            'format' => fn($v) => "$v {$lang['strpartitions']}",
+            'format' => fn($v) => sprintf($lang['strcount_partitions'], $v),
         ],
         'bounds' => [
             'text' => $lang['strtotal'],

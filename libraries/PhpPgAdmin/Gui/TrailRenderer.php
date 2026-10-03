@@ -124,7 +124,11 @@ class TrailRenderer extends AppContext
                 'title' => $lang['strschema'],
                 'text' => $_REQUEST['schema'],
                 'url' => $this->misc()->getHREFSubject('schema'),
-                'help' => 'pg.schema',
+                'help' => match ($_REQUEST['schema']) {
+                    'pg_catalog' => 'pg.pg_catalog',
+                    'information_schema' => 'pg.information_schema',
+                    default => 'pg.schema',
+                },
                 'icon' => $isCatalog ? 'Catalog' : 'Schema'
             ];
         }

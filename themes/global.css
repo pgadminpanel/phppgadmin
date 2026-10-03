@@ -332,6 +332,7 @@ p.errmsg {
 	right: 7px;
 	margin: 0;
 	text-decoration: none !important;
+	font-size: 20px !important;
 	opacity: 0.5;
 }
 
@@ -1055,4 +1056,91 @@ td.auto-wrap.no-line-break pre {
 	background: #4caf50;
 	color: white;
 	border-color: #4caf50;
+}
+
+.nodata {
+    line-height: 1.8;
+}
+
+/* Query result table: fill container, columns have minimum width */
+#data {
+    width: 100%;
+    min-width: 100%;
+    display: table;
+}
+
+#data th,
+#data td {
+    min-width: 150px;
+    padding: 12px 16px;
+}
+/* Statistics page table: width adapts to content */
+fieldset table {
+    width: auto;
+    min-width: auto;
+}
+
+/* Cell padding, makes the table more spacious */
+fieldset table th,
+fieldset table td {
+    padding: 8px 16px;
+}
+
+/* Row height */
+fieldset table tr {
+    height: 36px;
+}
+
+.intro-table {
+    border-collapse: separate;
+    border-spacing: 8px;
+    margin: 0;
+}
+
+.intro-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.intro-table .btn {
+    display: inline-block;
+    min-width: 140px;
+    padding: 8px 16px;
+    background: #d25c2d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.intro-table .btn:hover {
+    background: #b84a20;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+.intro-table .btn:focus-visible,
+.intro-table .btn:active {
+    outline: 2px solid #f0a882;
+    outline-offset: 2px;
+}
+
+.intro-table .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+code {
+    background: #f5f5f5;
+    color: #c7254e;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+}
+#content > table {
+    width: 100%;
+}
+
+#content > table .field.yesno {
+    text-align: left !important;
 }

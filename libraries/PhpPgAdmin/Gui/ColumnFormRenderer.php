@@ -38,7 +38,7 @@ class ColumnFormRenderer
             'gen_random_uuid()' => 'gen_random_uuid()',
             'uuid_generate_v4()' => 'uuid_generate_v4()',
             "'{}'::jsonb" => "'{}'::jsonb",
-            'custom' => $this->lang['strcustom'] ?? 'Custom:',
+            'custom' => $this->lang['strcustom'],
         ];
     }
 

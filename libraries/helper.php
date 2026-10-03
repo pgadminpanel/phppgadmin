@@ -646,3 +646,102 @@ if (!function_exists('get_debug_type')) {
 		}
 	}
 }
+
+if (!function_exists('printFatalError')) {
+    /**
+     * 输出完整的错误页面并终止脚本
+     *
+     * @param string $message 错误消息
+     * @param string|null $title 错误标题（默认用 lang['strerror']）
+     */
+    function printFatalError(string $message, ?string $title = null)
+    {
+        $lang = AppContainer::getLang();
+
+        $errortitle = htmlspecialchars($title ?? ($lang['strerror'] ?? 'Error'), ENT_QUOTES, 'UTF-8');
+        $title = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+        $backhome = htmlspecialchars($lang['strbacktohome'] ?? 'Back to home', ENT_QUOTES, 'UTF-8');
+        $appLocale = htmlspecialchars($lang['applocale'] ?? 'en');
+        $appLangDir = htmlspecialchars($lang['applangdir'] ?? 'ltr');
+        $home = htmlspecialchars('index.php');
+
+        $svg = '<svg xmlns="http://www.w3.org/2000/svg" id="Layer_12" data-name="Layer 12" viewBox="0 0 512 512" class="error-icon"><defs><linearGradient id="linear-gradient" x1="376.2" x2="135.8" y1="376.2" y2="135.8" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ef3739"/><stop offset=".5" stop-color="#ef3739"/><stop offset="1" stop-color="#ff8c8b"/></linearGradient><linearGradient id="linear-gradient-2" x1="320.4" x2="192.3" y1="318.4" y2="190.3" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd2d2"/><stop offset=".6" stop-color="#fff"/><stop offset="1" stop-color="#fff"/></linearGradient><radialGradient id="radial-gradient" cx="256" cy="-5704" r="200.8" fx="256" fy="-5704" gradientTransform="matrix(1 0 0 .45 0 2994.7)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ef3739" stop-opacity=".6"/><stop offset="1" stop-color="#ef3739" stop-opacity="0"/></radialGradient></defs><path d="M496.5 129.9c-13.4-49.5-64.9-101-114.4-114.4A501 501 0 0 0 256 0a510 510 0 0 0-126.1 15.5C80.4 28.9 28.9 80.4 15.5 129.9 7.9 160.2 0 200.9 0 256c.1 55.2 8 95.8 15.5 126.2C28.9 431.6 80.4 483 129.9 496.5c30.3 7.6 71 15.4 126.1 15.5 55.2-.1 95.8-8 126.2-15.5 49.4-13.4 100.9-64.9 114.3-114.4 7.6-30.3 15.4-71 15.5-126.1-.1-55.2-7.9-95.8-15.5-126.2" style="stroke-width:0;fill:#ffe5e5"/><path d="M444.7 366.2c-10.6-17.6-51-35.9-89.7-40.6a861 861 0 0 0-99-5.5c-43.3 0-75.2 2.8-99 5.5-38.8 4.7-79.1 23-89.7 40.6A91 91 0 0 0 55.2 411a91 91 0 0 0 12.1 45c10.6 17.5 51 35.8 89.7 40.6 23.8 2.7 55.7 5.5 99 5.5s75.2-2.8 99-5.5c38.8-4.8 79.1-23 89.7-40.6a91 91 0 0 0 12.1-44.9c0-19.6-6.2-34-12.1-44.8" style="stroke-width:0;fill:url(#radial-gradient)"/><g id="INFO"><path d="M256 86a170 170 0 1 0 0 340 170 170 0 0 0 0-340" style="fill:url(#linear-gradient);stroke-width:0"/><path d="M256 371.3a27.6 27.6 0 1 1 0-55.2 27.6 27.6 0 0 1 0 55.2m26.7-95.1q-.7 6.5-5.4 11.2-4.9 4.6-11.5 5.4h-.1q-8 .6-8.2.4s-4.5.1-9.8-.4h-.1q-6.7-.8-11.5-5.4c-3-3-5-7-5.4-11.2a1625 1625 0 0 1 0-118.5q.7-6.6 5.4-11.3t11.5-5.4h.1c5.3-.5 9.8-.3 9.8-.3s2.9-.2 8.2.3q6.8.8 11.6 5.4c3 3 5 7 5.4 11.2a1633 1633 0 0 1 0 118.6" style="stroke-width:0;fill:url(#linear-gradient-2)"/></g></svg>';
+
+        echo "<!DOCTYPE html>\n";
+        echo '<html lang="' . $appLocale . '" dir="' . $appLangDir . '">' . "\n";
+        echo "<head>\n";
+        echo '<meta charset="UTF-8">' . "\n";
+        echo '<link rel="icon" type="image/svg+xml" href="images/themes/bootstrap/favicon.svg">' . "\n";
+        echo "<title>{$errortitle}</title>\n";
+        echo "<style>\n";
+        echo "body {\n";
+        echo "    margin: 0;\n";
+        echo "    min-height: 100vh;\n";
+        echo "    display: flex;\n";
+        echo "    align-items: flex-start;\n";
+        echo "    justify-content: center;\n";
+        echo "    font-family: sans-serif;\n";
+        echo "    background: #f5f5f5;\n";
+        echo "}\n";
+        echo ".error-wrap {\n";
+        echo "    display: flex;\n";
+        echo "    flex-direction: column;\n";
+        echo "    align-items: center;\n";
+        echo "    padding-top: 40px;\n";
+        echo "}\n";
+        echo ".error-icon {\n";
+        echo "    display: block;\n";
+        echo "    width: 200px;\n";
+        echo "    height: 200px;\n";
+        echo "    margin-bottom: 1em;\n";
+        echo "}\n";
+        echo ".error-box {\n";
+        echo "    max-width: 480px;\n";
+        echo "    padding: 2em;\n";
+        echo "    background: #fff;\n";
+        echo "    border: 1px solid #ddd;\n";
+        echo "    border-radius: 8px;\n";
+        echo "    box-shadow: 0 2px 12px rgba(0,0,0,0.08);\n";
+        echo "    text-align: center;\n";
+        echo "}\n";
+        echo ".error-box h1 {\n";
+        echo "    margin: 0 0 0.5em;\n";
+        echo "    font-size: 1.3em;\n";
+        echo "    color: #cc0000;\n";
+        echo "}\n";
+        echo ".error-box p {\n";
+        echo "    margin: 0 0 1.5em;\n";
+        echo "    color: #000;\n";
+        echo "    line-height: 1.6;\n";
+        echo "    max-width: 36em;\n";
+        echo "    margin-left: auto;\n";
+        echo "    margin-right: auto;\n";
+        echo "}\n";
+        echo ".error-box a {\n";
+        echo "    display: inline-block;\n";
+        echo "    padding: 0.5em 1em;\n";
+        echo "    background: #1a518c;\n";
+        echo "    color: #fff;\n";
+        echo "    text-decoration: none;\n";
+        echo "    border-radius: 4px;\n";
+        echo "}\n";
+        echo ".error-box a:hover {\n";
+        echo "    background: #cc0000;\n";
+        echo "}\n";
+        echo "</style>\n";
+        echo "</head>\n";
+        echo "<body>\n";
+        echo '<div class="error-wrap">' . "\n";
+        echo $svg . "\n";
+        echo '<div class="error-box">' . "\n";
+        echo "<h1>{$errortitle}</h1>\n";
+        echo "<p>{$title}</p>\n";
+        echo "<a href=\"{$home}\">{$backhome}</a>\n";
+        echo "</div>\n";
+        echo "</div>\n";
+        echo "</body>\n";
+        echo "</html>\n";
+
+        exit;
+    }
+}

@@ -59,7 +59,7 @@ function doDefault($msg = '')
 	$footer = [
 		'accessmethod' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['stropclasses']}",
+			'format' => fn($v) => sprintf($lang['strcount_opclasses'], $v),
 			'colspan' => 4,
 		],
 		'owner' => [

@@ -168,11 +168,11 @@ table.tabs {
 .tabs .active {background-color: #449}
 .tab .icon {display: block}
 tr,td { height:100% }
-td:not(.constraint_cell) a:not(.help), th a { display:inline-block; height:100% }	/* vertical-align:middle doesn't work for block elements, CSS sux */
+td:not(.constraint_cell) a:not(.help), th a { display:inline-block; }	/* vertical-align:middle doesn't work for block elements, CSS sux */
 td.crumb a, td.tab a { width: auto }
 tr.data1 a, tr.data2 a { width:auto }
 td.opbutton1 a, td.opbutton2 a { width:inherit }
-td a.help { display:inline; position:absolute; min-width:10px; }
+td a.help { display:inline; min-width:10px; }
 a.pagenav { display:inline-block; min-width:15px; }
 a.toplink { display:inline }
 a:active {

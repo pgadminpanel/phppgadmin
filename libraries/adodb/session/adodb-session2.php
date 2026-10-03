@@ -476,7 +476,7 @@ class ADODB_Session {
 	 * @return ADOConnection|false
 	 */
 	static function _conn($conn=null) {
-		return $GLOBALS['ADODB_SESS_CONN'] ?? false;
+		return isset($GLOBALS['ADODB_SESS_CONN']) ? $GLOBALS['ADODB_SESS_CONN'] : false;
 	}
 
 	/**

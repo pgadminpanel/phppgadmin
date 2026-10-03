@@ -74,7 +74,7 @@ function doDefault($msg = '')
 	$footer = [
 		'source_type' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strcasts']}",
+			'format' => fn($v) => sprintf($lang['strcount_casts'], $v),
 			'colspan' => 2,
 		],
 		'function' => [
@@ -216,8 +216,7 @@ function doCreate($msg = '')
 					?>
 					<label><input type="radio" name="method" value="with_function" <?php echo $checked('with_function'); ?> /> <?php echo $lang['strwithfunction']; ?></label><br />
 					<label><input type="radio" name="method" value="without_function" <?php echo $checked('without_function'); ?> /> <?php echo $lang['strwithoutfunction']; ?></label><br />
-					<label><input type="radio" name="method" value="with_inout" <?php echo $checked('with_inout'); ?> />
-						<?php echo $lang['strwithinout']; ?></label>
+					<label><input type="radio" name="method" value="with_inout" <?php echo $checked('with_inout'); ?> /> <?php echo $lang['strwithinout']; ?></label>
 				</td>
 			</tr>
 			<tr id="cast_function_row">
@@ -238,18 +237,14 @@ function doCreate($msg = '')
 						return ($ctx === $v) ? ' checked' : '';
 					};
 					?>
-					<label><input type="radio" name="castcontext" value="e" <?php echo $ctxChecked('e'); ?> />
-						<?php echo $lang['strexplicit']; ?></label><br />
-					<label><input type="radio" name="castcontext" value="a" <?php echo $ctxChecked('a'); ?> />
-						<?php echo $lang['strassignment']; ?></label><br />
-					<label><input type="radio" name="castcontext" value="i" <?php echo $ctxChecked('i'); ?> />
-						<?php echo $lang['strimplicit']; ?></label>
+					<label><input type="radio" name="castcontext" value="e" <?php echo $ctxChecked('e'); ?> /> <?php echo $lang['strexplicit']; ?></label><br />
+					<label><input type="radio" name="castcontext" value="a" <?php echo $ctxChecked('a'); ?> /> <?php echo $lang['strassignment']; ?></label><br />
+					<label><input type="radio" name="castcontext" value="i" <?php echo $ctxChecked('i'); ?> /> <?php echo $lang['strimplicit']; ?></label>
 				</td>
 			</tr>
 			<tr>
 				<th class="data left"><?php echo $lang['strcomment']; ?></th>
-				<td class="data1"><textarea name="comment" rows="3"
-						cols="40"><?php echo html_esc($_POST['comment']); ?></textarea></td>
+				<td class="data1"><textarea name="comment" rows="3" cols="40"><?php echo html_esc($_POST['comment']); ?></textarea></td>
 			</tr>
 		</table>
 		<p>

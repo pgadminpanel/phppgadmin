@@ -10,7 +10,6 @@ use PhpPgAdmin\Core\AppContainer;
 
 $_ENV["SKIP_DB_CONNECTION"] = '1';
 require_once './libraries/bootstrap.php';
-
 $misc = AppContainer::getMisc();
 $lang = AppContainer::getLang();
 $fmt = function (string $key, ...$args) use ($lang) {
@@ -21,14 +20,20 @@ $misc->printHeader(
     $lang['strtestinfo'],
     <<<'CSS'
 <style>
-    .test-info pre { background: #ebf0b6; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px 16px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+    .test-info pre { position: relative; background: #ebf0b6; max-height: 100px;  overflow: auto; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px 16px;  width: fit-content; max-width: 100%; overflow-x: auto; font-size: 13px; line-height: 1.45; }
     .test-info pre code { background: none; border: none; padding: 0; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; color: #24292f; }
     .test-info code { background: rgb(216, 189, 44); border-radius: 4px; padding: 0.2em 0.4em; margin: 0.2em 0; font-size: 85%; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; display: inline-block; }
     .test-info h2 { border-bottom: 1px solid #d0d7de; padding-bottom: 0.3em; margin-top: 1.5em; }
-    .test-info .notice { background: #ebf0b6; border-left: 4px solid #d4a72c; padding: 12px 16px; margin: 1em 0; border-radius: 4px; }
+    .test-info .notice { background: #ebf0b6; width: fit-content; max-width: 100%; border-left: 4px solid #d4a72c; padding: 12px 16px; margin: 1em 0; border-radius: 4px; }
     .test-info .notice p { margin: 0; color: #000; }
     .test-info .btn { display: inline-block; padding: 8px 16px; background: #d25c2d; color: #fff; text-decoration: none; border-radius: 4px; }
     .test-info .btn:hover { background: #d22d2d; }
+    .test-info table.data td, .test-info table.data th { padding: 4px 8px; }
+    .test-info .pre-wrap { position: relative; width: fit-content; max-width: 100%; margin: 1em 0; }
+    .test-info .pre-wrap .copy-btn { position: absolute; top: 8px; right: 8px; z-index: 10; padding: 4px 12px; font-size: 13px; background: rgba(255, 255, 255, 0.95); border: 1px solid #d0d7de; border-radius: 4px; cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s; }
+    .test-info .pre-wrap:hover .copy-btn { opacity: 1; }
+    .test-info .pre-wrap .copy-btn:hover { background: #f3f4f6; }
+    .test-info .pre-wrap .copy-btn.copied { background: #d4edda; border-color: #28a745; color: #155724; }
 </style>
 CSS
 );
@@ -39,13 +44,9 @@ $misc->printTabs('root', 'intro');
 ?>
 <div class="test-info">
 <h1><?php echo $lang['strtestinfo']; ?></h1>
-
 <h2><?php echo $lang['strtestoverview']; ?></h2>
 <p><?php echo $fmt('strtestoverviewdesc', '<strong>' . $lang['strtestunit'] . '</strong>', '<strong>' . $lang['strtestintegration'] . '</strong>'); ?></p>
-<p><?php echo $lang['strtestenglishhint']; ?></p>
-
 <h2><?php echo $lang['strtestprep']; ?></h2>
-
 <div class="notice">
 <p><strong><?php echo $lang['strtestnotice_label']; ?><?php echo $lang['strseparator']; ?></strong><?php echo $fmt('strtestnotice',
     '<strong>' . $lang['strtestpath'] . '</strong>',
@@ -79,7 +80,7 @@ xdebug.mode => coverage => coverage
 xdebug.remote_mode => (setting renamed in Xdebug 3) => (setting renamed in Xdebug 3)
 </code></pre>
 
-<p><?php echo $fmt('strtestskipstep5', '<strong>' . $lang['strteststep5'] . '</strong>'); ?></p>
+<p><?php echo $fmt('strtestskipstep5', '<strong>' . $lang['strtestprepdb'] . '</strong>'); ?></p>
 
 <h3><?php echo $lang['strtestinstallext']; ?></h3>
 <p><?php echo $lang['strtestinstallextdesc']; ?></p>
@@ -154,7 +155,11 @@ tar -xzf master.tar.gz -C phppgadmin --strip-components=1</code></pre>
 <pre><code>cd /usr/share/phppgadmin
 git clone https://github.com/pgadminpanel/phppgadmin.git</code></pre>
 <p><?php echo $fmt('strtestvendorincluded', '<code>vendor/</code>', '<strong>' . $lang['strtestnocomposer'] . '</strong>'); ?></p>
-
+<h3><?= $lang['strtestconfigerror'] ?></h3>
+<p><?= $lang['strtestconfigerrordesc'] ?></p>
+<pre><code>Configuration error: Copy conf/config.inc.php-dist to conf/config.inc.php and edit appropriately.</code></pre>
+<p><?= $lang['strtestconfigerrorfix'] ?></p>
+<pre><code>cp /usr/share/phppgadmin/conf/config-dist.inc.php /usr/share/phppgadmin/conf/config.inc.php</code></pre>
 <h3><?php echo $lang['strtestprepdb']; ?></h3>
 <pre><code>sudo -u postgres psql -c "CREATE USER web_test WITH PASSWORD 'your-password';"
 sudo -u postgres psql -c "CREATE DATABASE web_test OWNER web_test;"</code></pre>
@@ -262,5 +267,62 @@ php -d xdebug.mode=coverage vendor/bin/phpunit -c phpunit-integration.xml --cove
 <hr>
 <p><a href="index.php" class="btn"><?php echo $lang['strbacktohome']; ?></a></p>
 </div>
+<script>
+(function () {
+    document.querySelectorAll('.test-info pre').forEach(function (pre) {
+        var wrap = document.createElement('div');
+        wrap.className = 'pre-wrap';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.textContent = '<?= $lang['strcopy'] ?>';
+
+        btn.addEventListener('click', function () {
+            var code = pre.querySelector('code');
+            var text = code ? code.innerText : pre.innerText;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function () {
+                    showCopied(btn);
+                }).catch(function () {
+                    fallbackCopy(text, btn);
+                });
+            } else {
+                fallbackCopy(text, btn);
+            }
+        });
+
+        wrap.appendChild(btn);
+    });
+
+    function showCopied(btn) {
+        var old = btn.textContent;
+        btn.textContent = '<?= $lang['strcopied'] ?>';
+        btn.classList.add('copied');
+        setTimeout(function () {
+            btn.textContent = old;
+            btn.classList.remove('copied');
+        }, 1500);
+    }
+
+    function fallbackCopy(text, btn) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            showCopied(btn);
+        } catch (e) {
+            alert('<?= $lang['strcopyfailed'] ?>');
+        }
+        document.body.removeChild(ta);
+    }
+})();
+</script>
 <?php
 $misc->printFooter();

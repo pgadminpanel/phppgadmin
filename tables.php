@@ -9,6 +9,7 @@ use PhpPgAdmin\Database\Actions\TypeActions;
 use PhpPgAdmin\Database\Actions\TableActions;
 use PhpPgAdmin\Database\Actions\PartitionActions;
 use PhpPgAdmin\Database\Actions\TablespaceActions;
+use PhpPgAdmin\Database\Actions\SchemaActions;
 
 /**
  * List tables in a database
@@ -30,6 +31,7 @@ function doCreate($msg = '')
 	$tableActions = new TableActions($pg);
 	$tablespaceActions = new TablespaceActions($pg);
 	$typeActions = new TypeActions($pg);
+	$schemaActions = new SchemaActions($pg);
 
 	if (!isset($_REQUEST['stage'])) {
 		$_REQUEST['stage'] = 1;
@@ -54,6 +56,25 @@ function doCreate($msg = '')
 		if ($pg->hasTablespaces())
 			$tablespaces = $tablespaceActions->getTablespaces();
 
+		// Fetch schemas the current user can create in
+		$allSchemas = $schemaActions->getSchemas(false);
+		$allowedSchemas = [];
+		$currentSchema = $_REQUEST['schema'] ?? '';
+		while (!$allSchemas->EOF) {
+			$s = $allSchemas->fields['nspname'];
+			if ($pg->hasSchemaPrivilege($s, 'CREATE')) {
+				$allowedSchemas[] = $s;
+			}
+			$allSchemas->moveNext();
+		}
+		// Show current schema even if no privilege, so user sees the warning
+		if ($currentSchema !== '' && !in_array($currentSchema, $allowedSchemas)) {
+			array_unshift($allowedSchemas, $currentSchema);
+		}
+		if (!isset($_REQUEST['target_schema']) || $_REQUEST['target_schema'] === '') {
+			$_REQUEST['target_schema'] = $currentSchema;
+		}
+
 		$misc->printTrail('schema');
 		$misc->printTitle($lang['strcreatetable'], 'pg.table.create');
 		$misc->printMsg($msg);
@@ -61,6 +82,38 @@ function doCreate($msg = '')
 		echo '<form action="tables.php" method="post">', "\n";
 		?>
 		<table>
+			<tr>
+				<th class="data left required"><?= $lang['strschema'] ?></th>
+				<td class="data">
+					<select name="target_schema">
+						<?php foreach ($allowedSchemas as $s):
+							$hasPriv = $pg->hasSchemaPrivilege($s, 'CREATE');
+							$isCurrent = ($s == $currentSchema);
+							$disable = (!$hasPriv && !$isCurrent) ? ' disabled="disabled"' : '';
+							?>
+							<option value="<?= html_esc($s) ?>"
+								<?= $s == $_REQUEST['target_schema'] ? ' selected="selected"' : '' ?>
+								<?= $disable ?>>
+								<?= html_esc($s) ?><?= $hasPriv ? '' : ' ' . $lang['strschemacreatepermission'] ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<?php if (!$pg->hasSchemaPrivilege($_REQUEST['target_schema'], 'CREATE')): ?>
+						<p class="message">
+							<?= sprintf($lang['strschemacreatepermissionhint'], html_esc($_REQUEST['target_schema'])) ?><br />
+							<?= sprintf($lang['strschemacreatepermissionpg15'], 'PostgreSQL 15+') ?><br />
+							<br />
+							<?= $lang['strschemacreatepermissiongrant'] ?><br />
+							<code>GRANT CREATE ON SCHEMA <?= html_esc($_REQUEST['target_schema']) ?> TO <?= html_esc($pg->getCurrentUser()) ?>;</code><br />
+							<br />
+							<?= $lang['strschemacreatepermissionalt'] ?><br />
+							<code>CREATE SCHEMA my_schema AUTHORIZATION <?= html_esc($pg->getCurrentUser()) ?>;</code><br />
+							<code>CREATE TABLE my_schema.my_table (id int, name text);</code><br />
+							<?= $lang['strschemacreatepermissionrefresh'] ?>
+						</p>
+					<?php endif; ?>
+				</td>
+			</tr>
 			<tr>
 				<th class="data left required"><?= $lang['strname'] ?></th>
 				<td class="data"><input name="name" size="32" maxlength="<?= $pg->_maxNameLen ?>"
@@ -207,6 +260,7 @@ function doCreate($msg = '')
 				<input type="hidden" name="num_columns" id="num_columns" value="<?= (int) $num_columns ?>" />
 				<?= $misc->form ?>
 				<input type="hidden" name="name" value="<?= html_esc($_REQUEST['name'] ?? '') ?>" />
+				<input type="hidden" name="target_schema" value="<?= html_esc($_REQUEST['target_schema'] ?? '') ?>" />
 				<?php if (isset($_REQUEST['withoutoids'])): ?>
 					<input type="hidden" name="withoutoids" value="true" />
 				<?php endif; ?>
@@ -285,6 +339,17 @@ function doCreate($msg = '')
 			return;
 		}
 
+		// Determine target schema and check privilege (use current_user, no hard-coded username)
+		$targetSchema = $_REQUEST['target_schema'] ?? $_REQUEST['schema'] ?? '';
+		if ($targetSchema === '' || !$pg->hasSchemaPrivilege($targetSchema, 'CREATE')) {
+			$_REQUEST['stage'] = 1;
+			doCreate(sprintf(
+				$lang['strschemacreatepermission'],
+				html_esc($targetSchema)
+			));
+			return;
+		}
+
 		// Build arrays for createTable from valid columns
 		$fields = [];
 		$types = [];
@@ -346,6 +411,10 @@ function doCreate($msg = '')
 			return;
 		}
 
+		// Switch connection schema to target, create, then restore
+		$originalSchema = $pg->_schema;
+		$schemaActions->setSchema($targetSchema);
+
 		$status = $tableActions->createTable(
 			$_REQUEST['name'] ?? '',
 			count($fields),
@@ -366,6 +435,9 @@ function doCreate($msg = '')
 			$isGeneratedArr,
 			$generatedExprArr
 		);
+
+		// Restore original schema
+		$schemaActions->setSchema($originalSchema);
 
 		if ($status == 0) {
 			AppContainer::setShouldReloadTree(true);
@@ -483,7 +555,7 @@ function doCreateLike($confirm, $msg = '')
 
 		$status = $tableActions->createTableLike(
 			$_REQUEST['name'],
-			unserialize($_REQUEST['like']),
+			safeUnserialize($_REQUEST['like']),
 			isset($_REQUEST['withdefaults']),
 			isset($_REQUEST['withconstraints']),
 			isset($_REQUEST['withindexes']),
@@ -536,7 +608,7 @@ function doEmpty($confirm)
 
 			echo "<form action=\"tables.php\" method=\"post\">\n";
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo "<p>", sprintf($lang['strconfemptytable'], $misc->formatVal($a['table'])), "</p>\n";
 				printf('<input type="hidden" name="table[]" value="%s" />', html_esc($a['table']));
 			}
@@ -606,7 +678,7 @@ function doDrop($confirm)
 
 			echo "<form action=\"tables.php\" method=\"post\">\n";
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo "<p>", sprintf($lang['strconfdroptable'], $misc->formatVal($a['table'])), "</p>\n";
 				printf('<input type="hidden" name="table[]" value="%s" />', html_esc($a['table']));
 			}
@@ -1006,7 +1078,7 @@ function doDefault($msg = '')
 	$footer = [
 		'table' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strtables']}",
+			'format' => fn($v) => sprintf($lang['strcount_tables'], $v),
 		],
 		'owner' => [
 			'text' => $lang['strtotal'],
@@ -1235,7 +1307,7 @@ function doDefault($msg = '')
 				]
 			],
 			'icon' => $misc->icon('CreateTableLike'),
-			'content' => $lang['strcreatetablelike']
+			'content' => $lang['strcreatelikewithdefaults']
 		];
 	}
 

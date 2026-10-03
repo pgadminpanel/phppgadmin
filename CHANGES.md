@@ -41,9 +41,9 @@ This update consists of two parts: **Dump dependency ordering fixes** and **lang
 - **Unified terminology**: terms such as "Owner", "Name", "Alter", "Enable/Disable" are now consistent with their actual UI meaning.
 - **Fixed older mistranslations**: e.g. "Crash" corrected to "Collapse", "Cluster" corrected to "Reindex", "Fixed (Tabbed)" corrected to "Tab-separated".
 
-### New Languages (27)
+### New Languages (29)
 
-This update adds 27 language files, registered in both `$appLangFiles` and `$availableLanguages`:
+This update adds 29 language files, registered in both `$appLangFiles` and `$availableLanguages`:
 
 | Language file | Language code | Language name |
 |---|---|---|
@@ -63,6 +63,7 @@ This update adds 27 language files, registered in both `$appLangFiles` and `$ava
 | `indonesian` | `id` | Bahasa Indonesia |
 | `korean` | `ko` | 한국어 |
 | `kurdish` | `ku` | Kurdî |
+| `kurdish-sorani` | `ckb` | کوردیی سۆرانی |
 | `lao` | `lo` | ລາວ |
 | `malay` | `ms` | Bahasa Melayu |
 | `norwegian` | `no` | Norsk |
@@ -71,6 +72,7 @@ This update adds 27 language files, registered in both `$appLangFiles` and `$ava
 | `serbian` | `sr` | Српски |
 | `swahili` | `sw` | Kiswahili |
 | `tamil` | `ta` | தமிழ் |
+| `telugu` | `te` | తెలుగు |
 | `thai` | `th` | ไทย |
 | `urdu` | `ur` | اردو |
 | `vietnamese` | `vi` | Tiếng Việt |
@@ -95,16 +97,16 @@ This update adds 27 language files, registered in both `$appLangFiles` and `$ava
 
 ### Language Coverage
 
-The application now supports 56 languages, covering all major language regions worldwide:
+The application now supports 58 languages, covering all major language regions worldwide:
 
 - **Europe**: English, German, French, Spanish, Italian, Portuguese, Russian, Ukrainian, etc.
 - **Asia**: Chinese, Japanese, Korean, Hindi, Bengali, Tamil, Thai, Vietnamese, Indonesian, etc.
-- **Middle East**: Arabic, Hebrew, Persian, Turkish, Kurdish, etc.
+- **Middle East**: Arabic, Hebrew, Persian, Turkish, Kurdish (Kurmanji, Sorani), etc.
 - **Africa**: Swahili, Hausa, Amharic, Afrikaans, etc.
 
 ### Translation Improvements and Feedback
 
-This update adds 27 new languages and supplements/corrects existing translations. If you find translation errors while using the application, please report them via:
+This update adds 29 new languages and supplements/corrects existing translations. If you find translation errors while using the application, please report them via:
 
 - **Discussions**: [pgadminpanel discussions](https://github.com/orgs/pgadminpanel/discussions)
 - **Issues**: [pgadminpanel issues](https://github.com/pgadminpanel/phppgadmin/issues)

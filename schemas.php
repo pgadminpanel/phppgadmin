@@ -67,7 +67,7 @@ function doDefault($msg = '')
 	$footer = [
 		'schema' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strschemas']}",
+			'format' => fn($v) => sprintf($lang['strcount_schemas'], $v),
 		],
 		'owner' => [
 			'text' => $lang['strtotal'],
@@ -353,7 +353,7 @@ function doDrop($confirm)
 		//If multi drop
 		if (isset($_REQUEST['ma'])) {
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo '<p>', sprintf($lang['strconfdropschema'], $misc->formatVal($a['nsp'])), "</p>\n";
 				echo '<input type="hidden" name="nsp[]" value="', html_esc($a['nsp']), "\" />\n";
 			}

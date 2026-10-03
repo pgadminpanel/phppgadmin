@@ -56,7 +56,7 @@ function doDrop($confirm)
 		//If multi drop
 		if (isset($_REQUEST['ma'])) {
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo "<p>", sprintf($lang['strconfdropview'], $misc->formatVal($a['view'])), "</p>\n";
 				echo '<input type="hidden" name="view[]" value="', html_esc($a['view']), "\" />\n";
 			}
@@ -171,6 +171,10 @@ function doSetParamsCreate($msg = '')
 	$schemaActions = new SchemaActions($pg);
 	$tableActions = new TableActions($pg);
 
+	// Target schema passed from wizard step 1
+	$targetSchema = $_POST['target_schema'] ?? $_REQUEST['schema'] ?? '';
+	$_REQUEST['target_schema'] = $targetSchema;
+
 	// Check that they've chosen tables for the view definition
 	if (!isset($_POST['formTables']))
 		doWizardCreate($lang['strviewneedsdef']);
@@ -186,9 +190,9 @@ function doSetParamsCreate($msg = '')
 		$misc->printMsg($msg);
 
 		$tblCount = sizeof($_POST['formTables']);
-		//unserialize our schema/table information and store in arrSelTables
+		//safeUnserialize our schema/table information and store in arrSelTables
 		for ($i = 0; $i < $tblCount; $i++) {
-			$arrSelTables[] = unserialize($_POST['formTables'][$i]);
+			$arrSelTables[] = safeUnserialize($_POST['formTables'][$i]);
 		}
 
 		$linkCount = $tblCount;
@@ -368,6 +372,7 @@ function doSetParamsCreate($msg = '')
 			</table>
 			<p>
 				<input type="hidden" name="action" value="save_create_wiz" />
+				<input type="hidden" name="target_schema" value="<?= html_esc($_REQUEST['target_schema'] ?? '') ?>" />
 				<?php foreach ($arrSelTables as $curTable): ?>
 					<input type="hidden" name="formTables[]" value="<?= html_esc(serialize($curTable)) ?>" />
 				<?php endforeach; ?>
@@ -397,6 +402,28 @@ function doWizardCreate($msg = '')
 	$misc->printTitle($lang['strcreateviewwiz'], 'pg.view.create');
 	$misc->printMsg($msg);
 
+	if ($tables->recordCount() == 0) {
+		?>
+		<p class="message">
+			<?= $lang['strnoviewtables'] ?><br />
+			<?= $lang['strnoviewtableshint'] ?><br />
+			<br />
+			<?= $lang['strnoviewtablesoption1'] ?><br />
+			<?= $lang['strnoviewtablesoption2'] ?><br />
+			<code>CREATE TABLE <?= html_esc($_REQUEST['schema']) ?>.my_table (id int, name text);</code><br />
+			<br />
+			<?= $lang['strnoviewtablesrefresh'] ?>
+		</p>
+		<ul class="navlink">
+			<li><a href="tables.php?action=create&amp;server=<?= html_esc($_REQUEST['server']) ?>&amp;database=<?= html_esc($_REQUEST['database']) ?>&amp;schema=<?= html_esc($_REQUEST['schema']) ?>">
+				<img class="icon" src="images/themes/default/CreateTable.png" alt="<?= $lang['strcreatetable'] ?>" />
+				<?= $lang['strcreatetable'] ?>
+			</a></li>
+		</ul>
+		<?php
+		return;
+	}
+
 	$arrTables = [];
 	while (!$tables->EOF) {
 		$arrTmp = [];
@@ -404,6 +431,11 @@ function doWizardCreate($msg = '')
 		$arrTmp['tablename'] = $tables->fields['relname'];
 		$arrTables[$tables->fields['nspname'] . '.' . $tables->fields['relname']] = serialize($arrTmp);
 		$tables->moveNext();
+	}
+
+	$defaultTable = '';
+	if (count($arrTables) == 1) {
+		$defaultTable = reset($arrTables);
 	}
 	?>
 	<form action="views.php" method="post">
@@ -415,12 +447,13 @@ function doWizardCreate($msg = '')
 			</tr>
 			<tr>
 				<td class="data1">
-					<?= $formRenderer->printCombo($arrTables, 'formTables[]', false, '', true) ?>
+					<?= $formRenderer->printCombo($arrTables, 'formTables[]', false, $defaultTable, true) ?>
 				</td>
 			</tr>
 		</table>
 		<p>
 			<input type="hidden" name="action" value="set_params_create" />
+			<input type="hidden" name="target_schema" value="<?= html_esc($_REQUEST['schema'] ?? '') ?>" />
 			<?= $misc->form ?>
 			<input type="submit" value="<?= $lang['strnext'] ?>" />
 			<input type="submit" name="cancel" value="<?= $lang['strcancel'] ?>" />
@@ -437,7 +470,16 @@ function doCreate($msg = '')
 	$pg = AppContainer::getPostgres();
 	$misc = AppContainer::getMisc();
 	$lang = AppContainer::getLang();
-
+	$schemaActions = new SchemaActions($pg);
+	// 系统 schema 不允许创建视图
+	if (isset($_REQUEST['schema']) && $schemaActions->isSystemSchema($_REQUEST['schema'])) {
+		$misc->printTrail('schema');
+		$misc->printTitle($lang['strcreateview'], 'pg.view.create');
+		$misc->printMsg($lang['strsystemschemanocreate']);
+		$misc->printFooter();
+		return;
+	}
+	
 	if (!isset($_REQUEST['formView']))
 		$_REQUEST['formView'] = '';
 	if (!isset($_REQUEST['formDefinition'])) {
@@ -449,6 +491,24 @@ function doCreate($msg = '')
 	if (!isset($_REQUEST['formComment']))
 		$_REQUEST['formComment'] = '';
 
+	// Fetch schemas the current user can create in
+	$allSchemas = $schemaActions->getSchemas(false);
+	$allowedSchemas = [];
+	$currentSchema = $_REQUEST['schema'] ?? '';
+	while (!$allSchemas->EOF) {
+		$s = $allSchemas->fields['nspname'];
+		if ($pg->hasSchemaPrivilege($s, 'CREATE')) {
+			$allowedSchemas[] = $s;
+		}
+		$allSchemas->moveNext();
+	}
+	if ($currentSchema !== '' && !in_array($currentSchema, $allowedSchemas)) {
+		array_unshift($allowedSchemas, $currentSchema);
+	}
+	if (!isset($_REQUEST['target_schema']) || $_REQUEST['target_schema'] === '') {
+		$_REQUEST['target_schema'] = $currentSchema;
+	}
+
 	$misc->printTrail('schema');
 	$misc->printTitle($lang['strcreateview'], 'pg.view.create');
 	$misc->printMsg($msg);
@@ -456,6 +516,38 @@ function doCreate($msg = '')
 	?>
 	<form action="views.php" method="post">
 		<table style="width: 100%">
+			<tr>
+				<th class="data left required"><?= $lang['strschema'] ?></th>
+				<td class="data1">
+					<select name="target_schema">
+						<?php foreach ($allowedSchemas as $s):
+							$hasPriv = $pg->hasSchemaPrivilege($s, 'CREATE');
+							$isCurrent = ($s == $currentSchema);
+							$disable = (!$hasPriv && !$isCurrent) ? ' disabled="disabled"' : '';
+							?>
+							<option value="<?= html_esc($s) ?>"
+								<?= $s == $_REQUEST['target_schema'] ? ' selected="selected"' : '' ?>
+								<?= $disable ?>>
+								<?= html_esc($s) ?><?= $hasPriv ? '' : ' ' . $lang['strschemacreatepermission'] ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<?php if (!$pg->hasSchemaPrivilege($_REQUEST['target_schema'], 'CREATE')): ?>
+						<p class="message">
+							<?= sprintf($lang['strschemacreatepermissionhint'], html_esc($_REQUEST['target_schema'])) ?><br />
+							<?= sprintf($lang['strschemacreatepermissionpg15'], 'PostgreSQL 15+') ?><br />
+							<br />
+							<?= $lang['strschemacreatepermissiongrant'] ?><br />
+							<code>GRANT CREATE ON SCHEMA <?= html_esc($_REQUEST['target_schema']) ?> TO <?= html_esc($pg->getCurrentUser()) ?>;</code><br />
+							<br />
+							<?= $lang['strschemacreatepermissionalt'] ?><br />
+							<code>CREATE SCHEMA my_schema AUTHORIZATION <?= html_esc($pg->getCurrentUser()) ?>;</code><br />
+							<code>CREATE TABLE my_schema.my_table (id int, name text);</code><br />
+							<?= $lang['strschemacreatepermissionrefresh'] ?>
+						</p>
+					<?php endif; ?>
+				</td>
+			</tr>
 			<tr>
 
 				<th class="data left required">
@@ -516,6 +608,7 @@ function doSaveCreate()
 	$pg = AppContainer::getPostgres();
 	$lang = AppContainer::getLang();
 	$viewActions = new ViewActions($pg);
+	$schemaActions = new SchemaActions($pg);
 
 	// Check that they've given a name and a definition
 	if ($_POST['formView'] == '')
@@ -523,27 +616,40 @@ function doSaveCreate()
 	elseif ($_POST['formDefinition'] == '')
 		doCreate($lang['strviewneedsdef']);
 	else {
+		// Determine target schema and check privilege (use current_user, no hard-coded username)
+		$targetSchema = $_POST['target_schema'] ?? $_REQUEST['schema'] ?? '';
+		if ($targetSchema === '' || !$pg->hasSchemaPrivilege($targetSchema, 'CREATE')) {
+			doCreate(sprintf(
+				$lang['strschemacreatepermission'],
+				html_esc($targetSchema)
+			));
+			return;
+		}
+
 		// Determine view type from radio button
 		$viewType = $_POST['formViewType'] ?? 'view';
+
+		// Switch connection schema to target, create, then restore
+		$originalSchema = $pg->_schema;
+		$schemaActions->setSchema($targetSchema);
 
 		if ($viewType == 'view') {
 			// Create normal view
 			$status = $viewActions->createView($_POST['formView'], $_POST['formDefinition'], false, $_POST['formComment']);
-			if ($status == 0) {
-				AppContainer::setShouldReloadTree(true);
-				doDefault($lang['strviewcreated']);
-			} else
-				doCreate($lang['strviewcreatedbad']);
 		} else {
 			// Create materialized view
 			$withData = ($viewType == 'materialized_with_data');
 			$status = $viewActions->createMaterializedView($_POST['formView'], $_POST['formDefinition'], $_POST['formComment'], $withData);
-			if ($status == 0) {
-				AppContainer::setShouldReloadTree(true);
-				doDefault($lang['strviewcreated']);
-			} else
-				doCreate($lang['strviewcreatedbad']);
 		}
+
+		// Restore original schema
+		$schemaActions->setSchema($originalSchema);
+
+		if ($status == 0) {
+			AppContainer::setShouldReloadTree(true);
+			doDefault($lang['strviewcreated']);
+		} else
+			doCreate($lang['strviewcreatedbad']);
 	}
 }
 
@@ -555,6 +661,7 @@ function doSaveCreateWiz()
 	$pg = AppContainer::getPostgres();
 	$lang = AppContainer::getLang();
 	$viewActions = new ViewActions($pg);
+	$schemaActions = new SchemaActions($pg);
 
 	// Check that they've given a name and fields they want to select		
 
@@ -566,13 +673,24 @@ function doSaveCreateWiz()
 		doSetParamsCreate($lang['strviewneedsfields']);
 		return;
 	}
+
+	// Determine target schema and check privilege (use current_user, no hard-coded username)
+	$targetSchema = $_POST['target_schema'] ?? $_REQUEST['schema'] ?? '';
+	if ($targetSchema === '' || !$pg->hasSchemaPrivilege($targetSchema, 'CREATE')) {
+		doSetParamsCreate(sprintf(
+			$lang['strschemacreatepermission'],
+			html_esc($targetSchema)
+		));
+		return;
+	}
+
 	$selFields = '';
 
 	if (!empty($_POST['dblFldMeth']))
 		$tmpHsh = [];
 
 	foreach ($_POST['formFields'] as $curField) {
-		$arrTmp = unserialize($curField);
+		$arrTmp = safeUnserialize($curField);
 		$pg->fieldArrayClean($arrTmp);
 		if (!empty($_POST['dblFldMeth'])) { // doublon control
 			if (empty($tmpHsh[$arrTmp['fieldname']])) { // field does not exist
@@ -608,8 +726,8 @@ function doSaveCreateWiz()
 		$arrUsedTbls = [];
 
 		$processLink = function ($curLink) use (&$arrJoined, &$arrUsedTbls, &$linkFields, $pg, $count) {
-			$arrLeftLink = unserialize($curLink['leftlink']);
-			$arrRightLink = unserialize($curLink['rightlink']);
+			$arrLeftLink = safeUnserialize($curLink['leftlink']);
+			$arrRightLink = safeUnserialize($curLink['rightlink']);
 			$pg->fieldArrayClean($arrLeftLink);
 			$pg->fieldArrayClean($arrRightLink);
 
@@ -652,7 +770,7 @@ function doSaveCreateWiz()
 	//just select from all selected tables - a cartesian join do a
 	if (!strlen($linkFields)) {
 		foreach ($_POST['formTables'] as $curTable) {
-			$arrTmp = unserialize($curTable);
+			$arrTmp = safeUnserialize($curTable);
 			$pg->fieldArrayClean($arrTmp);
 			$linkFields .= strlen($linkFields) ? ", \"{$arrTmp['schemaname']}\".\"{$arrTmp['tablename']}\"" : "\"{$arrTmp['schemaname']}\".\"{$arrTmp['tablename']}\"";
 		}
@@ -662,7 +780,7 @@ function doSaveCreateWiz()
 	if (is_array($_POST['formCondition'])) {
 		foreach ($_POST['formCondition'] as $curCondition) {
 			if (strlen($curCondition['field']) && strlen($curCondition['txt'])) {
-				$arrTmp = unserialize($curCondition['field']);
+				$arrTmp = safeUnserialize($curCondition['field']);
 				$pg->fieldArrayClean($arrTmp);
 				$addConditions .= strlen($addConditions) ? " AND \"{$arrTmp['schemaname']}\".\"{$arrTmp['tablename']}\".\"{$arrTmp['fieldname']}\" {$curCondition['operator']} '{$curCondition['txt']}' "
 					: " \"{$arrTmp['schemaname']}\".\"{$arrTmp['tablename']}\".\"{$arrTmp['fieldname']}\" {$curCondition['operator']} '{$curCondition['txt']}' ";
@@ -679,6 +797,10 @@ function doSaveCreateWiz()
 	// Determine view type from radio button
 	$viewType = $_POST['formViewType'] ?? 'view';
 
+	// Switch connection schema to target, create, then restore
+	$originalSchema = $pg->_schema;
+	$schemaActions->setSchema($targetSchema);
+
 	if ($viewType == 'view') {
 		// Create normal view
 		$status = $viewActions->createView($_POST['formView'], $viewQuery, false, $_POST['formComment']);
@@ -687,6 +809,9 @@ function doSaveCreateWiz()
 		$withData = ($viewType == 'materialized_with_data');
 		$status = $viewActions->createMaterializedView($_POST['formView'], $viewQuery, $_POST['formComment'], $withData);
 	}
+
+	// Restore original schema
+	$schemaActions->setSchema($originalSchema);
 
 	if ($status == 0) {
 		AppContainer::setShouldReloadTree(true);
@@ -753,7 +878,7 @@ function doDefault($msg = '')
 	$footer = [
 		'view' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strviews']}",
+			'format' => fn($v) => sprintf($lang['strcount_views'], $v),
 		],
 		'owner' => [
 			'text' => $lang['strtotal'],

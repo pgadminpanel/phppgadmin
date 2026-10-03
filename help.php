@@ -15,8 +15,7 @@ include_once('./libraries/bootstrap.php');
 /**
  * Fetch a URL (or array of URLs) for a given help page.
  */
-function getHelp($help)
-{
+function getHelp($help) {
 	$pg = AppContainer::getPostgres();
 	$conf = AppContainer::getConf();
 
@@ -38,8 +37,7 @@ function getHelp($help)
 		return null;
 }
 
-function doDefault()
-{
+function doDefault() {
 	$lang = AppContainer::getLang();
 
 	if (isset($_REQUEST['help'])) {
@@ -59,8 +57,7 @@ function doDefault()
 	doBrowse($lang['strinvalidhelppage']);
 }
 
-function doBrowse($msg = '')
-{
+function doBrowse($msg = '') {
 	$misc = AppContainer::getMisc();
 	$lang = AppContainer::getLang();
 
@@ -90,8 +87,7 @@ function doBrowse($msg = '')
 	$misc->printFooter();
 }
 
-function doChoosePage($urls)
-{
+function doChoosePage($urls) {
 	$misc = AppContainer::getMisc();
 	$lang = AppContainer::getLang();
 

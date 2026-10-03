@@ -38,7 +38,7 @@ class ZipStreamer
         }
     }
 
-    protected static function dosTimeDate(int $timestamp = null): array
+    protected static function dosTimeDate(?int $timestamp = null): array
     {
         if ($timestamp === null) {
             $timestamp = time();

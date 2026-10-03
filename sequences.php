@@ -82,7 +82,7 @@ function doDefault($msg = '')
 	$footer = [
 		'sequence' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strsequences']}",
+			'format' => fn($v) => sprintf($lang['strcount_sequences'], $v),
 			'colspan' => 2,
 		],
 		'owner' => [
@@ -391,7 +391,7 @@ function doDrop($confirm, $msg = '')
 	$requestedSequences = [];
 	if (isset($_REQUEST['ma'])) {
 		foreach ($_REQUEST['ma'] as $v) {
-			$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+			$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 			if (!empty($a['sequence'])) {
 				$requestedSequences[] = $a['sequence'];
 			}
@@ -420,7 +420,7 @@ function doDrop($confirm, $msg = '')
 		//If multi drop
 		if (isset($_REQUEST['ma'])) {
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo "<p>", sprintf($lang['strconfdropsequence'], $misc->formatVal($a['sequence'])), "</p>\n";
 				printf('<input type="hidden" name="sequence[]" value="%s" />', html_esc($a['sequence']));
 			}

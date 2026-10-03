@@ -270,7 +270,7 @@ function doDefault($msg = '')
 	$footer = [
 		'name' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strtablespaces']}",
+			'format' => fn($v) => sprintf($lang['strcount_tablespaces'], $v),
 			'colspan' => 2,
 		],
 		'location' => [
@@ -329,12 +329,19 @@ function doDefault($msg = '')
 		return $actions;
 	};
 
+	$emptyHint = $lang['strnotablespaces'] . '<br />'
+		. $lang['strtablespaceemptyhint'] . '<br />'
+		. sprintf($lang['strtablespaceemptyhintfix'], '<code>conf/config.inc.php</code>', '<code>$conf[\'show_system\'] = false;</code>') . '<br />'
+		. $lang['strtablespacehint'] . '<br />'
+		. $lang['strtablespacewhenneeded'] . '<br />'
+		. $lang['strtablespaceneedsuper'];
+
 	$misc->printTable(
 		$tablespaces,
 		$columns,
 		$actions,
 		'tablespaces-tablespaces',
-		$lang['strnotablespaces'],
+		$emptyHint,
 		$preFnc,
 		$footer
 	);

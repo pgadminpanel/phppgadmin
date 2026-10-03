@@ -302,7 +302,7 @@ class dbTable extends dbObject {
 				// Add a field
 				$fieldName = $attributes['NAME'];
 				$fieldType = $attributes['TYPE'];
-				$fieldSize = $attributes['SIZE'] ?? NULL;
+				$fieldSize = isset( $attributes['SIZE'] ) ? $attributes['SIZE'] : NULL;
 				$fieldOpts = !empty( $attributes['OPTS'] ) ? $attributes['OPTS'] : NULL;
 
 				$this->addField( $fieldName, $fieldType, $fieldSize, $fieldOpts );
@@ -1635,7 +1635,9 @@ class adoSchema {
 			}
 		}
 
-		xml_parser_free( $xmlParser );
+		if( PHP_VERSION_ID < 80000 ) {
+			xml_parser_free( $xmlParser );
+		}
 
 		return $this->sqlArray;
 	}
@@ -1679,7 +1681,9 @@ class adoSchema {
 			) );
 		}
 
-		xml_parser_free( $xmlParser );
+		if( PHP_VERSION_ID < 80000 ) {
+			xml_parser_free( $xmlParser );
+		}
 
 		return $this->sqlArray;
 	}

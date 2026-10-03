@@ -82,13 +82,20 @@ foreach ($appThemes as $k => $langKey) {
     ?>
 <?php endif; ?>
 
-<ul class="intro">
-    <li><a href="https://github.com/pgadminpanel/phppgadmin" target="_blank" rel="noopener noreferrer"><?php echo $lang['strppahome'] ?></a></li>
-    <li><a href="<?php echo $lang['strpgsqlhome_url'] ?>" target="_blank" rel="noopener noreferrer"><?php echo $lang['strpgsqlhome'] ?></a></li>
-    <li><a href="https://github.com/pgadminpanel/phppgadmin/issues" target="_blank" rel="noopener noreferrer"><?php echo $lang['strreportbug'] ?></a></li>
-    <li><a href="<?php echo $lang['strviewfaq_url'] ?>" target="_blank" rel="noopener noreferrer"><?php echo $lang['strviewfaq'] ?></a></li>
-    <li><a href="test-info.php"><?php echo $lang['strdevelopmentdocs'] ?></a></li>
-</ul>
+<table class="intro-table">
+    <tr>
+        <td><a class="btn" href="https://github.com/pgadminpanel/phppgadmin" target="_blank" rel="noopener noreferrer"><?= $lang['strppahome'] ?></a></td>
+        <td><a class="btn" href="<?= $lang['strpgsqlhome_url'] ?>" target="_blank" rel="noopener noreferrer"><?= $lang['strpgsqlhome'] ?></a></td>
+    </tr>
+    <tr>
+        <td><a class="btn" href="runtime.php"><?= $lang['strsessionconfig'] ?></a></td>
+        <td><a class="btn" href="dev-test.php"><?= $lang['strdevelopmentdocs'] ?></a></td>
+    </tr>
+    <tr>
+        <td><a class="btn" href="https://github.com/pgadminpanel/phppgadmin/issues" target="_blank" rel="noopener noreferrer"><?= $lang['strreportbug'] ?></a></td>
+        <td><a class="btn" href="<?= $lang['strviewfaq_url'] ?>" target="_blank" rel="noopener noreferrer"><?= $lang['strviewfaq'] ?></a></td>
+    </tr>
+</table>
 
 <?php
 if (isset($_GET['language']))

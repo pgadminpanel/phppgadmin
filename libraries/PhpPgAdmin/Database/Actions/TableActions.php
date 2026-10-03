@@ -168,11 +168,20 @@ class TableActions extends ActionsBase
         $c_schema = $this->connection->_schema;
         $this->connection->clean($c_schema);
         if ($all) {
-            $sql = "SELECT schemaname AS nspname, tablename AS relname,
-                        tableowner AS relowner, relkind
-                    FROM pg_catalog.pg_tables
-                    WHERE schemaname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
-                    ORDER BY schemaname, tablename";
+            $sql = "SELECT n.nspname, c.relname, c.relkind,
+                        pg_catalog.pg_get_userbyid(c.relowner) AS relowner,
+                        pg_catalog.obj_description(c.oid, 'pg_class') AS relcomment,
+                        reltuples::bigint,
+                        (SELECT spcname FROM pg_catalog.pg_tablespace pt WHERE pt.oid = c.reltablespace) AS tablespace,
+                        pg_total_relation_size(c.oid) AS total_size
+                    FROM pg_catalog.pg_class c
+                    LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+                    LEFT JOIN pg_inherits i ON c.oid = i.inhrelid
+                        AND EXISTS (SELECT 1 FROM pg_class pc WHERE pc.oid = i.inhparent AND pc.relkind = 'p')
+                    WHERE c.relkind IN ('r', 'p')
+                    AND n.nspname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
+                    AND i.inhrelid IS NULL
+                    ORDER BY n.nspname, c.relname";
         } else {
             // Include both regular tables (r) and partitioned tables (p)
             // Exclude child partitions by checking pg_inherits

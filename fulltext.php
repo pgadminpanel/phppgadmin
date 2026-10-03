@@ -56,7 +56,7 @@ function doDefault($msg = '')
 	$footer = [
 		'configuration' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strftsconfigs']}",
+			'format' => fn($v) => sprintf($lang['strcount_ftsconfigs'], $v),
 			'colspan' => 3,
 		],
 		'owner' => [
@@ -337,11 +337,11 @@ function doSaveCreateConfig()
 		return doCreateConfig($err);
 
 	if ($_POST['formParser'] != '')
-		$formParser = unserialize($_POST['formParser']);
+		$formParser = safeUnserialize($_POST['formParser']);
 	else
 		$formParser = '';
 	if ($_POST['formTemplate'] != '')
-		$formTemplate = unserialize($_POST['formTemplate']);
+		$formTemplate = safeUnserialize($_POST['formTemplate']);
 	else
 		$formTemplate = '';
 
@@ -470,7 +470,7 @@ function doViewParsers($msg = '')
 	$footer = [
 		'name' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strftsparsers']}",
+			'format' => fn($v) => sprintf($lang['strcount_ftsparsers'], $v),
 			'colspan' => 2,
 		],
 		'comment' => [
@@ -538,7 +538,7 @@ function doViewDicts($msg = '')
 	$footer = [
 		'name' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strftsdicts']}",
+			'format' => fn($v) => sprintf($lang['strcount_ftsdicts'], $v),
 			'colspan' => 3,
 		],
 		'owner' => [
@@ -858,7 +858,7 @@ function doSaveCreateDict()
 		if (!isset($_POST['formIsTemplate']))
 			$_POST['formIsTemplate'] = false;
 		if (isset($_POST['formTemplate']))
-			$formTemplate = unserialize($_POST['formTemplate']);
+			$formTemplate = safeUnserialize($_POST['formTemplate']);
 		else
 			$formTemplate = '';
 		if (!isset($_POST['formLexize']))
@@ -988,7 +988,7 @@ function doDropMapping($confirm)
 		if (isset($_REQUEST['ma'])) {
 
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				echo "<p>", sprintf($lang['strconfdropftsmapping'], $misc->formatVal($a['mapping']), $misc->formatVal($_REQUEST['ftscfg'])), "</p>\n";
 				printf('<input type="hidden" name="mapping[]" value="%s" />', html_esc($a['mapping']));
 			}
@@ -1064,7 +1064,7 @@ function doAlterMapping($msg = '')
 			$ma_mappings = [];
 			$ma_mappings_names = [];
 			foreach ($_REQUEST['ma'] as $v) {
-				$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+				$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 				printf('<input type="hidden" name="formMapping[]" value="%s" />', html_esc($a['mapping']));
 				$ma_mappings[] = $ftsActions->getFtsMappingByName(
 					$_POST['ftscfg'],

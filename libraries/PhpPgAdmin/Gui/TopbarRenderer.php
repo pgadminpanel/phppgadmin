@@ -35,7 +35,7 @@ class TopbarRenderer extends AppContext
                 '<span class="host">' . htmlspecialchars((empty($server_info['host'])) ? 'localhost' : $server_info['host']) . '</span>',
                 '<span class="port">' . htmlspecialchars($server_info['port']) . '</span>',
                 '<span class="username">' . htmlspecialchars($server_info['username']) . '</span>',
-                '<span class="time">' . htmlspecialchars(date($lang['strtimefmt'])) . '</span>',
+                '<a href="timezone.php" target="_blank" class="help" title="' . htmlspecialchars($lang['strhelp']) . '">?</a> <span class="time">' . htmlspecialchars(date($lang['strtimefmt'])) . '</span>',
                 '<a href="' . htmlspecialchars($lang['strviewfaq_url']) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($lang['strviewfaq']) . '</a>'
             );
 

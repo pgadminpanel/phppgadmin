@@ -74,7 +74,7 @@ $ADODB_INCLUDED_CSV = 1;
 			$flds[] = $o;
 		}
 
-		$savefetch = $rs->adodbFetchMode ?? $rs->fetchMode;
+		$savefetch = isset($rs->adodbFetchMode) ? $rs->adodbFetchMode : $rs->fetchMode;
 		$class = $rs->connection->arrayClass;
 		/** @var ADORecordSet $rs2 */
 		$rs2 = new $class(ADORecordSet::DUMMY_QUERY_ID);
@@ -110,7 +110,7 @@ $ADODB_INCLUDED_CSV = 1;
 		$arr = array();
 		$ttl = 0;
 
-		if ($meta = fgetcsv($fp, 32000, ",")) {
+		if ($meta = fgetcsv($fp, 32000, ",", '"', "\\")) {
 			// check if error message
 			if (strncmp($meta[0],'****',4) === 0) {
 				$err = trim(substr($meta[0],4,1024));
@@ -214,7 +214,7 @@ $ADODB_INCLUDED_CSV = 1;
 				}
 
 				$meta = false;
-				$meta = fgetcsv($fp, 32000, ",");
+				$meta = fgetcsv($fp, 32000, ",", '"', '\\');
 				if (!$meta) {
 					fclose($fp);
 					$err = "Unexpected EOF 1";

@@ -186,7 +186,7 @@ EOT;
 			echo "</div>\n";
 		}
 
-		echo "<a href=\"#\" class=\"bottom_link\">⇱</a>";
+		echo "<a href=\"#\" class=\"bottom_link\">".$lang['strgotoppage']."</a>";
 
 		if (AppContainer::isSkipHtmlFrame()) {
 			return;

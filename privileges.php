@@ -14,6 +14,22 @@ use PhpPgAdmin\Database\Actions\RoleActions;
 include_once('./libraries/bootstrap.php');
 
 /**
+ * 把权限名映射到语言包键
+ * CREATE         → strpriv_create
+ * TEMPORARY      → strpriv_temporary
+ * CONNECT        → strpriv_connect
+ * ALL PRIVILEGES → strpriv_all_privileges
+ *
+ * 只用于显示，不影响传给 SQL 的原始英文权限名。
+ */
+function privilegeLabel($name)
+{
+	$lang = AppContainer::getLang();
+	$key = 'strpriv_' . strtolower(str_replace(' ', '_', $name));
+	return $lang[$key] ?? $name;
+}
+
+/**
  * Grant permissions on an object to a user
  * @param bool $confirm To show entry screen
  * @param string $mode 'grant' or 'revoke'
@@ -81,9 +97,10 @@ function doAlter($confirm, $mode, $msg = '')
 		echo "<tr><th class=\"data left required\">{$lang['strprivileges']}</th>\n";
 		echo "<td class=\"data1\">\n";
 		foreach (AclActions::PRIV_LIST[$_REQUEST['subject']] as $v) {
-			$v = html_esc($v);
-			echo "<input type=\"checkbox\" id=\"privilege[$v]\" name=\"privilege[$v]\"",
-				isset($_REQUEST['privilege'][$v]) ? ' checked="checked"' : '', " /><label for=\"privilege[$v]\">{$v}</label><br />\n";
+			$vEsc = html_esc($v);
+			$vLabel = html_esc(privilegeLabel($v));
+			echo "<input type=\"checkbox\" id=\"privilege[$vEsc]\" name=\"privilege[$vEsc]\"",
+				isset($_REQUEST['privilege'][$v]) ? ' checked="checked"' : '', " /><label for=\"privilege[$vEsc]\">{$vLabel}</label><br />\n";
 		}
 		echo "</td></tr>\n";
 		// Grant option
@@ -206,7 +223,7 @@ function doDefault($msg = '')
 			// Skip over ALL PRIVILEGES
 			if ($v2 == 'ALL PRIVILEGES')
 				continue;
-			echo "<th class=\"data\">{$v2}</th>\n";
+			echo "<th class=\"data\">" . html_esc(privilegeLabel($v2)) . "</th>\n";
 		}
 		if ($pg->hasGrantOption()) {
 			echo "<th class=\"data\">{$lang['strgrantor']}</th>";
@@ -218,7 +235,8 @@ function doDefault($msg = '')
 		foreach ($privileges as $v) {
 			$id = (($i & 1) == 0 ? '1' : '2');
 			echo "<tr class=\"data{$id}\">\n";
-			echo "<td><img class=\"icon\" src=\"", $misc->icon('Role'), "\" alt=\"", $lang['strrole'], "\" /> <b>", $misc->formatVal($v['entity']), "</b></td>\n";
+			$entityDisplay = $v['entity'] === '' ? 'PUBLIC' : $v['entity'];
+			echo "<td><img class=\"icon\" src=\"", $misc->icon('Role'), "\" alt=\"", $lang['strrole'], "\" /> <b>", $misc->formatVal($entityDisplay), "</b></td>\n";
 			foreach (AclActions::PRIV_LIST[$_REQUEST['subject']] as $v2) {
 				// Skip over ALL PRIVILEGES
 				if ($v2 == 'ALL PRIVILEGES')

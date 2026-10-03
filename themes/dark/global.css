@@ -126,6 +126,9 @@ th.required {text-decoration: underline}
 .topbar a, .trail a, body.browser a, th.data a {
 	color: #a8aac2;
 }
+th.data a.help {
+    color: #ff0000;
+}
 .topbar .platform, .topbar .host, .topbar .username {
 	font-weight: bold;
 }

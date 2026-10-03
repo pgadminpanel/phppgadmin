@@ -10,6 +10,10 @@ return [
     'pg.admin.analyze' => 'sql-analyze.html',
     'pg.admin.vacuum' => 'sql-vacuum.html',
 
+    'pg.analyze' => 'sql-analyze.html',
+    'pg.vacuum' => 'sql-vacuum.html',
+    'pg.reindex' => 'sql-reindex.html',
+
     'pg.cast' => ['sql-expressions.html#SQL-SYNTAX-TYPE-CASTS', 'sql-createcast.html'],
     'pg.cast.create' => 'sql-createcast.html',
     'pg.cast.drop' => 'sql-dropcast.html',
@@ -85,6 +89,7 @@ return [
     'pg.role' => 'user-manag.html',
     'pg.role.alter' => 'sql-alterrole.html',
     'pg.role.create' => 'sql-createrole.html',
+    'pg.role.drop' => 'sql-droprole.html',
 
     'pg.rule' => 'rules.html',
     'pg.rule.create' => 'sql-createrule.html',
@@ -95,6 +100,11 @@ return [
     'pg.schema.create' => ['sql-createschema.html', 'ddl-schemas.html#DDL-SCHEMAS-CREATE'],
     'pg.schema.drop' => 'sql-dropschema.html',
     'pg.schema.search_path' => 'ddl-schemas.html#DDL-SCHEMAS-PATH',
+    'pg.information_schema' => 'information-schema.html',
+    'pg.pg_catalog' => ['catalogs.html', 'ddl-schemas.html#DDL-SCHEMAS-CATALOG'],
+    'pg.catalog' => ['catalogs.html', 'ddl-schemas.html#DDL-SCHEMAS-CATALOG'],
+
+    'pg.statistics' => 'monitoring-stats.html',
 
     'pg.sequence' => 'functions-sequence.html',
     'pg.sequence.alter' => 'sql-altersequence.html',
@@ -138,6 +148,9 @@ return [
     'pg.view.create' => ['sql-createview.html', 'sql-creatematerializedview.html'],
     'pg.view.drop' => 'sql-dropview.html',
 
+    'pg.matview' => 'sql-creatematerializedview.html',
+    'pg.matview.alter' => 'sql-refreshmaterializedview.html',
+
     'pg.aggregate' => ['xaggr.html', 'tutorial-agg.html', 'functions-aggregate.html', 'sql-expressions.html#SYNTAX-AGGREGATES'],
     'pg.aggregate.create' => 'sql-createaggregate.html',
     'pg.aggregate.drop' => 'sql-dropaggregate.html',
@@ -149,12 +162,25 @@ return [
 
     'pg.locks' => 'view-pg-locks.html',
 
+    'pg.fts' => 'textsearch.html',
+
     'pg.ftscfg' => ['textsearch.html', 'textsearch-intro.html#TEXTSEARCH-INTRO-CONFIGURATIONS'],
     'pg.ftscfg.create' => 'sql-createtsconfig.html',
+    'pg.ftscfg.example' => 'textsearch-configuration.html',
+    'pg.ftscfg.drop' => 'sql-droptsconfig.html',
+    'pg.ftscfg.alter' => 'sql-altertsconfig.html',
+
+    'pg.ftsdict' => 'textsearch-dictionaries.html',
+    'pg.ftsdict.drop' => 'sql-droptsdictionary.html',
+    'pg.ftsdict.create' => ['sql-createtsdictionary.html', 'sql-createtstemplate.html'],
+    'pg.ftsdict.alter' => 'sql-altertsdictionary.html',
+
+    'pg.ftsparser' => 'textsearch-parsers.html',
 
     'pg.partition' => 'ddl-partitioning.html',
-    'pg.partition.detach' => 'sql-altertable.html#SQL-ALTERTABLE-DETACH-PARTITION',
-    'pg.partition.create' => 'sql-createtable.html#SQL-CREATETABLE-PARTITION',
-    'pg.partition.attach' => 'sql-altertable.html#SQL-ALTERTABLE-ATTACH-PARTITION',
+    'pg.partition.create' => ['sql-createtable.html#SQL-CREATETABLE-PARTITION', 'ddl-partitioning.html'],
+    'pg.partition.attach' => ['sql-altertable.html#SQL-ALTERTABLE-ATTACH-PARTITION', 'ddl-partitioning.html'],
+    'pg.partition.detach' => ['sql-altertable.html#SQL-ALTERTABLE-DETACH-PARTITION', 'ddl-partitioning.html'],
+    'pg.partition.strategy' => ['ddl-partitioning.html', 'sql-createtable.html#SQL-CREATETABLE-PARTITION'],
+    'pg.partition.pruning' => 'ddl-partitioning.html#DDL-PARTITIONING-PRUNING',
 ];
-

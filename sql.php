@@ -153,12 +153,25 @@ $subject = $_REQUEST['subject'] ?? '';
 // We avoid GPC vars to avoid truncating long queries
 if ($subject == 'history') {
 	// Or maybe we came from the history popup
-	$_SESSION['sqlquery'] = $_SESSION['history'][$_REQUEST['server']][$_REQUEST['database']][$_GET['queryid']]['query'];
+	$history = $_SESSION['history'][$_REQUEST['server']][$_REQUEST['database']] ?? [];
+	$found = null;
+	$qid = $_GET['queryid'] ?? '';
+	foreach ($history as $entry) {
+		if (isset($entry['queryid']) && (string)$entry['queryid'] === (string)$qid) {
+			$found = $entry['query'];
+			break;
+		}
+	}
+	if ($found === null) {
+		printFatalError($lang['strnoquery']);
+		exit;
+	}
+	$_SESSION['sqlquery'] = $found;
 } elseif (isset($_REQUEST['query'])) {
 	// Or maybe we came from an sql form
 	$_SESSION['sqlquery'] = $_REQUEST['query'];
 } else {
-	echo "could not find the query!!";
+	printFatalError($lang['strnoquery']);
 	exit;
 }
 
@@ -316,7 +329,7 @@ $navlinks['alter'] = array(
 // Create view and download
 if (isset($_SESSION['sqlquery']) && isset($rs) && is_object($rs) && $rs->recordCount() > 0) {
 	// Report views don't set a schema, so we need to disable create view in that case
-	if (isset($_REQUEST['schema'])) {
+	if (isset($_REQUEST['schema']) && !$schemaActions->isSystemSchema($_REQUEST['schema'])) {
 		$navlinks['createview'] = array(
 			'attr' => array(
 				'href' => array(

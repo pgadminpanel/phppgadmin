@@ -55,7 +55,7 @@ function doEditRow($confirm, $msg = '')
 		if (is_array($_REQUEST['key']))
 			$keyFields = $_REQUEST['key'];
 		else
-			$keyFields = unserialize(urldecode($_REQUEST['key']));
+			$keyFields = safeUnserialize(urldecode($_REQUEST['key']));
 	} else {
 		$keyFields = [];
 	}
@@ -642,7 +642,7 @@ function doDelRow($confirm)
 		echo "<input type=\"hidden\" name=\"key\" value=\"", html_esc(urlencode(serialize($_REQUEST['key']))), "\" />\n";
 		echo "</form>\n";
 	} else {
-		$status = $rowActions->deleteRow($_POST['table'], unserialize(urldecode($_POST['key'])));
+		$status = $rowActions->deleteRow($_POST['table'], safeUnserialize(urldecode($_POST['key'])));
 		if ($status == 0)
 			doBrowse($lang['strrowdeleted']);
 		elseif ($status == -2)

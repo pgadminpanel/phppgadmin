@@ -549,7 +549,7 @@ function doDefault($msg = '')
 	$footer = [
 		'domain' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strdomains']}",
+			'format' => fn($v) => sprintf($lang['strcount_domains'], $v),
 			'colspan' => 4,
 		],
 		'owner' => [

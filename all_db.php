@@ -138,7 +138,7 @@ function doDrop($confirm)
 			// If multi drop
 			if (isset($_REQUEST['ma'])) {
 				foreach ($_REQUEST['ma'] as $v) {
-					$a = unserialize(htmlspecialchars_decode($v, ENT_QUOTES));
+					$a = safeUnserialize(htmlspecialchars_decode($v, ENT_QUOTES));
 					?>
 					<p><?= sprintf($lang['strconfdropdatabase'], $misc->formatVal($a['database'])); ?></p>
 					<input type="hidden" name="dropdatabase[]" value="<?= html_esc($a['database']); ?>" />
@@ -513,7 +513,7 @@ function doDefault($msg = '')
 	$footer = [
 		'database' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strdatabases']}",
+			'format' => fn($v) => sprintf($lang['strcount_databases'], $v),
 			'colspan' => 2,
 		],
 		'encoding' => [

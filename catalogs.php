@@ -53,7 +53,7 @@ function doDefault($msg = '')
     $footer = [
         'catalog' => [
             'agg' => 'count',
-            'format' => fn($v) => "$v {$lang['strcatalogs']}",
+            'format' => fn($v) => sprintf($lang['strcount_catalogs'], $v),
         ],
         'owner' => [
             'text' => $lang['strtotal'],
@@ -102,7 +102,9 @@ function doTree()
     $reqvars = $misc->getRequestVars('schema');
 
     $attrs = [
-        'text' => field('nspname'),
+        'text' => callback(function ($row) {
+            return displaySchemaName($row['nspname']);
+        }),
         'icon' => 'Catalog',
         'toolTip' => field('nspcomment'),
         'action' => url(

@@ -691,7 +691,7 @@ function doAccount($msg = '')
 		?>
 		<table>
 			<tr>
-				<th class="data"><?= $lang['strname'] ?></th>
+				<th class="data"><?= $lang['strusername'] ?></th>
 				<th class="data"><?= $lang['strsuper'] ?></th>
 				<th class="data"><?= $lang['strcreatedb'] ?></th>
 				<th class="data"><?= $lang['strcancreaterole'] ?></th>
@@ -885,7 +885,7 @@ function doDefault($msg = '')
 	$footer = [
 		'role' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strroles']}",
+			'format' => fn($v) => sprintf($lang['strcount_roles'], $v),
 			'colspan' => 2,
 		],
 		'createdb' => [

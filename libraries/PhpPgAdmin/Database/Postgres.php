@@ -830,4 +830,24 @@ class Postgres extends PgBase
 		// ALTER COLUMN ... DROP EXPRESSION was introduced in PostgreSQL 13
 		return $this->major_version >= 13;
 	}
+	/**
+	 * Check whether the current user has a privilege on a schema.
+	 * Uses current_user, never a hard-coded username.
+	 */
+	public function hasSchemaPrivilege($schema, $privilege = 'CREATE')
+	{
+		$this->clean($schema);
+		$this->clean($privilege);
+		$sql = "SELECT has_schema_privilege(current_user, '{$schema}', '{$privilege}') AS has_priv";
+		$rs = $this->selectSet($sql);
+		return isset($rs->fields['has_priv']) && $rs->fields['has_priv'] === 't';
+	}
+	/**
+	 * Return the current database user name.
+	 */
+	public function getCurrentUser()
+	{
+		$rs = $this->selectSet("SELECT current_user AS usr");
+		return $rs->fields['usr'] ?? '';
+	}
 }

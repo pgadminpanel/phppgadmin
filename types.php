@@ -869,7 +869,7 @@ function doDefault($msg = '')
 	$footer = [
 		'type' => [
 			'agg' => 'count',
-			'format' => fn($v) => "$v {$lang['strtypes']}",
+			'format' => fn($v) => sprintf($lang['strcount_types'], $v),
 			'colspan' => 2,
 		],
 		'owner' => [

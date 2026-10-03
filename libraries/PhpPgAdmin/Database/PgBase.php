@@ -167,7 +167,7 @@ abstract class PgBase extends AppContext
 	 */
 	public function escapeLiteral($literal = ''): string
 	{
-		return pg_escape_literal($this->conn->_connectionID, $literal);
+		 return pg_escape_literal($this->conn->_connectionID, $literal ?? '');
 	}
 
 	/**
