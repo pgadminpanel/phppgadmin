@@ -107,7 +107,7 @@ $misc->printTabs('root', 'intro');
 <p><?= $lang['strreplacecmd'] ?></p>
 <pre><code id="browserTimezoneCmd"><?= $lang['strdetecting'] ?></code></pre>
 <p><?= $lang['strverifychange'] ?></p>
-<pre><code>Select-String -Path "<?= htmlspecialchars($loadedIni ?: '') ?>" -Pattern "date\.timezone"</code></pre>
+<pre><code>Select-String -Path "<?= htmlspecialchars($loadedIni ?: '') ?>" -Pattern "date.timezone"</code></pre>
 
 <h2><?= $lang['strrestartphp'] ?></h2>
 <p><?= $lang['strrestartenv'] ?></p>
@@ -122,7 +122,7 @@ $misc->printTabs('root', 'intro');
 <?php elseif ($isBsd): ?>
 <h2><?= sprintf($lang['strmodifyini'], 'BSD / macOS', 'php.ini') ?></h2>
 <p><?= sprintf($lang['strviewtzi'], '<code>php.ini</code>') ?></p>
-<pre><code>grep -E '^[[:space:]]*date\.timezone' <?= htmlspecialchars($loadedIni ?: $lang['strnotfound']) ?></code></pre>
+<pre><code>grep -E '^;?[[:space:]]*date.timezone' <?= htmlspecialchars($loadedIni ?: $lang['strnotfound']) ?></code></pre>
 <p><?= $lang['strdefaultmaybe'] ?></p>
 <pre><code>date.timezone = UTC</code></pre>
 <p><?= $lang['strchangetotz'] ?></p>
@@ -149,7 +149,7 @@ $misc->printTabs('root', 'intro');
 <?php else: ?>
 <h2><?= sprintf($lang['strmodifyini'], 'Linux', 'php.ini') ?></h2>
 <p><?= sprintf($lang['strviewtzi'], '<code>php.ini</code>') ?></p>
-<pre><code>grep -E '^\s*date\.timezone' <?= htmlspecialchars($loadedIni ?: $lang['strnotfound']) ?></code></pre>
+<pre><code>grep -E '^;?\s*date\.timezone' <?= htmlspecialchars($loadedIni ?: $lang['strnotfound']) ?></code></pre>
 <p><?= $lang['strdefaultmaybe'] ?></p>
 <pre><code>date.timezone = UTC</code></pre>
 <p><?= $lang['strcommented'] ?></p>
@@ -215,6 +215,44 @@ $misc->printTabs('root', 'intro');
 <pre><code>date +%Z</code></pre>
 <p><?= $lang['strbsdlocaltime'] ?></p>
 <pre><code>ls -l /etc/localtime</code></pre>
+
+<p><strong>FreeBSD：Mimic Linux timedatectl output (optional)</strong></p>
+<pre><code>cat > /usr/local/bin/timedatectl <<'SCRIPT'
+#!/bin/sh
+# Mimic Linux timedatectl output (FreeBSD) -- timezone read from PHP
+
+PHP=$(command -v php || echo /usr/local/bin/php)
+[ -x "$PHP" ] || { echo "php not found"; exit 1; }
+
+TZ=$($PHP -r 'echo date_default_timezone_get();')
+NOW=$($PHP -r 'echo date("Y-m-d H:i:s");')
+local_time="$NOW $(date '+%Z')"
+utc_time=$(TZ=UTC date '+%Y-%m-%d %H:%M:%S UTC')
+rtc_time=$(TZ=UTC date '+%Y-%m-%d %H:%M:%S')
+tz_abbr=$(date '+%Z')
+tz_offset=$(date '+%z')
+
+ntp_status=$(sysrc -n ntpd_enable 2>/dev/null || echo "NO")
+if [ "$ntp_status" = "YES" ] && pgrep -x ntpd >/dev/null 2>&1; then
+    ntp_service="active"
+    sync="yes"
+else
+    ntp_service="inactive"
+    sync="no"
+fi
+
+rtc_local="no"
+
+printf "%-25s %s\n" "Local time:" "$local_time"
+printf "%-25s %s\n" "Universal time:" "$utc_time"
+printf "%-25s %s\n" "RTC time:" "$rtc_time"
+printf "%-25s %s (%s, %s)\n" "Time zone:" "$TZ" "$tz_abbr" "$tz_offset"
+printf "%-25s %s\n" "System clock synchronized:" "$sync"
+printf "%-25s %s\n" "NTP service:" "$ntp_service"
+printf "%-25s %s\n" "RTC in local TZ:" "$rtc_local"
+SCRIPT
+chmod +x /usr/local/bin/timedatectl</code></pre>
+<pre><code>timedatectl</code></pre>
 <?php else: ?>
 <p><strong>Linux：</strong></p>
 <pre><code>timedatectl</code></pre>
@@ -258,13 +296,13 @@ $misc->printTabs('root', 'intro');
     if (platform === 'windows') {
         elCmd.textContent =
             '$ini = "' + iniPath + '"\n' +
-            '(Get-Content $ini) -replace \'^;date\\.timezone\\s*=.*\', \'date.timezone = ' + tz + '\' | Set-Content $ini';
+            '(Get-Content $ini) -replace \'^;?date\\.timezone\\s*=.*\', \'date.timezone = ' + tz + '\' | Set-Content $ini';
     } else if (platform === 'bsd') {
         elCmd.textContent =
-            "sed -i '' -E 's|^[[:space:]]*date\\.timezone[[:space:]]*=.*|date.timezone = " + tz + "|' " + iniPath;
+            "sed -i '' -E 's|^;?[[:space:]]*date\\.timezone[[:space:]]*=.*|date.timezone = " + tz + "|' " + iniPath;
     } else {
         elCmd.textContent =
-            "sed -i 's|^\\s*date\\.timezone\\s*=.*|date.timezone = " + tz + "|' " + iniPath;
+            "sed -i 's|^;\\?\\s*date\\.timezone\\s*=.*|date.timezone = " + tz + "|' " + iniPath;
     }
     document.querySelectorAll('.tz-info pre').forEach(function (pre) {
         var wrap = document.createElement('div');

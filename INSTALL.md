@@ -6,7 +6,7 @@ This guide provides step-by-step instructions for installing and configuring php
 
 Before installing phpPgAdmin, ensure you have:
 
-- **PHP 7.4 or higher** (8.3+ recommended)
+- **PHP 7.4 or higher** (8.5+ recommended)
 - **PostgreSQL 9.0 or higher** (12+ recommended)
 - **PHP Extensions:**
     - `ext-pgsql` - PostgreSQL database functions
@@ -21,7 +21,7 @@ Before installing phpPgAdmin, ensure you have:
 ### Option A: From GitHub (Recommended)
 
 ```bash
-git clone https://github.com/phppgadmin/phppgadmin.git
+git clone https://github.com/pgadminpanel/phppgadmin.git
 cd phppgadmin
 ```
 
@@ -32,27 +32,25 @@ Choose your preferred archive format:
 #### tar.gz (Linux/Mac/Unix)
 
 ```bash
-wget https://github.com/phppgadmin/phppgadmin/archive/refs/heads/master.tar.gz
+wget https://github.com/pgadminpanel/phppgadmin/archive/refs/heads/master.tar.gz
 gunzip master.tar.gz
 tar -xvf master.tar
 cd phppgadmin-master
 ```
 
-#### tar.bz2 (Linux/Mac/Unix)
+#### Slim Package (All Platforms)
+
+The slim package is a **pre-built, minimal archive** that contains only the
+necessary files — no git history, no dev files, no tests. Just download and
+extract, no build step needed.
+
+Download the slim package from the releases page:
 
 ```bash
-wget https://github.com/phppgadmin/phppgadmin/archive/refs/heads/master.tar.bz2
-bunzip2 master.tar.bz2
-tar -xvf master.tar
-cd phppgadmin-master
-```
-
-#### ZIP (Windows/All Platforms)
-
-```bash
-# Download from GitHub, then:
-unzip master.zip
-cd phppgadmin-master
+mkdir -p /usr/share/phppgadmin
+wget https://github.com/pgadminpanel/phppgadmin/releases/download/v8.0.4/phppgadmin-v8.0.4.tar.gz
+tar -xzf phppgadmin-v8.0.4.tar.gz --strip-components=1 -C /usr/share/phppgadmin
+cd /usr/share/phppgadmin
 ```
 
 ## Step 2: Configure phpPgAdmin
@@ -64,6 +62,10 @@ Copy the distribution configuration file:
 ```bash
 cp conf/config-dist.inc.php conf/config.inc.php
 ```
+
+> **Note:** The **slim package** already ships `conf/config.inc.php` with the
+> correct filename — **skip the `cp` command above** and edit the existing
+> `conf/config.inc.php` directly.
 
 ### Edit Configuration
 
@@ -138,7 +140,7 @@ If you mess up the configuration file, you can restore it from the distribution 
 cp conf/config-dist.inc.php conf/config.inc.php
 ```
 
-## Step 4: Configure PostgreSQL Statistics Collector
+## Step 3: Configure PostgreSQL Statistics Collector
 
 phpPgAdmin displays table, index, and query performance statistics when enabled.
 
@@ -167,7 +169,7 @@ net stop "PostgreSQL (version)"
 net start "PostgreSQL (version)"
 ```
 
-## Step 5: Configure PostgreSQL Authentication
+## Step 4: Configure PostgreSQL Authentication
 
 ### IMPORTANT - Security
 
@@ -215,7 +217,7 @@ After changes to `pg_hba.conf`, restart PostgreSQL:
 sudo systemctl restart postgresql
 ```
 
-## Step 6: Configure Extra Login Security (Optional)
+## Step 5: Configure Extra Login Security (Optional)
 
 By default, phpPgAdmin has `extra_login_security` enabled, which prevents logging in as:
 
@@ -234,7 +236,7 @@ To disable (only after securing PostgreSQL):
 $conf['extra_login_security'] = false;
 ```
 
-## Step 7: Optional - Configure PostgreSQL Dump Utilities
+## Step 6: Optional - Configure PostgreSQL Dump Utilities
 
 By default, phpPgAdmin automatically searches the system PATH for the `pg_dump` and `pg_dumpall` utilities. **Configuration is only necessary if:**
 
@@ -262,7 +264,7 @@ Common paths:
 - **Mac (Homebrew):** `/usr/local/bin/pg_dump`
 - **Windows:** `C:\Program Files\PostgreSQL\<version>\bin\pg_dump.exe`
 
-## Step 8: Web Server Configuration
+## Step 7: Web Server Configuration
 
 ### Apache
 
@@ -311,7 +313,7 @@ location /phppgadmin/ {
 3. Set Application Pool to use PHP handler
 4. Add HTTP redirect rule to block `*.inc`, `*.conf`, `*.dist` files
 
-## Step 9: Access phpPgAdmin
+## Step 8: Access phpPgAdmin
 
 Open your web browser and navigate to:
 
@@ -356,7 +358,7 @@ brew install php@8.2
 
 ### Session Directory Error
 
-**Error:** "Warning: session*start(): open(/tmp/sess*..., O_RDWR) failed"
+**Error:** "Warning: session_start(): open(/tmp/sess_..., O_RDWR) failed"
 
 **Solution:** Create and configure session directory:
 
@@ -452,7 +454,7 @@ Then edit with correct settings.
 
 ## Getting Help
 
-- **GitHub Issues:** https://github.com/phppgadmin/phppgadmin/issues
+- **GitHub Issues:** https://github.com/pgadminpanel/phppgadmin/issues
 - **PostgreSQL Docs:** https://www.postgresql.org/docs/
 - **PHP Docs:** https://www.php.net/manual/
 
